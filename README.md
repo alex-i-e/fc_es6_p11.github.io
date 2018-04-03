@@ -9,6 +9,8 @@
 - unit tests with Jest/Enzyme
 
 ##Scripts
+- test-pure: test + code-coverage with Jest+Enzyme+Istanbul
+
 - start: for development on localhost:3100
 - build: make build for SSR
 - test: simple test with Jest+Enzyme
