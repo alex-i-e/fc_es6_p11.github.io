@@ -6,14 +6,22 @@ import Enzyme, { configure, mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import 'jsdom-global/register'
-
+import configureStore from 'redux-mock-store';
+import { Provider } from "react-redux";
 
 configure({ adapter: new Adapter() });
 
-
 describe('A suite <FilterSector/>', () => {
 
-  let wrapper;
+  const initialState = {output:10};
+  const mockStore = configureStore();
+  let store,wrapper;
+
+  beforeEach(()=>{
+    store = mockStore(initialState);
+    wrapper = mount( <Provider store={store}><FilterSector /></Provider> )
+  })
+
 
   it('should render without throwing an error', () => {
     expect(shallow(<FilterSector/>).contains(
