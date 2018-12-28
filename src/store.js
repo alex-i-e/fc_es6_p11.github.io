@@ -1,14 +1,17 @@
 import {applyMiddleware, createStore} from 'redux';
-import {createLogger} from 'redux-logger'
+import {createLogger} from 'redux-logger';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import {localStorageMiddleware, promiseMiddleware} from './middleware';
 import reducer from './reducer';
-
-import {routerMiddleware} from 'react-router-redux'
+import {routerMiddleware} from 'react-router-redux';
 // import createHistory from 'history/createBrowserHistory';
 // import createMemoryHistory from 'history/createMemoryHistory';
 import createMemoryHistory from 'history/createMemoryHistory';
 // import {loadState} from "./localStorageState";
+import createSagaMiddleware from 'redux-saga';
+import newsWatcher from './saga/news';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const history = ('' + process.env.BROWSER !== 'false')  // TODO : check why does not work env.BROWSER
     ? createMemoryHistory() // createHistory()
@@ -22,7 +25,8 @@ const getMiddleware = () => {
         return applyMiddleware(
             myRouterMiddleware,
             promiseMiddleware,
-            localStorageMiddleware
+            localStorageMiddleware,
+            sagaMiddleware
         );
     } else {
         // Enable additional logging in non-production environments.
@@ -30,8 +34,9 @@ const getMiddleware = () => {
             myRouterMiddleware,
             promiseMiddleware,
             localStorageMiddleware,
+            sagaMiddleware,
             createLogger()
-        )
+        );
     }
 };
 
@@ -41,17 +46,20 @@ const persistedState = ('' + process.env.BROWSER !== 'false') // TODO : check wh
 
 
 if (typeof window === 'undefined') {
-    global.window = {}
+    global.window = {};
 }
 
 // Grab the state from a global variable injected into the server-generated HTML
-const preloadedState = window.__PRELOADED_STATE__
+const preloadedState = window.__PRELOADED_STATE__;
 
 // Allow the passed state to be garbage-collected
-delete window.__PRELOADED_STATE__
+delete window.__PRELOADED_STATE__;
 
 export const store = createStore(
     reducer,
     preloadedState,
     composeWithDevTools(getMiddleware()),
 );
+
+// then run the saga
+sagaMiddleware.run(newsWatcher);

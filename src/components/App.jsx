@@ -22,7 +22,6 @@ const Title = styled.h1`
 const Chapter = styled.p`
     font-size: large;
 `;
-
 const rotate = keyframes`
     0% {
         opacity: 0;
@@ -34,9 +33,14 @@ const rotate = keyframes`
     }
 `;
 const AnimateLogo = styled.img`
-  animation: ${rotate} 20s infinite linear;
+  animation: ${rotate} 5s infinite linear;
+`;
+const NewsWrapper = styled(NewsBlock)`
+    color: #adadad;
+    width: 100%;
 `;
 import {createGlobalStyle} from 'styled-components';
+import NewsBlock from './NewsBlock/NewsBlock';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -53,8 +57,9 @@ class App extends Component<{}, {}> {
             <AppBlock>
                 <GlobalStyle/>
                 <Header>
-                    <AnimateLogo animationLength={'20s'} src='' alt="logo"/>
+                    <AnimateLogo src='' alt="logo"/>
                     <Title>Blog on React</Title>
+                    <NewsWrapper/>
                 </Header>
                 <Chapter>
                     Welcome to Blog Maker!
