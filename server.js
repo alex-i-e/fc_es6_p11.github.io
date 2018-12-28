@@ -10,7 +10,6 @@ import {Provider} from "react-redux";
 
 const app = express();
 
-
 app.get('/', function (req, res) {
 
     // Create a new Redux store instance

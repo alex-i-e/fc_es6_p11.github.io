@@ -1,5 +1,27 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+/*
+Fonts*/
+* {
+  font: small-caption;
+}
+
+/*
+MarkUp
+*/
+
+@media (min-width: 500px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 50px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "header header header header" "main main . sidebar" "footer footer footer footer";
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 50px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "sidebar sidebar sidebar sidebar" "main main main main" "footer footer footer footer";
+  }
 }

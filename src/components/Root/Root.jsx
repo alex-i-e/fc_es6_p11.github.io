@@ -2,7 +2,7 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import App from '../App';
 import {history} from '../../store';
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter} from 'react-router-dom';
 
 const Root = ({store}) => (
     <Provider store={store}>

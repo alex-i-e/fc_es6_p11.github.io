@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './BlogButton.css';
 import { connect } from 'react-redux';
 import FilterLink from "../../../../ActionLink/ActionLink";
 

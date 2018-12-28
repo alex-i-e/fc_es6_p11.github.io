@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
-// import './BlogForm.css';
 import {connect} from 'react-redux';
 import {ADD_NEW_BLOG, BLOG_CREATOR_TOGGLE} from "../../../../../constants/actionTypes";
 import FilterLink from "../../../../ActionLink/ActionLink";
+import styled from 'styled-components';
+
+const FormWrapper = styled.div`
+    margin: 8px;
+`;
+const FormBlock = styled.form`
+    display: flex;
+    flex-flow: column;
+`;
 
 const mapStateToBlogFormProps = (state) => ({
     isFormOpen: state.blog.isOpenNewBlogForm,
@@ -31,9 +39,8 @@ class BlogForm extends Component {
 
     render() {
         return (
-            <div className="blog-form">
-                <form onSubmit={this.onSubmitPost.bind(this)}
-                      className="blog-form-scope">
+            <FormWrapper>
+                <FormBlock onSubmit={this.onSubmitPost.bind(this)}>
                     <label required htmlFor="blog-author">Author:</label>
                     <input ref={(node) => {
                         this.newBlog.author = node;
@@ -66,8 +73,8 @@ class BlogForm extends Component {
                                 onSubmitPost={this.onSubmitPost.bind(this)}>
                         Submit POST
                     </FilterLink>
-                </form>
-            </div>
+                </FormBlock>
+            </FormWrapper>
         )
     }
 
