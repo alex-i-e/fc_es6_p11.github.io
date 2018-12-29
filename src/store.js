@@ -9,9 +9,12 @@ import {routerMiddleware} from 'react-router-redux';
 import createMemoryHistory from 'history/createMemoryHistory';
 // import {loadState} from "./localStorageState";
 import createSagaMiddleware from 'redux-saga';
-import newsWatcher from './saga/news';
+import {createEpicMiddleware} from 'redux-observable';
+import newsSaga from './sagas/news';
+import newsEpic from './epics/news';
 
 const sagaMiddleware = createSagaMiddleware();
+const epicMiddleware = createEpicMiddleware();
 
 export const history = ('' + process.env.BROWSER !== 'false')  // TODO : check why does not work env.BROWSER
     ? createMemoryHistory() // createHistory()
@@ -26,7 +29,8 @@ const getMiddleware = () => {
             myRouterMiddleware,
             promiseMiddleware,
             localStorageMiddleware,
-            sagaMiddleware
+            sagaMiddleware,
+            // epicMiddleware
         );
     } else {
         // Enable additional logging in non-production environments.
@@ -35,6 +39,7 @@ const getMiddleware = () => {
             promiseMiddleware,
             localStorageMiddleware,
             sagaMiddleware,
+            // epicMiddleware,
             createLogger()
         );
     }
@@ -62,4 +67,6 @@ export const store = createStore(
 );
 
 // then run the saga
-sagaMiddleware.run(newsWatcher);
+sagaMiddleware.run(newsSaga);
+
+// epicMiddleware.run(newsEpic);

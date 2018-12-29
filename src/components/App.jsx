@@ -59,7 +59,7 @@ class App extends Component<{}, {}> {
                 <Header>
                     <AnimateLogo src='' alt="logo"/>
                     <Title>Blog on React</Title>
-                    <NewsWrapper/>
+                    <NewsWrapper />
                 </Header>
                 <Chapter>
                     Welcome to Blog Maker!

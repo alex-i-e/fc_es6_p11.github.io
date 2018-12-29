@@ -1,4 +1,4 @@
-import {call, put, takeEvery, takeLatest} from 'redux-saga/effects';
+import {all, call, put, takeEvery, takeLatest} from 'redux-saga/effects';
 import axios from 'axios';
 
 const NEWS_API = 'https://newsapi.org/v2';
@@ -20,7 +20,11 @@ function* newsWorker(action) {
 }
 
 function* newsWatcher() {
-    yield takeEvery('USER_FETCH_REQUESTED', newsWorker);
+    yield takeEvery('NEWS_FETCH_REQUESTED', newsWorker);
 }
 
-export default newsWatcher;
+export default function* newsSaga() {
+    yield all([
+        newsWatcher(),
+    ]);
+}

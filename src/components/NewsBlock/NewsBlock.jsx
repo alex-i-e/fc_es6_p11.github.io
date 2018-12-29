@@ -4,19 +4,25 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 const Loader = styled.div`
+    position: fixed;
+    top: 16px;
+    right: 0;
     text-align: center;
+`;
+const NewsContainer = styled.div`
+    overflow: hidden;
+    position: absolute;
 `;
 
 const mapStateToNewsBlockProps = (state) => ({
     loading: state.news.loading,
     data: state.news.status ? state.news.articles : []
-    // isFormOpen: state.blog.isOpenNewBlogForm,
 });
 
 const mapDispatchToNewsBlockProps = (dispatch) => ({
     onChangeFormState(country) {
         dispatch({
-            type: 'USER_FETCH_REQUESTED', payload: {country}
+            type: 'NEWS_FETCH_REQUESTED', payload: {country}
         });
     }
 });
@@ -30,40 +36,30 @@ class NewsBlock extends Component {
         this.props.onChangeFormState('us');
     }
 
-    getDerivedStateFromProps(nextProps, prevState) {
-        console.log(' ...getDerivedStateFromProps >>> nextProps', nextProps);
-    }
-
     getSnapshotBeforeUpdate(prevProps, prevState) {
-        // this.props.onNewsLoaded();
-        console.log(' ...getSnapshotBeforeUpdate >>> prevProps', prevProps);
-        console.log(' ...getSnapshotBeforeUpdate >>> nextProps', this.props);
-
-        // this.props.loading = this.props.news.loading;
-        // this.props.data = this.props.news.data;
+        return null;
     }
 
     componentDidUpdate() {
-        console.log(' ...componentDidUpdate >>> this.props', this.props);
     }
 
     render() {
-        const isLoading = this.props.loading;
-        console.log('>>> isLoading', isLoading);
         return (
             <div>
-                {isLoading
+                {this.props.loading
                     ?
-                    <div>
-                        some news...{this.props.data}
-                    </div>
+                    <Loader>Loading...</Loader>
                     :
-                    <Loader>Loading...</Loader>}
+                    <NewsContainer>
+                        <div className={this.props.loading ? 'loading' : 'loaded'}>
+                            <span>some news...{`length = ${this.props.data.length}`}</span>
+                        </div>
+                    </NewsContainer>
+                }
             </div>
         );
     }
 }
-
 
 export default connect(
     mapStateToNewsBlockProps,
