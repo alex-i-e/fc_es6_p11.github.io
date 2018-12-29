@@ -20,20 +20,27 @@ const mapStateToNewsBlockProps = (state) => ({
 });
 
 const mapDispatchToNewsBlockProps = (dispatch) => ({
-    onChangeFormState(country) {
+    onChangeFormState(country: string) {
         dispatch({
             type: 'NEWS_FETCH_REQUESTED', payload: {country}
+        });
+    },
+    onChangeEpicFormState(country: string) {
+        dispatch({
+            type: 'EPIC_NEWS_FETCH_REQUESTED', payload: {country}
         });
     }
 });
 
-class NewsBlock extends Component {
+class NewsBlock extends Component<any, {}> {
     constructor() {
         super();
     }
 
     componentDidMount(): void {
+        
         this.props.onChangeFormState('us');
+        this.props.onChangeEpicFormState('ru');
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {

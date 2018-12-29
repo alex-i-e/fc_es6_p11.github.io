@@ -1,11 +1,10 @@
-// @flow
 const initState = {
     loading: false
 };
 
-export default (state: State = initState, action): State => {
+export default (state = initState, action) => {
     switch (action.type) {
-        case 'EPIC_USER_FETCH_REQUESTED':
+        case 'EPIC_NEWS_FETCH_REQUESTED':
             return {
                 ...state,
                 loading: true
