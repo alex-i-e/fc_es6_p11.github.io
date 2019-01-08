@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
+import {fetchNewsViaSaga, fetchNewsViaEpic} from '../../actionCreators/newsBlock';
 
 const Loader = styled.div`
     position: fixed;
@@ -14,32 +15,14 @@ const NewsContainer = styled.div`
     position: absolute;
 `;
 
-const mapStateToNewsBlockProps = (state) => ({
-    loading: state.news.loading,
-    data: state.news.status ? state.news.articles : []
-});
-
-const mapDispatchToNewsBlockProps = (dispatch) => ({
-    onChangeFormState(country: string) {
-        dispatch({
-            type: 'NEWS_FETCH_REQUESTED', payload: {country}
-        });
-    },
-    onChangeEpicFormState(country: string) {
-        dispatch({
-            type: 'EPIC_NEWS_FETCH_REQUESTED', payload: {country}
-        });
-    }
-});
-
 class NewsBlock extends Component<any, {}> {
     constructor() {
         super();
     }
 
     componentDidMount(): void {
-        this.props.onChangeFormState('us');
-        this.props.onChangeEpicFormState('ru');
+        this.props.fetchNewsViaSaga('us');
+        this.props.fetchNewsViaEpic('ru');
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState) {
@@ -68,6 +51,9 @@ class NewsBlock extends Component<any, {}> {
 }
 
 export default connect(
-    mapStateToNewsBlockProps,
-    mapDispatchToNewsBlockProps
+    (state) => ({
+        loading: state.news.loading,
+        data: state.news.status ? state.news.articles : []
+    }),
+    {fetchNewsViaSaga, fetchNewsViaEpic}
 )(NewsBlock);

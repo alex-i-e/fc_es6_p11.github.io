@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {ADD_NEW_BLOG, BLOG_CREATOR_TOGGLE} from "../../../../../constants/actionTypes";
-import FilterLink from "../../../../ActionLink/ActionLink";
+import {addNewBlog, toggleBlogCreator} from '../../../../../actionCreators/blogForm';
+import FilterLink from '../../../../ActionLink/ActionLink';
 import styled from 'styled-components';
 
 const FormWrapper = styled.div`
@@ -11,19 +11,6 @@ const FormBlock = styled.form`
     display: flex;
     flex-flow: column;
 `;
-
-const mapStateToBlogFormProps = (state) => ({
-    isFormOpen: state.blog.isOpenNewBlogForm,
-});
-
-const mapDispatchToBlogFormProps = (dispatch) => ({
-    onBlogSubmit(newBlog) {
-        dispatch({type: ADD_NEW_BLOG, value: newBlog});
-    },
-    onChangeFormState(flag) {
-        dispatch({type: BLOG_CREATOR_TOGGLE, value: flag});
-    },
-});
 
 class BlogForm extends Component {
 
@@ -75,7 +62,7 @@ class BlogForm extends Component {
                     </FilterLink>
                 </FormBlock>
             </FormWrapper>
-        )
+        );
     }
 
     onSubmitPost(e) {
@@ -85,17 +72,19 @@ class BlogForm extends Component {
             return;
         }
 
-        this.props.onBlogSubmit({
+        this.props.addNewBlog({
             author: this.newBlog.author.value,
             title: this.newBlog.title.value,
             body: this.newBlog.body.value,
             date: this.newBlog.date.value,
         });
-        this.props.onChangeFormState(!this.props.isFormOpen);
+        this.props.toggleBlogCreator(!this.props.isFormOpen);
     };
 }
 
 export default connect(
-    mapStateToBlogFormProps,
-    mapDispatchToBlogFormProps
+    (state) => ({
+        isFormOpen: state.blog.isOpenNewBlogForm,
+    }),
+    {addNewBlog, toggleBlogCreator}
 )(BlogForm);

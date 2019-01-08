@@ -48,14 +48,6 @@ const Author = styled.div`
 const getVisibleBlogList = (blogList, {type, value}) =>
     blogList.filter(item => item[type].indexOf(value) !== -1);
 
-const mapStateToBlogListItemProps = (state) => ({
-    blogList: getVisibleBlogList(
-        state.home.blogList,
-        {type: 'author', value: state.filters.filterByAuthorValue}
-    ),
-    filter: state.filters.filterByAuthorValue,
-});
-
 class BlogListItem extends Component {
     render() {
         return (
@@ -76,6 +68,12 @@ class BlogListItem extends Component {
 }
 
 export default connect(
-    mapStateToBlogListItemProps,
+    (state) => ({
+        blogList: getVisibleBlogList(
+            state.home.blogList,
+            {type: 'author', value: state.filters.filterByAuthorValue}
+        ),
+        filter: state.filters.filterByAuthorValue,
+    }),
     null
 )(BlogListItem);
