@@ -1,9 +1,10 @@
-import 'babel-polyfill'; // TODO; add polyfill to project
+import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import React from 'react';
 import {configureStore} from './configureStore';
 import Root from './components/Root/Root';
 import registerServiceWorker from './registerServiceWorker';
+import 'normalize.css';
 import './index.css';
 import 'rxjs';
 import NotificationFactory from './webApi/notification';

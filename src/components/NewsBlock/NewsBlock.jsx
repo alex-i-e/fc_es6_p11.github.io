@@ -38,7 +38,6 @@ class NewsBlock extends Component<any, {}> {
     }
 
     componentDidMount(): void {
-        
         this.props.onChangeFormState('us');
         this.props.onChangeEpicFormState('ru');
     }

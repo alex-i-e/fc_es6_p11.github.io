@@ -30,7 +30,7 @@ const getMiddleware = () => {
             promiseMiddleware,
             localStorageMiddleware,
             sagaMiddleware,
-            // epicMiddleware
+            epicMiddleware
         );
     } else {
         // Enable additional logging in non-production environments.
@@ -39,7 +39,7 @@ const getMiddleware = () => {
             promiseMiddleware,
             localStorageMiddleware,
             sagaMiddleware,
-            // epicMiddleware,
+            epicMiddleware,
             createLogger()
         );
     }
@@ -69,4 +69,4 @@ export const store = createStore(
 // then run the saga
 sagaMiddleware.run(newsSaga);
 
-// epicMiddleware.run(newsEpic);
+epicMiddleware.run(newsEpic);

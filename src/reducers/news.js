@@ -1,9 +1,19 @@
 // @flow
+
+import {Action} from 'redux';
+
+type State = {
+    loading: boolean,
+    articles?: Array<any>,
+    status?: string,
+    totalResults?: number
+}
+
 const initState = {
     loading: false
 };
 
-export default (state: State = initState, action): State => {
+export default (state: State = initState, action: Action): State => {
     switch (action.type) {
         case 'NEWS_FETCH_REQUESTED':
             return {
