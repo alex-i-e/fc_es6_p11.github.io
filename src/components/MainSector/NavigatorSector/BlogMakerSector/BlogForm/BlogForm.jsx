@@ -14,8 +14,9 @@ const FormBlock = styled.form`
 
 class BlogForm extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+        this.onSubmitPost = this.onSubmitPost.bind(this);
         this.newBlog = {
             author: {value: ''},
             title: {value: ''},
@@ -27,7 +28,7 @@ class BlogForm extends Component {
     render() {
         return (
             <FormWrapper>
-                <FormBlock onSubmit={this.onSubmitPost.bind(this)}>
+                <FormBlock onSubmit={this.onSubmitPost}>
                     <label required htmlFor="blog-author">Author:</label>
                     <input ref={(node) => {
                         this.newBlog.author = node;
@@ -56,8 +57,8 @@ class BlogForm extends Component {
                            type="date"
                            id="blog-date"/>
 
-                    <FilterLink urlState="home"
-                                onSubmitPost={this.onSubmitPost.bind(this)}>
+                    <FilterLink urlstate="home"
+                                onSubmitPost={this.onSubmitPost}>
                         Submit POST
                     </FilterLink>
                 </FormBlock>
@@ -67,8 +68,8 @@ class BlogForm extends Component {
 
     onSubmitPost(e) {
         if (!this.newBlog.author.value) {
-            alert('Required fields need to fill');
             e.preventDefault();
+            alert('Required fields need to fill');
             return;
         }
 

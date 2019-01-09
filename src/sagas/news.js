@@ -21,7 +21,7 @@ function* newsWorker(action) {
 }
 
 function* newsWatcher() {
-    yield takeEvery(NEWS_FETCH_REQUESTED, newsWorker);
+    yield takeLatest(NEWS_FETCH_REQUESTED, newsWorker);
 }
 
 export default function* newsSaga() {

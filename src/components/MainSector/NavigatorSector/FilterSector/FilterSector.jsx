@@ -1,4 +1,3 @@
-// @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {filterNewsByTypeAndValue} from '../../../../actionCreators/filterSector';
@@ -17,25 +16,25 @@ const FilterBlock = styled.div`
     margin: 8px;
 `;
 
+class FilterSector extends Component {
+    constructor(props) {
+        super(props);
+        this.onChangeFilter = this.onChangeFilter.bind(this);
+    }
 
-type Props = {
-    onChangeFilter: (filterType: string, value: string) => void
-}
+    onChangeFilter(e) {
+        this.props.filterNewsByTypeAndValue('author', e.currentTarget.value);
+    }
 
-class FilterSector extends Component<Props> {
     render() {
         return (
             <FilterWrapper>
                 <FilterBlock>
                     <label htmlFor="blog-author">Filter By Author</label>
-                    <input type="text" id="blog-author" onChange={this.onChangeFilter.bind(this)}/>
+                    <input type="text" id="blog-author" onChange={this.onChangeFilter}/>
                 </FilterBlock>
             </FilterWrapper>
         );
-    }
-
-    onChangeFilter(e) {
-        this.props.onChangeFilter('author', e.currentTarget.value);
     }
 }
 

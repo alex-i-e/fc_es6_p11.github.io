@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
+import AuthorItem from './AuthorItem';
 
 const BlogListBlock = styled.div`
     --blog-item-margin: 8px;
@@ -40,40 +40,37 @@ const Date = styled.div`
     display: flex;
     flex-flow: row;
 `;
-const Author = styled.div`
+const Author = styled(AuthorItem)`
+    display: flex;
+    flex-flow: row;
+`;
+const NoItems = styled.div`
     display: flex;
     flex-flow: row;
 `;
 
-const getVisibleBlogList = (blogList, {type, value}) =>
-    blogList.filter(item => item[type].indexOf(value) !== -1);
+const BlogListItem = (props) => {
+    const {blogList, filterValue, filterType} = props;
 
-class BlogListItem extends Component {
-    render() {
-        return (
-            <BlogListBlock>
-                {this.props.blogList.map((row, number) =>
+    return (
+        <BlogListBlock>
+            {blogList.length
+                ?
+                blogList.map((row, number) =>
                     <BlogItem key={number.toString()}>
                         <Title>{row.title}</Title>
                         <Body>{row.body}</Body>
                         <Footer>
                             <Date>{row.date}</Date>
-                            <Author>{row.author}</Author>
+                            <Author author={row.author}
+                                    matchingValue={filterValue}>
+                            </Author>
                         </Footer>
                     </BlogItem>
-                )}
-            </BlogListBlock>
-        );
-    }
-}
+                )
+                : <NoItems>No items!</NoItems>}
+        </BlogListBlock>
+    );
+};
 
-export default connect(
-    (state) => ({
-        blogList: getVisibleBlogList(
-            state.home.blogList,
-            {type: 'author', value: state.filters.filterByAuthorValue}
-        ),
-        filter: state.filters.filterByAuthorValue,
-    }),
-    null
-)(BlogListItem);
+export default BlogListItem;
