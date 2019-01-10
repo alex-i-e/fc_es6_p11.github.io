@@ -3,6 +3,10 @@ import {connect} from 'react-redux';
 import {addNewBlog, toggleBlogCreator} from '../../../../../actionCreators/blogForm';
 import FilterLink from '../../../../ActionLink/ActionLink';
 import styled from 'styled-components';
+import {compose} from 'redux';
+import withToggle from '../../../../HOC/withToggle';
+import BlogButton from '../BlogButton/BlogButton';
+import {Route} from 'react-router';
 
 const FormWrapper = styled.div`
     margin: 8px;
@@ -16,13 +20,15 @@ class BlogForm extends Component {
 
     constructor(props) {
         super(props);
-        this.onSubmitPost = this.onSubmitPost.bind(this);
+
         this.newBlog = {
             author: {value: ''},
             title: {value: ''},
             body: {value: ''},
             date: {value: ''},
         };
+
+        this.onSubmitPost = this.onSubmitPost.bind(this);
     }
 
     render() {
@@ -56,11 +62,10 @@ class BlogForm extends Component {
                     }}
                            type="date"
                            id="blog-date"/>
-
-                    <FilterLink urlstate="home"
+                    <BlogButton urlState="home"
                                 onSubmitPost={this.onSubmitPost}>
                         Submit POST
-                    </FilterLink>
+                    </BlogButton>
                 </FormBlock>
             </FormWrapper>
         );
@@ -79,6 +84,7 @@ class BlogForm extends Component {
             body: this.newBlog.body.value,
             date: this.newBlog.date.value,
         });
+
         this.props.toggleBlogCreator(!this.props.isFormOpen);
     };
 }

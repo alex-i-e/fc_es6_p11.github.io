@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import {ThemeContext} from '../../context/theme-context';
+import PropTypes from 'prop-types';
 
 const NavLinkWrapper = styled(NavLink)`
     margin: 16px;
@@ -34,19 +35,24 @@ const NavLinkWrapper = styled(NavLink)`
 //     </NavLinkWrapper>
 // );
 
+const propTypes = {
+    urlState: PropTypes.string.isRequired,
+    onSubmitPost: PropTypes.func.isRequired
+};
+
+
 class FilterLink extends Component {
     render() {
         const props = this.props;
         const theme = this.context;
 
         return (
-            <NavLinkWrapper to={props.urlstate === 'home' ? '' : props.urlstate}
+            <NavLinkWrapper to={props.urlState === 'home' ? '' : props.urlState}
                             activeStyle={{
                                 textDecoration: 'none',
                                 color: 'blue',
                             }}
                             onClick={props.onSubmitPost}
-                            {...props}
                             style={{backgroundColor: theme.background}}>
                 {props.children}
             </NavLinkWrapper>
@@ -54,6 +60,7 @@ class FilterLink extends Component {
     }
 }
 
+FilterLink.propTypes = propTypes;
 FilterLink.contextType = ThemeContext;
 
 export default FilterLink;

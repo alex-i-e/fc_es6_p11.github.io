@@ -16,6 +16,8 @@ const FilterBlock = styled.div`
     margin: 8px;
 `;
 
+const FILTER_TYPE = 'author';
+
 class FilterSector extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +25,7 @@ class FilterSector extends Component {
     }
 
     onChangeFilter(e) {
-        this.props.filterNewsByTypeAndValue('author', e.currentTarget.value);
+        this.props.filterNewsByTypeAndValue(FILTER_TYPE, e.currentTarget.value);
     }
 
     render() {
@@ -31,7 +33,9 @@ class FilterSector extends Component {
             <FilterWrapper>
                 <FilterBlock>
                     <label htmlFor="blog-author">Filter By Author</label>
-                    <input type="text" id="blog-author" onChange={this.onChangeFilter}/>
+                    <input type="text"
+                           id="blog-author"
+                           onChange={this.onChangeFilter}/>
                 </FilterBlock>
             </FilterWrapper>
         );

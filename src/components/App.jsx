@@ -1,5 +1,4 @@
-// @flow
-import React, {Component} from 'react';
+import React from 'react';
 import MainSector from './MainSector/MainSector';
 import styled, {keyframes} from 'styled-components';
 
@@ -51,23 +50,21 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 // {logo} // TODO : provide logo through SSR
-class App extends Component<{}, {}> {
-    render() {
-        return (
-            <AppBlock>
-                <GlobalStyle/>
-                <Header>
-                    <AnimateLogo src='' alt="logo"/>
-                    <Title>Blog on React</Title>
-                    <NewsWrapper />
-                </Header>
-                <Chapter>
-                    Welcome to Blog Maker!
-                </Chapter>
-                <MainSector/>
-            </AppBlock>
-        );
-    }
-}
+const App = (props) => {
+    return (
+        <AppBlock>
+            <GlobalStyle/>
+            <Header>
+                <AnimateLogo src='' alt="logo"/>
+                <Title>Blog on React</Title>
+                <NewsWrapper />
+            </Header>
+            <Chapter>
+                Welcome to Blog Maker!
+            </Chapter>
+            <MainSector/>
+        </AppBlock>
+    );
+};
 
 export default App;
