@@ -1,49 +1,54 @@
 import React, {Component} from 'react';
+import {compose} from 'redux';
 import {connect} from 'react-redux';
 import {toggleBlogCreator} from '../../actionCreators/blogForm';
 import PropTypes from 'prop-types';
 
 // const enhance = compose(
+//     connect(mapStateToProps, mapDispatchToProps),
 //     withRouter,
 //     withStyles(styles, 'some style'),
-//     connect(mapStateToProps, mapDispatchToProps),
 //     ....
 //
 //     export default enhance(MyComponent);
 
-const withToggle = (WrapperComponent) => {
+export function getDisplayName(WrappedComponent) {
+    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+}
 
-    return class HH extends Component {
-
+const withToggleWrapper = (WrapperComponent) => {
+    class WithToggle extends Component {
         constructor(props) {
             super(props);
-            this.onSubmitPost = this.onSubmitPost.bind(this);
+            this.toggleForm = this.toggleForm.bind(this);
         }
 
-        componentWillmount() {
-        }
-
-        componentDidUnmount() {
-        }
-
-        onSubmitPost(e) {
-            this.props.toggleBlogCreator(!this.props.isFormOpen);
+        toggleForm(e) {
+            console.log('>>> toggleForm');
         };
 
         render() {
-            return <WrapperComponent {...this.props}
-                                     onClick={this.onSubmitPost}/>;
+            return <WrapperComponent
+                toggleForm={this.toggleForm}
+                theme={true}
+                {...this.props}
+            />;
         }
-    };
+    }
+
+    WithToggle.displayName = `WithToggle(${getDisplayName(WrapperComponent)})`;
+
+    return WithToggle;
 };
 
-withToggle.propTypes = {
+withToggleWrapper.propTypes = {
     toggleBlogCreator: PropTypes.func
 };
 
-export default connect(
-    (state) => ({
-        isFormOpen: state.blog.isOpenNewBlogForm,
-    }),
-    {toggleBlogCreator}
-)(withToggle);
+export default compose(
+    connect(
+        null,
+        {toggleBlogCreator}
+    ),
+    withToggleWrapper
+);

@@ -4,10 +4,12 @@ import NavigatorSector from './NavigatorSector/NavigatorSector';
 
 const MainSector = (props) => {
     return (
+        //<Theme.Context>
         <div className="container main-sector">
             <BlogSector/>
             <NavigatorSector/>
         </div>
+        //</Theme.Context>
     );
 };
 

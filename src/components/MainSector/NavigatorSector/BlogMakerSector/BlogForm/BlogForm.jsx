@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addNewBlog, toggleBlogCreator} from '../../../../../actionCreators/blogForm';
-import FilterLink from '../../../../ActionLink/ActionLink';
+import {addNewBlog} from '../../../../../actionCreators/blogForm';
+import ActionLink from '../../../../ActionLink/ActionLink';
 import styled from 'styled-components';
-import {compose} from 'redux';
-import withToggle from '../../../../HOC/withToggle';
-import BlogButton from '../BlogButton/BlogButton';
-import {Route} from 'react-router';
 
 const FormWrapper = styled.div`
     margin: 8px;
@@ -62,10 +58,10 @@ class BlogForm extends Component {
                     }}
                            type="date"
                            id="blog-date"/>
-                    <BlogButton urlState="home"
+                    <ActionLink urlState="home"
                                 onSubmitPost={this.onSubmitPost}>
                         Submit POST
-                    </BlogButton>
+                    </ActionLink>
                 </FormBlock>
             </FormWrapper>
         );
@@ -75,7 +71,8 @@ class BlogForm extends Component {
         if (!this.newBlog.author.value) {
             e.preventDefault();
             alert('Required fields need to fill');
-            return;
+
+            return false;
         }
 
         this.props.addNewBlog({
@@ -85,13 +82,11 @@ class BlogForm extends Component {
             date: this.newBlog.date.value,
         });
 
-        this.props.toggleBlogCreator(!this.props.isFormOpen);
+        return true;
     };
 }
 
 export default connect(
-    (state) => ({
-        isFormOpen: state.blog.isOpenNewBlogForm,
-    }),
-    {addNewBlog, toggleBlogCreator}
+    null,
+    {addNewBlog}
 )(BlogForm);

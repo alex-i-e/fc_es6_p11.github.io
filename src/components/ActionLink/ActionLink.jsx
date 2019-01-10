@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import {ThemeContext} from '../../context/theme-context';
 import PropTypes from 'prop-types';
+import withToggle from '../HOC/withToggle';
 
 const NavLinkWrapper = styled(NavLink)`
     margin: 16px;
@@ -18,30 +19,26 @@ const NavLinkWrapper = styled(NavLink)`
         color: orangered;
     }
 `;
-// type Props = {
-//     urlState: string,
-//     children?: string,
-//     onSubmitPost?: (e: SyntheticEvent<HTMLElement>) => void,
-// };
-
-// const FilterLink = (props: Props) => (
-//     <NavLinkWrapper to={props.urlState === 'home' ? '' : props.urlState}
-//                     activeStyle={{
-//                         textDecoration: 'none',
-//                         color: 'blue',
-//                     }}
-//                     onClick={props.onSubmitPost}>
-//         {props.children}
-//     </NavLinkWrapper>
-// );
 
 const propTypes = {
     urlState: PropTypes.string.isRequired,
-    onSubmitPost: PropTypes.func.isRequired
+    onSubmitPost: PropTypes.func
 };
 
 
-class FilterLink extends Component {
+class ActionLink extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onClickAction = this.onClickAction.bind(this);
+    }
+
+    onClickAction(e) {
+        if (this.props.onSubmitPost && this.props.onSubmitPost(e)) {
+            this.props.toggleForm && this.props.toggleForm();
+        }
+    }
+
     render() {
         const props = this.props;
         const theme = this.context;
@@ -52,7 +49,7 @@ class FilterLink extends Component {
                                 textDecoration: 'none',
                                 color: 'blue',
                             }}
-                            onClick={props.onSubmitPost}
+                            onClick={this.onClickAction}
                             style={{backgroundColor: theme.background}}>
                 {props.children}
             </NavLinkWrapper>
@@ -60,7 +57,7 @@ class FilterLink extends Component {
     }
 }
 
-FilterLink.propTypes = propTypes;
-FilterLink.contextType = ThemeContext;
+ActionLink.propTypes = propTypes;
+ActionLink.contextType = ThemeContext;
 
-export default FilterLink;
+export default withToggle(ActionLink);

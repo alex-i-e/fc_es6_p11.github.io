@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import BlogButton from './BlogButton/BlogButton';
+import React from 'react';
 import BlogForm from './BlogForm/BlogForm';
 import {Route, Router, Switch} from 'react-router';
 import {history} from '../../../../store';
 import styled from 'styled-components';
+import ActionLink from '../../../ActionLink/ActionLink';
 
 const BlogBlock = styled.div`
     display: flex;
@@ -21,7 +21,7 @@ const BlogMakerSector = (props) => {
                 <Switch>
                     <Route path="/edit" component={BlogForm}/>
                     <Route path="/" render={() => (
-                        <BlogButton urlState="edit">Create new Post</BlogButton>
+                        <ActionLink urlState="edit">Create new Post</ActionLink>
                     )}/>
                 </Switch>
             </Router>
