@@ -9,8 +9,22 @@ export const themes = {
         foreground: '#ffffff',
         background: '#222222',
     },
+    red: {
+        foreground: '#ffffff',
+        background: '#f3d1d1',
+    },
+    green: {
+        foreground: '#ffffff',
+        background: '#a4dca7',
+    },
+    blue: {
+        foreground: '#ffffff',
+        background: '#cccaf2',
+    }
 };
 
-export const ThemeContext = React.createContext(
-    themes.light // default value
-);
+export const ThemeContext = React.createContext({
+    theme: themes.dark,
+    toggleTheme: () => {
+    }
+});

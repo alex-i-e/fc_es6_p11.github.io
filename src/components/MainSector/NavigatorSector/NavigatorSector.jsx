@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 import BlogMakerSector from './BlogMakerSector/BlogMakerSector';
-import FilterSector from "./FilterSector/FilterSector";
+import FilterSector from './FilterSector/FilterSector';
 import styled from 'styled-components';
 
 const SidebarItem = styled.div`
@@ -8,6 +8,7 @@ const SidebarItem = styled.div`
    margin: 16px;
 `;
 const NavigatorBlock = styled(SidebarItem)`
+    background-color: white;
     display: flex;
     flex-flow: column;
     
@@ -15,13 +16,11 @@ const NavigatorBlock = styled(SidebarItem)`
     box-shadow: -3px 1px 9px 0px #adadad;
 `;
 
-const NavigatorSector = (props) => {
-    return (
-        <NavigatorBlock>
-            <BlogMakerSector />
-            <FilterSector />
-        </NavigatorBlock>
-    )
-}
+const NavigatorSector = (props) => (
+    <NavigatorBlock>
+        <BlogMakerSector/>
+        <FilterSector/>
+    </NavigatorBlock>
+);
 
 export default NavigatorSector;

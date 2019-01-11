@@ -1,34 +1,39 @@
-import {
-    EPIC_NEWS_FETCH_REQUESTED,
-    EPIC_NEWS_FETCH_ING,
-    EPIC_NEWS_FETCH_SUCCEEDED,
-    EPIC_NEWS_FETCH_FAILED
-} from '../constants/actionTypes';
+// @flow
+
+import {Action} from 'redux';
+import {NEWS_FETCH_REQUESTED, NEWS_FETCH_ING, NEWS_FETCH_SUCCEEDED, NEWS_FETCH_FAILED} from '../../constants/actionTypes';
+
+type State = {
+    loading: boolean,
+    articles?: Array<any>,
+    status?: string,
+    totalResults?: number
+}
 
 const initState = {
     loading: false
 };
 
-export default (state = initState, action) => {
+export default (state: State = initState, action: Action): State => {
     switch (action.type) {
-        case EPIC_NEWS_FETCH_REQUESTED:
+        case NEWS_FETCH_REQUESTED:
             return {
                 ...state,
                 loading: true
             };
-        case EPIC_NEWS_FETCH_ING:
+        case NEWS_FETCH_ING:
             return {
                 ...state,
                 ...action.payload,
                 loading: true
             };
-        case EPIC_NEWS_FETCH_SUCCEEDED:
+        case NEWS_FETCH_SUCCEEDED:
             return {
                 ...state,
                 ...action.payload,
                 loading: false
             };
-        case EPIC_NEWS_FETCH_FAILED:
+        case NEWS_FETCH_FAILED:
             return {
                 ...state,
                 ...action.payload,

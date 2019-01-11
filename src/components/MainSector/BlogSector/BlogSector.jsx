@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 
 const BlogListBlock = styled.div`
+    background-color: white;
     min-width: 250px;
     grid-area: main;
     margin: 16px;

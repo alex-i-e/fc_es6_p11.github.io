@@ -35,13 +35,13 @@ class ActionLink extends Component {
 
     onClickAction(e) {
         if (this.props.onSubmitPost && this.props.onSubmitPost(e)) {
-            this.props.toggleForm && this.props.toggleForm();
+            this.props.withToggleAction && this.props.withToggleAction();
         }
     }
 
     render() {
         const props = this.props;
-        const theme = this.context;
+        const themeContext = this.context;
 
         return (
             <NavLinkWrapper to={props.urlState === 'home' ? '' : props.urlState}
@@ -50,7 +50,7 @@ class ActionLink extends Component {
                                 color: 'blue',
                             }}
                             onClick={this.onClickAction}
-                            style={{backgroundColor: theme.background}}>
+                            style={{backgroundColor: themeContext.theme.background}}>
                 {props.children}
             </NavLinkWrapper>
         );

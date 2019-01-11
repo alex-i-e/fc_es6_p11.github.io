@@ -5,7 +5,7 @@ import serverTemplate from "./src/serverTemplate";
 import App from "./src/components/App";
 import {StaticRouter} from "react-router-dom";
 import {createStore} from 'redux';
-import reducer from './src/reducer';
+import reducer from './src/reducers/reducer';
 import {Provider} from "react-redux";
 
 const app = express();

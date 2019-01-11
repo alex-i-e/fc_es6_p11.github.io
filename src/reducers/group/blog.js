@@ -1,4 +1,4 @@
-import {BLOG_CREATOR_TOGGLE} from '../constants/actionTypes';
+import {BLOG_CREATOR_TOGGLE} from '../../constants/actionTypes';
 
 const initState = {
     isOpenNewBlogForm: false,

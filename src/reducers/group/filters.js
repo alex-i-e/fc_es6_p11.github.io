@@ -1,6 +1,6 @@
 // @flow
-import type {Action} from '../constants/actionTypes';
-import {FILTER_BY_AUTHOR_WAS_CHANGED} from '../constants/actionTypes';
+import type {Action} from '../../constants/actionTypes';
+import {FILTER_BY_AUTHOR_WAS_CHANGED} from '../../constants/actionTypes';
 
 type State = {
     filterByAuthorValue: string,

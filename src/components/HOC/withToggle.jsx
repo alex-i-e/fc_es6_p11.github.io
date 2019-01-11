@@ -20,17 +20,16 @@ const withToggleWrapper = (WrapperComponent) => {
     class WithToggle extends Component {
         constructor(props) {
             super(props);
-            this.toggleForm = this.toggleForm.bind(this);
+            this.withToggleAction = this.withToggleAction.bind(this);
         }
 
-        toggleForm(e) {
-            console.log('>>> toggleForm');
+        withToggleAction(e) {
+            console.log('>>> withToggleAction');
         };
 
         render() {
             return <WrapperComponent
-                toggleForm={this.toggleForm}
-                theme={true}
+                withToggleAction={this.withToggleAction}
                 {...this.props}
             />;
         }
