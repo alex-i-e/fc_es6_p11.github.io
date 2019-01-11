@@ -1,9 +1,13 @@
-// @flow
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {fetchNewsViaSaga, fetchNewsViaEpic} from '../../actionCreators/newsBlock';
+import {hoverNewsDetails} from '../../actionCreators/newsDetails';
+import NewsDetails from './NewsDetails/NewsDetails';
 
+const Header = styled.div`
+    z-index: 100;
+`;
 const Loader = styled.div`
     position: fixed;
     top: 16px;
@@ -14,13 +18,21 @@ const NewsContainer = styled.div`
     overflow: hidden;
     position: absolute;
 `;
+const DetailsWrapper = styled(NewsDetails)`
+    overflow: hidden;
+    opacity: 1;
+    display: inherit;
+`;
 
 class NewsBlock extends Component<any, {}> {
     constructor() {
         super();
+
+        this.onHoverIn = this.onHoverIn.bind(this);
+        this.onHoverOut = this.onHoverOut.bind(this);
     }
 
-    componentDidMount(): void {
+    componentDidMount() {
         this.props.fetchNewsViaSaga('us');
         this.props.fetchNewsViaEpic('ru');
     }
@@ -32,16 +44,37 @@ class NewsBlock extends Component<any, {}> {
     componentDidUpdate() {
     }
 
+    onHoverIn() {
+        this.props.hoverNewsDetails(true);
+    }
+
+    onHoverOut() {
+        this.props.hoverNewsDetails(false);
+    }
+
     render() {
+        const {loading, news, newsDetailsHoverIn} = this.props;
+        const classAnimation = newsDetailsHoverIn === null
+            ? ''
+            : newsDetailsHoverIn === true
+                ? 'showOn'
+                : 'showOff';
+
         return (
             <div>
-                {this.props.loading
+                {loading
                     ?
                     <Loader>Loading...</Loader>
                     :
                     <NewsContainer>
-                        <div className={this.props.loading ? 'loading' : 'loaded'}>
-                            <span>some news...{`length = ${this.props.data.length}`}</span>
+                        <div className={loading ? 'loading' : 'loaded'}
+                             onMouseEnter={this.onHoverIn}
+                             onMouseLeave={this.onHoverOut}>
+                            <Header>
+                                News...length = {news.length}
+                            </Header>
+                            <DetailsWrapper classAnimation={classAnimation}
+                                            news={news}/>
                         </div>
                     </NewsContainer>
                 }
@@ -53,7 +86,8 @@ class NewsBlock extends Component<any, {}> {
 export default connect(
     (state) => ({
         loading: state.news.loading,
-        data: state.news.status ? state.news.articles : []
+        news: state.news.status ? state.news.articles : [],
+        newsDetailsHoverIn: state.news.hoverIn,
     }),
-    {fetchNewsViaSaga, fetchNewsViaEpic}
+    {fetchNewsViaSaga, fetchNewsViaEpic, hoverNewsDetails}
 )(NewsBlock);

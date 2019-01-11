@@ -1,5 +1,5 @@
 import {
-  ADD_NEW_BLOG, BLOG_CREATOR_TOGGLE, FILTER_BY_AUTHOR_WAS_CHANGED,
+  ADD_NEW_BLOG, BLOG_CREATOR_TOGGLE, BLOG_FILTER_WAS_CHANGED,
   HOME_PAGE_LOADED
 } from "./constants/actionTypes";
 import * as rootReducer from "enzyme";
@@ -57,14 +57,14 @@ describe('home reducers', () => {
     expect(actions).toEqual([addNote]);
   });
 
-  it('should dispatch action FILTER_BY_AUTHOR_WAS_CHANGED', () => {
+  it('should dispatch action BLOG_FILTER_WAS_CHANGED', () => {
     const initialState = {
       actions: {
-        filterByAuthorValue: ''
+        value: ''
       }
     };
     const filterByAuthor = 'Some new family';
-    const addNote = { type: FILTER_BY_AUTHOR_WAS_CHANGED, value: filterByAuthor };
+    const addNote = { type: BLOG_FILTER_WAS_CHANGED, payload: {value: filterByAuthor, type: 'author'} };
 
     const store = mockStore(initialState);
     store.dispatch(addNote);

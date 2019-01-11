@@ -1,7 +1,7 @@
 // @flow
 
-import {FILTER_BY_AUTHOR_WAS_CHANGED} from '../constants/actionTypes';
+import {BLOG_FILTER_WAS_CHANGED} from '../constants/actionTypes';
 
 export function filterNewsByTypeAndValue(filterType: string, value: string) {
-    return {type: FILTER_BY_AUTHOR_WAS_CHANGED, value};
+    return {type: BLOG_FILTER_WAS_CHANGED, payload: {value, filterType}};
 }

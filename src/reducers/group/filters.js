@@ -1,21 +1,23 @@
 // @flow
 import type {Action} from '../../constants/actionTypes';
-import {FILTER_BY_AUTHOR_WAS_CHANGED} from '../../constants/actionTypes';
+import {BLOG_FILTER_WAS_CHANGED} from '../../constants/actionTypes';
 
 type State = {
-    filterByAuthorValue: string,
+    value: string,
+    type: string,
 }
 
 const initState = {
-    filterByAuthorValue: '',
+    value: '',
+    type: 'author',
 };
 
 export default (state: State = initState, action: Action): State => {
     switch (action.type) {
-        case FILTER_BY_AUTHOR_WAS_CHANGED:
+        case BLOG_FILTER_WAS_CHANGED:
             return {
                 ...state,
-                filterByAuthorValue: action.value,
+                ...action.payload,
             };
         default:
             return state;

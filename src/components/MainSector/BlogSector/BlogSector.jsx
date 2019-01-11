@@ -20,7 +20,7 @@ class BlogSector extends Component {
             <BlogListBlock>
                 <BlogListItem blogList={this.props.blogList}
                               filterType={FILTER_TYPE}
-                              filterValue={this.props.filterByAuthorValue}/>
+                              filterValue={this.props.value}/>
             </BlogListBlock>
         );
     }
@@ -33,9 +33,9 @@ export default connect(
     (state) => ({
         blogList: getVisibleBlogList(
             state.home.blogList,
-            {type: FILTER_TYPE, value: state.filters.filterByAuthorValue}
+            {type: FILTER_TYPE, value: state.filters.value}
         ),
-        filterByAuthorValue: state.filters.filterByAuthorValue,
+        value: state.filters.value,
     }),
     null
 )(BlogSector);

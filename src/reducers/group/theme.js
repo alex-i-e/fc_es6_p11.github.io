@@ -10,7 +10,7 @@ export default (state = initState, action) => {
         case CHANGE_THEME:
             return {
                 ...state,
-                value: action.value
+                ...action.payload
             };
         default:
             return state;
