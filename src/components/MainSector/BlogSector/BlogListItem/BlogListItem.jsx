@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import AuthorItem from './AuthorItem';
+import moment from 'moment';
 
 const BlogListBlock = styled.div`
     --blog-item-margin: 8px;
     margin: var(--blog-item-margin);
     padding: var(--blog-item-margin);
-    box-shadow: -3px 1px 9px 0px #222222;
+    box-shadow: -3px 1px 9px 0px #adadad;
 
     display: flex;
     flex-flow: column;
@@ -26,6 +27,14 @@ const Title = styled.div`
 
     font-size: 16px;
     font-weight: 600;
+`;
+const BodyBlock = styled.div`
+    display: flex;
+    flex-flow: row;
+`;
+const Img = styled.img`
+    margin: 8px;
+    height: 70px;
 `;
 const Body = styled.div`
     margin: 8px;
@@ -59,9 +68,12 @@ const BlogListItem = (props) => {
                 blogList.map((row, number) =>
                     <BlogItem key={number.toString()}>
                         <Title>{row.title}</Title>
-                        <Body>{row.body}</Body>
+                        <BodyBlock>
+                            {row.image ? <Img src={row.image} alt="news image"/> : ''}
+                            <Body>{row.body}</Body>
+                        </BodyBlock>
                         <Footer>
-                            <Date>{row.date}</Date>
+                            <Date>{moment(row.date).format('lll')}</Date>
                             <Author author={row.author}
                                     matchingValue={filterValue}>
                             </Author>

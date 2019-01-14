@@ -4,10 +4,9 @@ import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import {localStorageMiddleware, promiseMiddleware} from './middleware';
 import reducer from './reducers/reducer';
 import {routerMiddleware} from 'react-router-redux';
-// import createHistory from 'history/createBrowserHistory';
-// import createMemoryHistory from 'history/createMemoryHistory';
+import createHistory from 'history/createBrowserHistory';
 import createMemoryHistory from 'history/createMemoryHistory';
-// import {loadState} from "./localStorageState";
+import {loadState} from './localStorageState';
 import createSagaMiddleware from 'redux-saga';
 import {createEpicMiddleware} from 'redux-observable';
 import newsSaga from './sagas/news';
@@ -17,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 const epicMiddleware = createEpicMiddleware();
 
 export const history = ('' + process.env.BROWSER !== 'false')  // TODO : check why does not work env.BROWSER
-    ? createMemoryHistory() // createHistory()
+    ? createHistory() // createHistory()
     : createMemoryHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
@@ -46,7 +45,7 @@ const getMiddleware = () => {
 };
 
 const persistedState = ('' + process.env.BROWSER !== 'false') // TODO : check why does not work env.BROWSER
-    ? null // loadState()
+    ? loadState()
     : null;
 
 
@@ -68,5 +67,5 @@ export const store = createStore(
 
 // then run the saga
 sagaMiddleware.run(newsSaga);
-
+// then run the epic
 epicMiddleware.run(newsEpic);

@@ -4,7 +4,7 @@ import MainSector from './MainSector/MainSector';
 import styled, {keyframes} from 'styled-components';
 import {ThemeContext, themes} from '../context/theme-context';
 import {changeTheme} from '../actionCreators/theme';
-
+import {NavLink} from 'react-router-dom';
 
 const AppBlock = styled.div`
     text-align: center;
@@ -54,6 +54,61 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 
+const TopMenu = styled.div`
+    position: fixed;
+    width: 100%;
+    height: 40px;
+    background-color: #080015;
+    color: snow;
+    display: flex;
+    flex-flow: row;
+    align-content: center;
+    justify-items: left;
+    align-items: center;
+`;
+
+const MenuItem = styled.div`
+    margin-left: 10px;
+    width: 70px;
+    text-overflow: ellipsis;
+    text-decoration: none;
+`;
+
+const WithActiveNavLink = (WrappedComponent, activeClass) => {
+    const withActiveNavLink = (props) => {
+
+        return (
+            <WrappedComponent
+                activeClassName={activeClass}
+                activeStyle={{
+                    color: 'red'
+                }}
+                {...props}
+            />
+        );
+    };
+
+    return withActiveNavLink;
+};
+const withActiveLink = WithActiveNavLink(NavLink, 'activeLink');
+const NavLinkWrapper = styled(NavLink)`
+    text-decoration: none;
+`;
+
+const Menu = (props) => {
+    return (
+        <TopMenu>
+            <MenuItem>
+                <NavLinkWrapper to={'/main'}>Main info</NavLinkWrapper>
+            </MenuItem>
+            <MenuItem><NavLinkWrapper to={'/base'}>Base</NavLinkWrapper></MenuItem>
+            <MenuItem><NavLinkWrapper to={'/about'}>About</NavLinkWrapper></MenuItem>
+            <MenuItem><NavLinkWrapper to={'/news'}>News</NavLinkWrapper></MenuItem>
+        </TopMenu>
+    );
+};
+
+
 // {logo} // TODO : provide logo through SSR
 class App extends Component {
     constructor(props) {
@@ -74,6 +129,7 @@ class App extends Component {
             }}>
                 <AppBlock>
                     <GlobalStyle/>
+                    <Menu/>
                     <Header>
                         <AnimateLogo src='' alt="logo"/>
                         <Title>Blog on React</Title>

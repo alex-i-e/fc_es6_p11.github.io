@@ -58,9 +58,12 @@ class BlogForm extends Component {
                     }}
                            type="date"
                            id="blog-date"/>
-                    <ActionLink urlState="home"
+                    <ActionLink urlState="/main"
                                 onSubmitPost={this.onSubmitPost}>
                         Submit POST
+                    </ActionLink>
+                    <ActionLink urlState="/main">
+                        Back
                     </ActionLink>
                 </FormBlock>
             </FormWrapper>

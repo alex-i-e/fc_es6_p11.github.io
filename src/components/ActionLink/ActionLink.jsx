@@ -6,8 +6,15 @@ import PropTypes from 'prop-types';
 import withToggle from '../HOC/withToggle';
 
 const NavLinkWrapper = styled(NavLink)`
-    margin: 16px;
+    display: inline-block;
+    color: black;
+    height: 32px;
+    margin-top: 16px;
     cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 3;
 
     box-shadow: -3px 1px 18px 0 #adadad;
     text-decoration: none;
@@ -44,11 +51,7 @@ class ActionLink extends Component {
         const themeContext = this.context;
 
         return (
-            <NavLinkWrapper to={props.urlState === 'home' ? '' : props.urlState}
-                            activeStyle={{
-                                textDecoration: 'none',
-                                color: 'blue',
-                            }}
+            <NavLinkWrapper to={props.urlState}
                             onClick={this.onClickAction}
                             style={{backgroundColor: themeContext.theme.background}}>
                 {props.children}

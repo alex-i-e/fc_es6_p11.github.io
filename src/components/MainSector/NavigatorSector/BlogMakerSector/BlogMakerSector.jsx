@@ -19,9 +19,9 @@ const BlogMakerSector = (props) => {
         <BlogBlock>
             <Router history={history}>
                 <Switch>
-                    <Route path="/edit" component={BlogForm}/>
-                    <Route path="/" render={() => (
-                        <ActionLink urlState="edit">Create new Post</ActionLink>
+                    <Route path="/main/edit" exact component={BlogForm}/>
+                    <Route path="/main" exact render={() => (
+                        <ActionLink urlState="main/edit">Create new Post</ActionLink>
                     )}/>
                 </Switch>
             </Router>

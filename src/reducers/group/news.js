@@ -11,7 +11,7 @@ import {
 
 type State = {
     loading: boolean,
-    hoverIn: boolean,
+    hoverIn: boolean | null,
     articles?: Array<any>,
     status?: string,
     totalResults?: number

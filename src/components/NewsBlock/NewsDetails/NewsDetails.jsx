@@ -1,6 +1,7 @@
 import React from 'react';
-
+import {Link, NavLink} from 'react-router-dom';
 import styled from 'styled-components';
+import AddBlog from './AddBlog/AddBlog';
 
 const NewsDetailsWrapper = styled.div`
     height: 0;
@@ -16,7 +17,10 @@ const NewsDetailsWrapper = styled.div`
     box-shadow: -3px 1px 9px 0px #adadad;
    
 `;
-const NewsHoverItem = styled.div`
+const NewsHoverItem = styled.a`
+    text-decoration: none;
+    color: #adadad;
+
     height: 250px;
     background-color: white;
     position: relative;
@@ -41,7 +45,8 @@ const NewsDetails = (props) => (
     <NewsDetailsWrapper className={props.classAnimation}>
         {props.news.length
             ? props.news.map((item, index) => (
-                <NewsHoverItem key={index}>
+                <NewsHoverItem className={'newsTopic'} key={index} href={item.url} target="_blank">
+                    <AddBlog topic={item} />
                     <Img src={item.urlToImage} alt="news"/>
                     <Title>{item.title}</Title>
                 </NewsHoverItem>

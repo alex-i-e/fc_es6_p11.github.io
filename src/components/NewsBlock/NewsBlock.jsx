@@ -18,11 +18,6 @@ const NewsContainer = styled.div`
     overflow: hidden;
     position: absolute;
 `;
-const DetailsWrapper = styled(NewsDetails)`
-    overflow: hidden;
-    opacity: 1;
-    display: inherit;
-`;
 
 class NewsBlock extends Component<any, {}> {
     constructor() {
@@ -73,8 +68,8 @@ class NewsBlock extends Component<any, {}> {
                             <Header>
                                 News...length = {news.length}
                             </Header>
-                            <DetailsWrapper classAnimation={classAnimation}
-                                            news={news}/>
+                            <NewsDetails classAnimation={classAnimation}
+                                         news={news}/>
                         </div>
                     </NewsContainer>
                 }

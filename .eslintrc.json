@@ -3,6 +3,10 @@
     "plugin:flowtype/recommended"
   ],
   "plugins": [
-    "flowtype"
-  ]
+    "flowtype",
+    "react-hooks"
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error"
+  }
 }
