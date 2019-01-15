@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {Component, Fragment} from 'react';
 import BlogSector from './BlogSector/BlogSector';
 import NavigatorSector from './NavigatorSector/NavigatorSector';
 import {ThemeContext} from '../../context/theme-context';
-import {Router, Switch, Route} from 'react-router';
+import {Router, Switch, Route, withRouter} from 'react-router';
 import {history} from '../../store';
 import styled from 'styled-components';
-import BlogForm from './NavigatorSector/BlogMakerSector/BlogForm/BlogForm';
 
 const Content = styled.div`
 `;
@@ -26,6 +25,30 @@ const Base = (props) => {
         <div>Base</div>
     );
 };
+const withRouterWrapper = (WrappedComponent) => {
+
+    class routerWrapper extends Component {
+
+        componentDidMount() {
+
+        }
+
+        render() {
+            // withRouter props
+            // const {match, location, history} = this.props;
+
+            return (
+                <WrappedComponent {...this.props}/>
+            );
+        }
+    }
+
+    return routerWrapper;
+
+};
+
+const withRouterComponent = withRouterWrapper(Base);
+
 const About = (props) => {
     return (
         <div>About</div>
@@ -51,9 +74,8 @@ const MainSector = (props) => (
     <Content>
         <Router history={history}>
             <Switch>
-                {/*<Route path="/edit" component={MainPage}/>*/}
                 <Route path="/main" component={MainPage}/>
-                <Route path="/base" component={Base}/>
+                <Route path="/base" component={withRouterComponent}/>
                 <Route path="/about" component={About}/>
                 <Route path="/news" component={News}/>
                 <Route path="/" exact component={InitPage}/>

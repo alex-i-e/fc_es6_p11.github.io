@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
-import {ThemeContext} from '../../context/theme-context';
+import {ThemeContext} from '../../../context/theme-context';
 import PropTypes from 'prop-types';
-import withToggle from '../HOC/withToggle';
+import withToggle from '../../HOC/withToggle';
 
 const NavLinkWrapper = styled(NavLink)`
     display: inline-block;
@@ -15,6 +15,7 @@ const NavLinkWrapper = styled(NavLink)`
     text-align: center;
     vertical-align: middle;
     line-height: 3;
+    background-color: ${props => props.theme.background};
 
     box-shadow: -3px 1px 18px 0 #adadad;
     text-decoration: none;
@@ -52,8 +53,8 @@ class ActionLink extends Component {
 
         return (
             <NavLinkWrapper to={props.urlState}
-                            onClick={this.onClickAction}
-                            style={{backgroundColor: themeContext.theme.background}}>
+                            theme={themeContext.theme}
+                            onClick={this.onClickAction}>
                 {props.children}
             </NavLinkWrapper>
         );

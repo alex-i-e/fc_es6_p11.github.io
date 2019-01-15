@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {filterNewsByTypeAndValue} from '../../../../actionCreators/filterSector';
 import styled from 'styled-components';
+import InputField from '../../../shared/Input/InputField';
 
 const FilterWrapper = styled.div`
     margin: 8px;
@@ -33,9 +34,9 @@ class FilterSector extends Component {
             <FilterWrapper>
                 <FilterBlock>
                     <label htmlFor="blog-author">Filter By Author</label>
-                    <input type="text"
-                           id="blog-author"
-                           onChange={this.onChangeFilter}/>
+                    <InputField type="search"
+                                id="blog-author"
+                                onChange={this.onChangeFilter}/>
                 </FilterBlock>
             </FilterWrapper>
         );

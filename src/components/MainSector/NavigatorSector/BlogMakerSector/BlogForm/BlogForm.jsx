@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {addNewBlog} from '../../../../../actionCreators/blogForm';
-import ActionLink from '../../../../ActionLink/ActionLink';
+import ActionLink from '../../../../shared/ActionLink/ActionLink';
 import styled from 'styled-components';
+import InputField from '../../../../shared/Input/InputField';
 
 const FormWrapper = styled.div`
     margin: 8px;
@@ -24,43 +25,44 @@ class BlogForm extends Component {
             date: {value: ''},
         };
 
+        this.authorInput = React.createRef();
+        this.titleInput = React.createRef();
+        this.bodyInput = React.createRef();
+        this.dateInput = React.createRef();
+
         this.onSubmitPost = this.onSubmitPost.bind(this);
     }
 
     render() {
+        const blog = this.newBlog;
+
         return (
             <FormWrapper>
                 <FormBlock onSubmit={this.onSubmitPost}>
-                    <label required htmlFor="blog-author">Author:</label>
-                    <input ref={(node) => {
-                        this.newBlog.author = node;
-                    }}
-                           type="text"
-                           id="blog-author"/>
-
-                    <label required htmlFor="blog-title">Title:</label>
-                    <input ref={(node) => {
-                        this.newBlog.title = node;
-                    }}
-                           type="text"
-                           id="blog-title"/>
-
-                    <label htmlFor="blog-body">Body:</label>
-                    <input ref={(node) => {
-                        this.newBlog.body = node;
-                    }}
-                           type="text"
-                           id="blog-body"/>
-
-                    <label htmlFor="blog-date">Date:</label>
-                    <input ref={(node) => {
-                        this.newBlog.date = node;
-                    }}
-                           type="date"
-                           id="blog-date"/>
+                    <InputField labelValue={'Author *'}
+                                ref={this.authorInput}
+                                placeholder={'ex. Some author\'s name'}
+                                type="text"
+                                required
+                                id="blog-author"/>
+                    <InputField labelValue={'Title'}
+                                ref={this.titleInput}
+                                placeholder={'ex. Awesome title'}
+                                type="text"
+                                id="blog-title"/>
+                    <InputField labelValue={'Body'}
+                                ref={this.bodyInput}
+                                placeholder={'ex. Body description ...'}
+                                type="text"
+                                id="blog-body"/>
+                    <InputField labelValue={'Date'}
+                                ref={this.dateInput}
+                                placeholder={'ex. 01.01.2000'}
+                                type="date"
+                                id="blog-date"/>
                     <ActionLink urlState="/main"
                                 onSubmitPost={this.onSubmitPost}>
-                        Submit POST
+                        Submit
                     </ActionLink>
                     <ActionLink urlState="/main">
                         Back
@@ -71,7 +73,7 @@ class BlogForm extends Component {
     }
 
     onSubmitPost(e) {
-        if (!this.newBlog.author.value) {
+        if (!this.authorInput.current.value) {
             e.preventDefault();
             alert('Required fields need to fill');
 
@@ -79,10 +81,10 @@ class BlogForm extends Component {
         }
 
         this.props.addNewBlog({
-            author: this.newBlog.author.value,
-            title: this.newBlog.title.value,
-            body: this.newBlog.body.value,
-            date: this.newBlog.date.value,
+            author: this.authorInput.current.value,
+            title: this.titleInput.current.value,
+            body: this.bodyInput.current.value,
+            date: this.dateInput.current.value || new Date(),
         });
 
         return true;

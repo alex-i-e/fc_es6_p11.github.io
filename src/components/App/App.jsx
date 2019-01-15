@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import MainSector from './MainSector/MainSector';
+import MainSector from '../MainSector/MainSector';
 import styled, {keyframes} from 'styled-components';
-import {ThemeContext, themes} from '../context/theme-context';
-import {changeTheme} from '../actionCreators/theme';
+import {ThemeContext, themes} from '../../context/theme-context';
+import {changeTheme} from '../../actionCreators/theme';
 import {NavLink} from 'react-router-dom';
 
 const AppBlock = styled.div`
@@ -43,8 +43,8 @@ const NewsWrapper = styled(NewsBlock)`
     width: 100%;
 `;
 import {createGlobalStyle} from 'styled-components';
-import NewsBlock from './NewsBlock/NewsBlock';
-import ThemeContainer from './ThemeContainer/ThemeContainer';
+import NewsBlock from '../NewsBlock/NewsBlock';
+import ThemeContainer from '../ThemeContainer/ThemeContainer';
 
 const GlobalStyle = createGlobalStyle`
     body {
@@ -74,23 +74,6 @@ const MenuItem = styled.div`
     text-decoration: none;
 `;
 
-const WithActiveNavLink = (WrappedComponent, activeClass) => {
-    const withActiveNavLink = (props) => {
-
-        return (
-            <WrappedComponent
-                activeClassName={activeClass}
-                activeStyle={{
-                    color: 'red'
-                }}
-                {...props}
-            />
-        );
-    };
-
-    return withActiveNavLink;
-};
-const withActiveLink = WithActiveNavLink(NavLink, 'activeLink');
 const NavLinkWrapper = styled(NavLink)`
     text-decoration: none;
 `;
@@ -132,7 +115,7 @@ class App extends Component {
                     <Menu/>
                     <Header>
                         <AnimateLogo src='' alt="logo"/>
-                        <Title>Blog on React</Title>
+                        <Title>Blog</Title>
                         <NewsWrapper/>
                         <ThemeContainer/>
                     </Header>

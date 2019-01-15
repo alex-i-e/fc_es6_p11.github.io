@@ -2,7 +2,7 @@ import express from 'express';
 import {renderToString} from 'react-dom/server';
 import React from 'react';
 import serverTemplate from "./src/serverTemplate";
-import App from "./src/components/App";
+import App from "./src/components/App/App";
 import {StaticRouter} from "react-router-dom";
 import {createStore} from 'redux';
 import reducer from './src/reducers/reducer';

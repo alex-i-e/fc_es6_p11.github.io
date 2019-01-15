@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import AuthorItem from './AuthorItem';
 import moment from 'moment';
+import RemoveBlog from './RemoveBlog/RemoveBlog';
 
 const BlogListBlock = styled.div`
     --blog-item-margin: 8px;
@@ -20,6 +21,11 @@ const BlogItem = styled.div`
     margin: var(--blog-item-margin);
     padding: var(--blog-item-margin);
     box-shadow: -3px 1px 9px 0px #adadad;
+`;
+export const Topic = styled.div`
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
 `;
 const Title = styled.div`
     margin: 8px;
@@ -66,8 +72,12 @@ const BlogListItem = (props) => {
             {blogList.length
                 ?
                 blogList.map((row, number) =>
-                    <BlogItem key={number.toString()}>
-                        <Title>{row.title}</Title>
+                    <BlogItem className={'newsTopic'}
+                              key={number.toString()}>
+                        <Topic>
+                            <Title>{row.title}</Title>
+                            <RemoveBlog index={number}/>
+                        </Topic>
                         <BodyBlock>
                             {row.image ? <Img src={row.image} alt="news image"/> : ''}
                             <Body>{row.body}</Body>

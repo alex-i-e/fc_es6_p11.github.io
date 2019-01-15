@@ -6,6 +6,7 @@ export const BLOG_FILTER_WAS_CHANGED = 'BLOG_FILTER_WAS_CHANGED';
 
 export const BLOG_CREATOR_TOGGLE = 'BLOG_CREATOR_TOGGLE';
 export const ADD_NEW_BLOG = 'ADD_NEW_BLOG';
+export const REMOVE_BLOG = 'REMOVE_BLOG';
 
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';

@@ -1,8 +1,8 @@
 // @flow
 import type {Action} from '../../constants/actionTypes';
-import {ADD_NEW_BLOG, HOME_PAGE_LOADED} from '../../constants/actionTypes';
+import {ADD_NEW_BLOG, HOME_PAGE_LOADED, REMOVE_BLOG} from '../../constants/actionTypes';
 import BlogListMock from './blogListMock.json';
-import type {BlogType} from "../../components/types/blogTypes";
+import type {BlogType} from '../../components/types/blogTypes';
 
 type State = {
     +blogList: Array<BlogType>
@@ -24,6 +24,16 @@ export default (state: State = initState, action: Action): State => {
                 ...state,
                 blogList: [
                     action.value,
+                    ...state.blogList,
+                ],
+            };
+        case REMOVE_BLOG:
+            const index = action.value;
+            state.blogList.splice(index, 1);
+
+            return {
+                ...state,
+                blogList: [
                     ...state.blogList,
                 ],
             };

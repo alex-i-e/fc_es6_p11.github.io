@@ -1,7 +1,7 @@
 import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import AddBlog from './AddBlog/AddBlog';
+import {Topic} from '../../MainSector/BlogSector/BlogListItem/BlogListItem';
 
 const NewsDetailsWrapper = styled.div`
     height: 0;
@@ -9,7 +9,7 @@ const NewsDetailsWrapper = styled.div`
     display: flex;
     flex-flow: column;
     position: relative;
-    //margin: 8px;
+
     background-color: rgba(255,255,255, 1);
     overflow-y: scroll;
     overflow-x: hidden;
@@ -20,7 +20,6 @@ const NewsDetailsWrapper = styled.div`
 const NewsHoverItem = styled.a`
     text-decoration: none;
     color: #adadad;
-
     height: 250px;
     background-color: white;
     position: relative;
@@ -45,9 +44,11 @@ const NewsDetails = (props) => (
     <NewsDetailsWrapper className={props.classAnimation}>
         {props.news.length
             ? props.news.map((item, index) => (
-                <NewsHoverItem className={'newsTopic'} key={index} href={item.url} target="_blank">
-                    <AddBlog topic={item} />
-                    <Img src={item.urlToImage} alt="news"/>
+                <NewsHoverItem key={index} href={item.url} target="_blank">
+                    <Topic className={'newsTopic'}>
+                        <Img src={item.urlToImage} alt="news"/>
+                        <AddBlog topic={item}/>
+                    </Topic>
                     <Title>{item.title}</Title>
                 </NewsHoverItem>
             ))

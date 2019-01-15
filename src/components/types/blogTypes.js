@@ -4,4 +4,5 @@ export type BlogType = {
     body: string,
     date: string,
     author: string,
+    image?: string
 }
