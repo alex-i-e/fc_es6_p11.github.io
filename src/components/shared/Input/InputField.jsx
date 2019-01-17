@@ -1,5 +1,4 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux';
+import React, {Fragment} from 'react';
 import styled from 'styled-components';
 
 const Input = styled.input`

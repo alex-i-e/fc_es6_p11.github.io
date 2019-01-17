@@ -53,7 +53,8 @@ class BlogForm extends Component {
                     <InputField labelValue={'Body'}
                                 ref={this.bodyInput}
                                 placeholder={'ex. Body description ...'}
-                                type="text"
+                                type="textarea"
+                                rows="4"
                                 id="blog-body"/>
                     <InputField labelValue={'Date'}
                                 ref={this.dateInput}

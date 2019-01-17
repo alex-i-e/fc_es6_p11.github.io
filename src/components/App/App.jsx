@@ -76,6 +76,12 @@ const MenuItem = styled.div`
 
 const NavLinkWrapper = styled(NavLink)`
     text-decoration: none;
+    
+    &:focus {
+        background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+        border-radius: 4px;
+        padding: 2px 4px;
+    }
 `;
 
 const Menu = (props) => {

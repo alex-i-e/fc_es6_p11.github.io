@@ -5,8 +5,12 @@ import {ThemeContext} from '../../context/theme-context';
 import {Router, Switch, Route, withRouter} from 'react-router';
 import {history} from '../../store';
 import styled from 'styled-components';
+import initGoogleMap, {prefixScript, affixScriptToHead, onLoadCallback} from '../../webApi/initGoogleMap';
 
 const Content = styled.div`
+`;
+const Map = styled.div`
+    height: 400px;
 `;
 
 const MainPage = (props) => (
@@ -22,15 +26,26 @@ const MainPage = (props) => (
 );
 const Base = (props) => {
     return (
-        <div>Base</div>
+        <Fragment>
+            <div>Base</div>
+            <Map id='map'></Map>
+        </Fragment>
+
     );
 };
 const withRouterWrapper = (WrappedComponent) => {
 
+    const API_KEY = 'AIzaSyCKA-4G14Aehm3qsiejmYsk3E6aSH2cKNI';
+
     class routerWrapper extends Component {
 
         componentDidMount() {
-
+            affixScriptToHead(
+                `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`, // &callback=initMap
+                onLoadCallback
+            )
+                .then(data => data())
+                .then(data => console.log(' >>>', data));
         }
 
         render() {
