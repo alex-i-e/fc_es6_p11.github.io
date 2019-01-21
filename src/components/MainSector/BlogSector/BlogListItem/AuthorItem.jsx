@@ -9,7 +9,7 @@ const Author = styled.div`
 const AuthorItem = (props) => {
     const {author, matchingValue} = props;
     // TODO: use sanitise DOM, ex. DOMPurify
-    const innerHtml = `<span>${author.replace(new RegExp(matchingValue, 'g'), `<b>${matchingValue}</b>`)}</span>`;
+    const innerHtml = `<span>${author.replace(new RegExp(matchingValue, 'g'), `<b style="background-color: yellow">${matchingValue}</b>`)}</span>`;
 
     return (
         <Author dangerouslySetInnerHTML={{__html: innerHtml}}>

@@ -120,7 +120,7 @@ class App extends Component {
                     <GlobalStyle/>
                     <Menu/>
                     <Header>
-                        <AnimateLogo src='' alt="logo"/>
+                        <AnimateLogo src='./favicon.ico' alt="logo"/>
                         <Title>Blog</Title>
                         <NewsWrapper/>
                         <ThemeContainer/>
