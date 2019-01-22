@@ -8,7 +8,7 @@ import NewsDetails from './NewsDetails/NewsDetails';
 const Header = styled.div`
     z-index: 100;
 `;
-const Loader = styled.div`
+export const Loader = styled.div`
     position: fixed;
     top: 16px;
     right: 0;
@@ -19,7 +19,7 @@ const NewsContainer = styled.div`
     position: absolute;
 `;
 
-class NewsBlock extends Component<any, {}> {
+export class NewsBlock extends Component<any, {}> {
     constructor() {
         super();
 

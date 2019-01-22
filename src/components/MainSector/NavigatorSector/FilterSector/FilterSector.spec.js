@@ -2,18 +2,17 @@ import React from 'react';
 import FilterSector from "./FilterSector";
 
 import Enzyme, { configure, mount, shallow } from 'enzyme';
-// setup file
-import Adapter from 'enzyme-adapter-react-16';
-
-import 'jsdom-global/register'
 import configureStore from 'redux-mock-store';
 import { Provider } from "react-redux";
+import createSagaMiddleware from 'redux-saga';
+import {createEpicMiddleware} from 'redux-observable';
 
-configure({ adapter: new Adapter() });
 
 describe('A suite <FilterSector/>', () => {
 
   const initialState = {output:10};
+
+  const middlewares = [createSagaMiddleware, createEpicMiddleware];
   const mockStore = configureStore();
   let store,wrapper;
 

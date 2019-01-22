@@ -14,7 +14,7 @@ const BlogListBlock = styled.div`
 
 const FILTER_TYPE = 'author';
 
-class BlogSector extends Component {
+export class BlogSector extends Component {
     render() {
         return (
             <BlogListBlock>

@@ -16,7 +16,7 @@ const NavigatorBlock = styled(SidebarItem)`
     box-shadow: -3px 1px 9px 0px #adadad;
 `;
 
-const NavigatorSector = (props) => (
+export const NavigatorSector = (props) => (
     <NavigatorBlock>
         <BlogMakerSector/>
         <FilterSector/>
