@@ -12,7 +12,6 @@ import Enzyme, { configure, mount, shallow } from 'enzyme';
 
 configure({ adapter: new Adapter() });
 
-
 describe('A suite <MainSector/>', () => {
 
   const initialState = { output: 10 };

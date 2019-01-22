@@ -28,6 +28,8 @@ export const EPIC_NEWS_FETCH_FAILED = 'EPIC_NEWS_FETCH_FAILED';
 
 export const CHANGE_THEME = 'CHANGE_THEME';
 
+export const LOG_ERROR = 'LOG_ERROR';
+
 export type FilterByAuthorAction = { type: typeof BLOG_FILTER_WAS_CHANGED, payload: {value: string, type?: string} };
 export type AddNewBlogAction = { type: typeof ADD_NEW_BLOG, value: BlogType };
 

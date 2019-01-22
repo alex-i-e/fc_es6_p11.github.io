@@ -34,7 +34,6 @@ const Base = (props) => {
     );
 };
 const withRouterWrapper = (WrappedComponent) => {
-
     const API_KEY = 'AIzaSyCKA-4G14Aehm3qsiejmYsk3E6aSH2cKNI';
 
     class routerWrapper extends Component {

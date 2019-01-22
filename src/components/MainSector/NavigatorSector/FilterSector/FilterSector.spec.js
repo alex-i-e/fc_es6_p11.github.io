@@ -20,7 +20,7 @@ describe('A suite <FilterSector/>', () => {
   beforeEach(()=>{
     store = mockStore(initialState);
     wrapper = mount( <Provider store={store}><FilterSector /></Provider> )
-  })
+  });
 
 
   it('should render without throwing an error', () => {

@@ -5,6 +5,10 @@ import styled, {keyframes} from 'styled-components';
 import {ThemeContext, themes} from '../../context/theme-context';
 import {changeTheme} from '../../actionCreators/theme';
 import {NavLink} from 'react-router-dom';
+import {createGlobalStyle} from 'styled-components';
+import NewsBlock from '../NewsBlock/NewsBlock';
+import ThemeContainer from '../ThemeContainer/ThemeContainer';
+import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
 
 const AppBlock = styled.div`
     text-align: center;
@@ -42,10 +46,6 @@ const NewsWrapper = styled(NewsBlock)`
     color: #adadad;
     width: 100%;
 `;
-import {createGlobalStyle} from 'styled-components';
-import NewsBlock from '../NewsBlock/NewsBlock';
-import ThemeContainer from '../ThemeContainer/ThemeContainer';
-
 const GlobalStyle = createGlobalStyle`
     body {
       margin: 0;
@@ -53,7 +53,6 @@ const GlobalStyle = createGlobalStyle`
       font-family: sans-serif;
     }
 `;
-
 const TopMenu = styled.div`
     position: fixed;
     width: 100%;
@@ -66,7 +65,6 @@ const TopMenu = styled.div`
     justify-items: left;
     align-items: center;
 `;
-
 const MenuItem = styled.div`
     margin-left: 10px;
     width: 70px;
@@ -128,7 +126,9 @@ class App extends Component {
                     <Chapter>
                         Welcome to Blog Maker!
                     </Chapter>
-                    <MainSector/>
+                    <ErrorBoundary>
+                        <MainSector/>
+                    </ErrorBoundary>
                 </AppBlock>
             </ThemeContext.Provider>
         );
