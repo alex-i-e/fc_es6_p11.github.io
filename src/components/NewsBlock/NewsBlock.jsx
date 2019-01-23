@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {fetchNewsViaSaga, fetchNewsViaEpic} from '../../actionCreators/newsBlock';
@@ -17,6 +18,8 @@ export const Loader = styled.div`
 const NewsContainer = styled.div`
     overflow: hidden;
     position: absolute;
+`;
+export const NewsInnerContainer = styled.div`
 `;
 
 export class NewsBlock extends Component<any, {}> {
@@ -62,7 +65,7 @@ export class NewsBlock extends Component<any, {}> {
                     <Loader>Loading...</Loader>
                     :
                     <NewsContainer>
-                        <div className={loading ? 'loading' : 'loaded'}
+                        <NewsInnerContainer className={loading ? 'loading' : 'loaded'}
                              onMouseEnter={this.onHoverIn}
                              onMouseLeave={this.onHoverOut}>
                             <Header>
@@ -70,13 +73,28 @@ export class NewsBlock extends Component<any, {}> {
                             </Header>
                             <NewsDetails classAnimation={classAnimation}
                                          news={news}/>
-                        </div>
+                        </NewsInnerContainer>
                     </NewsContainer>
                 }
             </div>
         );
     }
 }
+
+NewsBlock.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    news: PropTypes.arrayOf(PropTypes.object).isRequired,
+    newsDetailsHoverIn: PropTypes.bool.isRequired,
+    fetchNewsViaSaga: PropTypes.func.isRequired,
+    fetchNewsViaEpic: PropTypes.func.isRequired,
+    hoverNewsDetails: PropTypes.func.isRequired,
+};
+
+NewsBlock.defaultProps = {
+    loading: false,
+    newsDetailsHoverIn: false,
+    news: [],
+};
 
 export default connect(
     (state) => ({

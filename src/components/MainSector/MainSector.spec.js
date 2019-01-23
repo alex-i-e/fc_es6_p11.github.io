@@ -10,7 +10,7 @@ import renderer from 'react-test-renderer';
 
 import {Provider} from 'react-redux';
 import configureStore from 'redux-mock-store';
-import Enzyme, {configure, mount, shallow} from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import createSagaMiddleware from 'redux-saga';
 import {createEpicMiddleware} from 'redux-observable';
 
