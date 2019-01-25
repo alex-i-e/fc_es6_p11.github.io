@@ -62,6 +62,7 @@ delete window.__PRELOADED_STATE__;
 export const store = createStore(
     reducer,
     preloadedState,
+    //persistedState,
     composeWithDevTools(getMiddleware()),
 );
 

@@ -7,13 +7,11 @@ import {history} from '../../store';
 import styled from 'styled-components';
 import initGoogleMap, {prefixScript, affixScriptToHead, onLoadCallback} from '../../webApi/initGoogleMap';
 
-const Content = styled.div`
-`;
 const Map = styled.div`
     height: 400px;
 `;
 
-const MainPage = (props) => (
+export const MainPage = (props) => (
     <ThemeContext.Consumer>
         {({theme}) => (
             <div className="container main-sector"
@@ -85,18 +83,16 @@ const NoMatch = (props) => {
 };
 
 const MainSector = (props) => (
-    <Content>
-        <Router history={history}>
-            <Switch>
-                <Route path="/main" component={MainPage}/>
-                <Route path="/base" component={withRouterComponent}/>
-                <Route path="/about" component={About}/>
-                <Route path="/news" component={News}/>
-                <Route path="/" exact component={InitPage}/>
-                <Route component={NoMatch}/>
-            </Switch>
-        </Router>
-    </Content>
+    <Router history={history}>
+        <Switch>
+            <Route path="/main" component={MainPage}/>
+            <Route path="/base" component={withRouterComponent}/>
+            <Route path="/about" component={About}/>
+            <Route path="/news" component={News}/>
+            <Route path="/" exact component={InitPage}/>
+            <Route component={NoMatch}/>
+        </Switch>
+    </Router>
 );
 
 export default MainSector;

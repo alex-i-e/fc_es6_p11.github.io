@@ -1,60 +1,60 @@
 import React from 'react';
-import FilterSector from "./FilterSector";
+import {FilterSector, FilterBlock} from './FilterSector';
+import {shallow, mount} from 'enzyme';
+import renderer from 'react-test-renderer';
+import {Input} from '../../../shared/Input/InputField';
 
-import Enzyme, { configure, mount, shallow } from 'enzyme';
-import configureStore from 'redux-mock-store';
-import { Provider } from "react-redux";
-import createSagaMiddleware from 'redux-saga';
-import {createEpicMiddleware} from 'redux-observable';
+function setProps() {
+    return {
+        filterNewsByTypeAndValue: jest.fn(),
+    };
+}
 
+function setup() {
+    const props = setProps();
+    const enzymeWrapper = shallow(<FilterSector {...props} />);
+
+    return {
+        props,
+        enzymeWrapper
+    };
+}
 
 describe('A suite <FilterSector/>', () => {
+    it('should render shallow render only', () => {
+        const {props, enzymeWrapper} = setup();
 
-  const initialState = {output:10};
+        expect(enzymeWrapper.render()).toMatchSnapshot();
+        enzymeWrapper.unmount();
+    });
 
-  const middlewares = [createSagaMiddleware, createEpicMiddleware];
-  const mockStore = configureStore();
-  let store,wrapper;
+    it('should render deep DOM', () => {
+        const props = setProps();
+        const wrapper = renderer
+            .create(<FilterSector {...props} />)
+            .toJSON();
+        expect(wrapper).toMatchSnapshot();
+    });
 
-  beforeEach(()=>{
-    store = mockStore(initialState);
-    wrapper = mount( <Provider store={store}><FilterSector /></Provider> )
-  });
+    it('should simulate onChange action', () => {
+        // Arrange
+        const props = setProps();
+        const component = mount(<FilterSector {...props}/>);
+        const simulateEvent = {
+            target: {
+                value: 'some value'
+            }
+        };
 
+        // Act
+        // test: simulate UI events
+        component.find(Input).simulate('change', simulateEvent);
+        expect(props.filterNewsByTypeAndValue).toHaveBeenCalled();
+        expect(props.filterNewsByTypeAndValue).toHaveBeenCalledWith('author', 'some value');
 
-  it('should render without throwing an error', () => {
-    expect(shallow(<FilterSector/>).contains(
-      <div className="filter-sector">
-        <div className="filter-form"/>
-      </div>
-    )).toBe(true);
-  });
+        // Assert: component
+        // console.log(' >>> component.debug()', component.debug());
 
-  it('should render without throwing an error', () => {
-    expect(shallow(<FilterSector/>).contains(
-      <div className="filter">
-        <label htmlFor="blog-author"/>
-        <input type="text" id="blog-author"/>
-      </div>
-    )).toBe(true);
-  });
-
-  it('renders one .filter-form components', () => {
-    const wrapper = shallow(<FilterSector/>);
-    expect(wrapper.find('.filter-form').length).toBe(1);
-  });
-
-  it('should be selectable by class ".blog-author"', () => {
-    const wrapper = shallow(<FilterSector/>);
-    expect(wrapper.is('.blog-author')).toBe(true);
-  });
-
-  it('renders one <div> components', () => {
-    const wrapper = shallow(<FilterSector/>);
-    expect(wrapper.find('div').length).toBe(1);
-  });
-
-  it('should be selectable by id "blog-author"', () => {
-    expect(shallow(<FilterSector/>).is('#blog-author')).toBe(false);
-  });
+        component.unmount();
+    });
 });

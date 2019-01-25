@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A suite <FilterSector/> should render deep DOM 1`] = `
+.c2 {
+  padding: 4px 8px;
+  line-height: 16px;
+}
+
+.c0 {
+  margin: 8px;
+  padding: 8px;
+  box-shadow: -3px 1px 9px 0px #adadad;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  margin: 8px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <label
+      htmlFor="blog-author"
+    >
+      Filter By Author
+    </label>
+    <label
+      htmlFor="blog-author"
+    />
+    <input
+      className="c2"
+      id="blog-author"
+      onChange={[Function]}
+      type="search"
+    />
+  </div>
+</div>
+`;
+
+exports[`A suite <FilterSector/> should render shallow render only 1`] = `
+.c2 {
+  padding: 4px 8px;
+  line-height: 16px;
+}
+
+.c0 {
+  margin: 8px;
+  padding: 8px;
+  box-shadow: -3px 1px 9px 0px #adadad;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column;
+  -ms-flex-flow: column;
+  flex-flow: column;
+  margin: 8px;
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="c1"
+  >
+    <label
+      for="blog-author"
+    >
+      Filter By Author
+    </label>
+    <label
+      for="blog-author"
+    >
+      
+    </label>
+    <input
+      class="c2"
+      id="blog-author"
+      type="search"
+    >
+      
+    </input>
+  </div>
+</div>
+`;

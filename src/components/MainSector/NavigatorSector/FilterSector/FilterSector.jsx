@@ -10,7 +10,7 @@ const FilterWrapper = styled.div`
     
     box-shadow: -3px 1px 9px 0px #adadad;
 `;
-const FilterBlock = styled.div`
+export const FilterBlock = styled.div`
     display: flex;
     flex-flow: column;
     
@@ -19,14 +19,14 @@ const FilterBlock = styled.div`
 
 const FILTER_TYPE = 'author';
 
-class FilterSector extends Component {
+export class FilterSector extends Component {
     constructor(props) {
         super(props);
         this.onChangeFilter = this.onChangeFilter.bind(this);
     }
 
     onChangeFilter(e) {
-        this.props.filterNewsByTypeAndValue(FILTER_TYPE, e.currentTarget.value);
+        this.props.filterNewsByTypeAndValue(FILTER_TYPE, e.target.value);
     }
 
     render() {

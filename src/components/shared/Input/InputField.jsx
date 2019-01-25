@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import styled from 'styled-components';
 
-const Input = styled.input`
+export const Input = styled.input`
     padding: 4px 8px;
     line-height: 16px;
 `;
