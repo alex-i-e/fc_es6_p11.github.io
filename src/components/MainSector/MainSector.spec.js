@@ -24,7 +24,7 @@ describe('A suite MainSector', () => {
     //             </MemoryRouter>
     //         );
     //
-    //         expect(render(enzymeWrapper)).toMatchSnapshot(true);
+    //         expect(render(enzymeWrapper)).toMatchSnapshot();
     //     });
     //
     //     it('should render shallow render only', () => {
@@ -32,7 +32,7 @@ describe('A suite MainSector', () => {
     //             <MainSector/>
     //         </MemoryRouter>);
     //
-    //         expect(enzymeWrapper.render()).toMatchSnapshot(true);
+    //         expect(enzymeWrapper.render()).toMatchSnapshot();
     //         enzymeWrapper.unmount();
     //     });
     //
@@ -45,7 +45,7 @@ describe('A suite MainSector', () => {
     //             </MemoryRouter>)
     //             .toJSON();
     //
-    //         expect(wrapper).toMatchSnapshot(true);
+    //         expect(wrapper).toMatchSnapshot();
     //     });
     // });
 });

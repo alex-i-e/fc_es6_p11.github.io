@@ -5,13 +5,11 @@ import {
     NEWS_FETCH_REQUESTED,
     NEWS_FETCH_ING,
     NEWS_FETCH_SUCCEEDED,
-    NEWS_FETCH_FAILED,
-    NEWS_HOVER_IN
+    NEWS_FETCH_FAILED
 } from '../../constants/actionTypes';
 
 type State = {
     loading: boolean,
-    hoverIn: boolean | null,
     articles?: Array<any>,
     status?: string,
     totalResults?: number
@@ -19,7 +17,6 @@ type State = {
 
 const initState = {
     loading: false,
-    hoverIn: null
 };
 
 export default (state: State = initState, action: Action): State => {
@@ -46,11 +43,6 @@ export default (state: State = initState, action: Action): State => {
                 ...state,
                 ...action.payload,
                 loading: false
-            };
-        case NEWS_HOVER_IN:
-            return {
-                ...state,
-                ...action.payload,
             };
         default:
             return state;

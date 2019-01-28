@@ -2,8 +2,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import {mount, shallow} from 'enzyme';
 import React from 'react';
-import {NewsBlock} from './NewsBlock';
 import renderer from 'react-test-renderer';
+import {NewsBlock} from './NewsBlock';
 import NewsDetails from './NewsDetails/NewsDetails';
 
 // This sets the mock adapter on the default instance
@@ -101,55 +101,42 @@ describe('News Block', () => {
     });
 
     describe('when isLoading is false', () => {
-        it('should render shallow render only', () => {
+        it('should render shallow render only when hoverIn is true', () => {
             const {props, enzymeWrapper} = setup({
                 loading: false,
-                newsDetailsHoverIn: true
             });
 
-            expect(enzymeWrapper.render()).toMatchSnapshot(true);
+            enzymeWrapper.setState({newsDetailsHoverIn: true});
+            expect(enzymeWrapper.render()).toMatchSnapshot();
 
             enzymeWrapper.unmount();
         });
 
-        it('should render when hoverIn is false', () => {
-            const props = setProps({
+        it('should render shallow render only when hoverIn is false', () => {
+            const {props, enzymeWrapper} = setup({
                 loading: false,
-                newsDetailsHoverIn: false,
             });
 
-            const wrapper = renderer
-                .create(<NewsBlock {...props} />)
-                .toJSON();
-            expect(wrapper).toMatchSnapshot();
-        });
+            enzymeWrapper.setState({newsDetailsHoverIn: false});
+            expect(enzymeWrapper.render()).toMatchSnapshot();
 
-        it('should render when hoverIn is true', () => {
-            const props = setProps({
-                loading: false,
-                newsDetailsHoverIn: true,
-            });
-
-            const wrapper = renderer
-                .create(<NewsBlock {...props} />)
-                .toJSON();
-            expect(wrapper).toMatchSnapshot();
+            enzymeWrapper.unmount();
         });
 
         it('should proper invoke call functions on componentDidMount', () => {
             // Arrange
             const props = setProps({
                 loading: false,
-                newsDetailsHoverIn: false,
             });
             const component = mount(<NewsBlock {...props}/>);
+            component.setState({newsDetailsHoverIn: false});
 
             // Act
             // test: simulate UI events
             component.find('div.loaded').simulate('mouseEnter');
-            expect(props.hoverNewsDetails).toHaveBeenCalledWith(true);
+            expect(component.state().newsDetailsHoverIn).toEqual(true);
             component.find('div.loaded').simulate('mouseLeave');
-            expect(props.hoverNewsDetails).toHaveBeenCalledWith(false);
+            expect(component.state().newsDetailsHoverIn).toEqual(false);
 
             // test: check componentDidMount
             expect(props.fetchNewsViaSaga).toHaveBeenCalledWith('us');
@@ -170,7 +157,6 @@ describe('News Block', () => {
         });
 
         // it('should render when hoverIn is true and news exist', () => {
-        //     props.newsDetailsHoverIn = true;
         //     props.news = [
         //         {
         //             url: 'www.example1.com',
