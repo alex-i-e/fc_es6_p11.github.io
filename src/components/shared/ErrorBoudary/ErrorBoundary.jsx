@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {logComponentStackToMyService} from '../../../actionCreators/logService';
+import {logComponentStackToMyService} from '../../../actions/logService';
 
 const ErrorBoundaryWrapper = styled.h1`
     margin: 8px;

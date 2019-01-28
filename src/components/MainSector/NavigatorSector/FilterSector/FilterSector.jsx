@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {filterNewsByTypeAndValue} from '../../../../actionCreators/filterSector';
+import {filterNewsByTypeAndValue} from '../../../../actions/filterSector';
 import styled from 'styled-components';
 import InputField from '../../../shared/Input/InputField';
 

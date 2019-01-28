@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {compose} from 'redux';
-import {toggleNewsDetails} from '../../actionCreators/blogForm';
+import {toggleNewsDetails} from '../../actions/blogActions';
 import {getDisplayName} from './withToggle';
 
 const withNewsDetails = (WrapperComponent) => {

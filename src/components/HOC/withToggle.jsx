@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {compose} from 'redux';
 import {connect} from 'react-redux';
-import {toggleBlogCreator} from '../../actionCreators/blogForm';
 import PropTypes from 'prop-types';
 
 // const enhance = compose(
@@ -47,7 +46,7 @@ withToggleWrapper.propTypes = {
 export default compose(
     connect(
         null,
-        {toggleBlogCreator}
+        null
     ),
     withToggleWrapper
 );

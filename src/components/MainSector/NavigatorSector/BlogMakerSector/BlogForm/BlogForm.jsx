@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addNewBlog} from '../../../../../actionCreators/blogForm';
+import {addNewBlog} from '../../../../../actions/blogActions';
 import ActionLink from '../../../../shared/ActionLink/ActionLink';
 import styled from 'styled-components';
 import InputField from '../../../../shared/Input/InputField';
@@ -82,6 +82,7 @@ class BlogForm extends Component {
         }
 
         this.props.addNewBlog({
+            id: '' + Math.random(),
             author: this.authorInput.current.value,
             title: this.titleInput.current.value,
             body: this.bodyInput.current.value,

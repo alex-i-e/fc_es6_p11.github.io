@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {removeBlog} from '../../../../../actionCreators/blogForm';
+import {removeBlog} from '../../../../../actions/blogActions';
 import {BtnWrapper} from '../../../../NewsBlock/NewsDetails/AddBlog/AddBlog';
 
 const RemoveWrapper = styled(BtnWrapper)`

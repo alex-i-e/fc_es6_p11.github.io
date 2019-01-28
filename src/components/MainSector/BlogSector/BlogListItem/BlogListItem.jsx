@@ -76,7 +76,7 @@ const BlogListItem = (props) => {
                               key={number.toString()}>
                         <Topic>
                             <Title>{row.title}</Title>
-                            <RemoveBlog index={number}/>
+                            <RemoveBlog index={row.id}/>
                         </Topic>
                         <BodyBlock>
                             {row.image ? <Img src={row.image} alt="news image"/> : ''}

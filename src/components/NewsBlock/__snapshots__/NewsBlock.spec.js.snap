@@ -1,22 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`News Block when isLoading is false should render shallow render only 1`] = `
-.c0 {
-  position: fixed;
-  top: 16px;
-  right: 0;
-  text-align: center;
-}
-
-<div>
-  <div
-    class="c0"
-  >
-    Loading...
-  </div>
-</div>
-`;
-
 exports[`News Block when isLoading is false should render when hoverIn is false 1`] = `
 .c2 {
   height: 0;
@@ -117,23 +100,6 @@ exports[`News Block when isLoading is false should render when hoverIn is true 1
         No news!
       </div>
     </div>
-  </div>
-</div>
-`;
-
-exports[`News Block when isLoading is true should proper  1`] = `
-.c0 {
-  position: fixed;
-  top: 16px;
-  right: 0;
-  text-align: center;
-}
-
-<div>
-  <div
-    class="c0"
-  >
-    Loading...
   </div>
 </div>
 `;

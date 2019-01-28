@@ -85,11 +85,11 @@ const NoMatch = (props) => {
 const MainSector = (props) => (
     <Router history={history}>
         <Switch>
+            <Route exact path="/" component={InitPage}/>
             <Route path="/main" component={MainPage}/>
             <Route path="/base" component={withRouterComponent}/>
             <Route path="/about" component={About}/>
             <Route path="/news" component={News}/>
-            <Route path="/" exact component={InitPage}/>
             <Route component={NoMatch}/>
         </Switch>
     </Router>

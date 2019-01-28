@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {addNewBlog} from '../../../../actionCreators/blogForm';
+import {addNewBlog} from '../../../../actions/blogActions';
 
 export const BtnWrapper = styled.button`
     background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
@@ -38,6 +38,7 @@ class AddBlog extends Component {
         e && e.stopPropagation();
 
         this.props.addNewBlog({
+            id: '' + Math.random(),
             author: this.props.topic.source.name + ' - ' + this.props.topic.author,
             title: this.props.topic.title,
             body: this.props.topic.description,

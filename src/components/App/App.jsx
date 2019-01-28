@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import MainSector from '../MainSector/MainSector';
 import styled, {keyframes} from 'styled-components';
 import {ThemeContext, themes} from '../../context/theme-context';
-import {changeTheme} from '../../actionCreators/theme';
+import {changeTheme} from '../../actions/theme';
 import {NavLink} from 'react-router-dom';
 import {createGlobalStyle} from 'styled-components';
 import NewsBlock from '../NewsBlock/NewsBlock';

@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
-import {fetchNewsViaSaga, fetchNewsViaEpic} from '../../actionCreators/newsBlock';
-import {hoverNewsDetails} from '../../actionCreators/newsDetails';
+import {fetchNewsViaSaga, fetchNewsViaEpic} from '../../actions/newsBlock';
+import {hoverNewsDetails} from '../../actions/newsDetails';
 import NewsDetails from './NewsDetails/NewsDetails';
 
 const Header = styled.div`
