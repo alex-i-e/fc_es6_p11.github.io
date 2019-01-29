@@ -1,12 +1,42 @@
 {
+  "parser": "babel-eslint",
   "extends": [
-    "plugin:flowtype/recommended"
+    "plugin:flowtype/recommended",
+    //    "airbnb",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:react/recommended"
   ],
   "plugins": [
     "flowtype",
-    "react-hooks"
+    "react-hooks",
+    //    "prettier",
+    "jest",
+    "import"
   ],
   "rules": {
-    "react-hooks/rules-of-hooks": "error"
+    "react-hooks/rules-of-hooks": "error",
+//    "prettier/prettier": [
+    //      "error"
+    //    ],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
+    "linebreak-style": [
+      "error",
+      "windows"
+    ],
+    "react/destructuring-assignment": [
+      "enabled",
+      "never",
+      {
+        "ignoreClassFields": true
+      }
+    ]
+  },
+  "env": {
+    "jest/globals": true
   }
 }

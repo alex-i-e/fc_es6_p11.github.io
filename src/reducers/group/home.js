@@ -14,7 +14,7 @@ const initState = {
 
 export default (state: State = initState, action: Action): State => {
     switch (action.type) {
-        case HOME_PAGE_LOADED:
+    case HOME_PAGE_LOADED:      
             return {
                 ...state,
                 blogList: action.payload.value,
