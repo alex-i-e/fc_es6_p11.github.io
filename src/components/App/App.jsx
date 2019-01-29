@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import MainSector from '../MainSector/MainSector';
-import styled, {keyframes} from 'styled-components';
-import {ThemeContext, themes} from '../../context/theme-context';
-import {changeTheme} from '../../actions/theme';
 import {NavLink} from 'react-router-dom';
-import {createGlobalStyle} from 'styled-components';
+import styled, {createGlobalStyle, keyframes} from 'styled-components';
+import {changeTheme} from '../../actions/theme';
+import {ThemeContext, themes} from '../../context/theme-context';
+import MainSector from '../MainSector/MainSector';
 import NewsBlock from '../NewsBlock/NewsBlock';
-import ThemeContainer from '../ThemeContainer/ThemeContainer';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
+import ThemeContainer from '../ThemeContainer/ThemeContainer';
 
 const AppBlock = styled.div`
     text-align: center;
@@ -103,7 +102,7 @@ class App extends Component {
         const defaultTheme = themes.green;
 
         this.toggleTheme = (e) => {
-            const color = e.currentTarget.value;
+            const color = e.target.value;
             this.props.changeTheme(themes[color] || defaultTheme);
         };
     }

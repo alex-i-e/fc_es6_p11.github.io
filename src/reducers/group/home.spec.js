@@ -2,30 +2,31 @@ import configureStore from 'redux-mock-store';
 import {ADD_NEW_BLOG, HOME_PAGE_LOADED, REMOVE_BLOG} from '../../constants/actionTypes';
 import BlogListMock from '../../mock/blogListMock.json';
 import reducer from '../reducer';
+import { addNewBlog, removeBlog } from '../../actions/blogActions';
 
 function getNewBlog({id, title, body, date, author}) {
     return {id, title, body, date, author};
 }
 
-const newBlog = getNewBlog({
-    id: 1,
-    title: 'Some title',
-    body: 'Some body',
-    date: 'Some date',
-    author: 'Some author',
-});
-const anotherBlog = getNewBlog({
-    id: 2,
-    title: 'Awesome title',
-    body: 'Awesome body',
-    date: 'Awesome date',
-    author: 'Awesome author',
-});
-
 describe('home UT', () => {
     const middlewares = [];
     const mockStore = configureStore(middlewares);
     let store;
+
+    const newBlog = getNewBlog({
+        id: 1,
+        title: 'Some title',
+        body: 'Some body',
+        date: 'Some date',
+        author: 'Some author',
+    });
+    const anotherBlog = getNewBlog({
+        id: 2,
+        title: 'Awesome title',
+        body: 'Awesome body',
+        date: 'Awesome date',
+        author: 'Awesome author',
+    });
 
     describe('actions', () => {
 
@@ -58,6 +59,27 @@ describe('home UT', () => {
 
             const actions = store.getActions();
             expect(actions).toEqual([action]);
+        });
+
+        it('should return proper action from addNewBlog', () => {
+            expect(addNewBlog(newBlog))
+                .toEqual({
+                    type: ADD_NEW_BLOG,
+                    payload: {
+                        value: newBlog
+                    }
+                });
+        });
+
+        it('should return proper action from addNewBlog', () => {
+            const id = '2';
+            expect(removeBlog(id))
+                .toEqual({
+                    type: REMOVE_BLOG,
+                    payload: {
+                        value: id
+                    }
+                });
         });
     });
 

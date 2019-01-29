@@ -4,7 +4,7 @@ const initState = {
     logList: [],
 };
 
-export default (state, action) => {
+export default (state = initState, action) => {
     switch (action.type) {
         case LOG_ERROR:
             return {

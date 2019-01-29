@@ -25,7 +25,6 @@ function setProps({
                       loading = true,
                       news = [],
                       newsDetailsHoverIn = false,
-                      ...rest
                   }) {
 
     return {
@@ -42,7 +41,6 @@ function setup({
                    loading = true,
                    news = [],
                    newsDetailsHoverIn = false,
-                   ...rest
                }) {
     const props = setProps({
         loading,
@@ -61,7 +59,7 @@ function setup({
 describe('News Block', () => {
     describe('when isLoading is true', () => {
         it('should proper call ComponentDidMount', () => {
-            const {props, enzymeWrapper} = setup({
+            const {enzymeWrapper} = setup({
                 loading: true,
                 newsDetailsHoverIn: false
             });
@@ -78,7 +76,7 @@ describe('News Block', () => {
         });
 
         it('should render shallow render only', () => {
-            const {props, enzymeWrapper} = setup({
+            const {enzymeWrapper} = setup({
                 loading: true,
                 newsDetailsHoverIn: false
             });
@@ -102,7 +100,7 @@ describe('News Block', () => {
 
     describe('when isLoading is false', () => {
         it('should render shallow render only when hoverIn is true', () => {
-            const {props, enzymeWrapper} = setup({
+            const {enzymeWrapper} = setup({
                 loading: false,
             });
 
@@ -113,7 +111,7 @@ describe('News Block', () => {
         });
 
         it('should render shallow render only when hoverIn is false', () => {
-            const {props, enzymeWrapper} = setup({
+            const {enzymeWrapper} = setup({
                 loading: false,
             });
 

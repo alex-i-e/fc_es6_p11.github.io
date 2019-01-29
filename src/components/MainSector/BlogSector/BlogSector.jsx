@@ -33,9 +33,9 @@ export default connect(
     (state) => ({
         blogList: getVisibleBlogList(
             state.home.blogList,
-            {type: FILTER_TYPE, value: state.filters.value}
+            {type: FILTER_TYPE, value: state.filter.value}
         ),
-        value: state.filters.value,
+        value: state.filter.value,
     }),
     null
 )(BlogSector);
