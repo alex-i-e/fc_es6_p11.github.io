@@ -5,7 +5,7 @@ import MainSector from './MainSector';
 // TODO: postpone router rendering
 describe('A suite MainSector', () => {
     it('should render correctly', () => {
-        const component = renderer.create(<MainSector/>);
+        const component = renderer.create(<MainSector />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 

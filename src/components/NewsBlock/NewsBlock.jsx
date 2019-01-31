@@ -67,19 +67,24 @@ export class NewsBlock extends Component<any, {}> {
                 {loading
                     ?
                     <Loader>Loading...</Loader>
-                    :
-                    <NewsContainer>
-                        <NewsInnerContainer className={loading ? 'loading' : 'loaded'}
-                                            onMouseEnter={this.onHoverIn}
-                                            onMouseLeave={this.onHoverOut}>
-                            <Header>
-                                News...length = {news.length}
-                            </Header>
-                            <NewsDetails classAnimation={classAnimation}
-                                         news={news}/>
-                        </NewsInnerContainer>
-                    </NewsContainer>
-                }
+                    : (
+                        <NewsContainer>
+                            <NewsInnerContainer
+                                className={loading ? 'loading' : 'loaded'}
+                                onMouseEnter={this.onHoverIn}
+                                onMouseLeave={this.onHoverOut}
+                            >
+                                <Header>
+                                    News...length =
+                                    {news.length}
+                                </Header>
+                                <NewsDetails
+                                    classAnimation={classAnimation}
+                                    news={news}
+                                />
+                            </NewsInnerContainer>
+                        </NewsContainer>
+                    )}
             </div>
         );
     }

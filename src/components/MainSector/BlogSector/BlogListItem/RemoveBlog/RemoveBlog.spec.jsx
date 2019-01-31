@@ -1,22 +1,16 @@
 import {mount, shallow} from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import {RemoveBlog} from './RemoveBlog';
+import {RemoveBlog, RemoveWrapper} from './RemoveBlog';
 
-function setProps({
-                      removeBlog = jest.fn(),
-                      index,
-                  }) {
+function setProps({removeBlog = jest.fn(), index}) {
     return {
         index,
         removeBlog
     };
 }
 
-function setup({
-                   removeBlog,
-                   index
-               }) {
+function setup({removeBlog, index}) {
     const props = setProps({
         index,
         removeBlog
@@ -31,148 +25,35 @@ function setup({
 }
 
 describe('News Block', () => {
-    describe('when isLoading is true', () => {
-        it('should proper call ComponentDidMount', () => {
-            const {
-                enzymeWrapper
-            } = setup({
-                loading: true,
-                newsDetailsHoverIn: false
-            });
+    it('should render shallow render only', () => {
+        const {enzymeWrapper} = setup({index: '1'});
 
-            // first call componentDidMount when init instance
-            const instance = enzymeWrapper.instance();
+        expect(enzymeWrapper.render()).toMatchSnapshot();
 
-            // call componentDidMount will force new update
-            // instance.componentDidMount();
-            expect(instance.props.fetchNewsViaSaga).toHaveBeenCalledTimes(1);
-            expect(instance.props.fetchNewsViaEpic).toHaveBeenCalledTimes(1);
-
-            enzymeWrapper.unmount();
-        });
-
-        it('should render shallow render only', () => {
-            const {
-                enzymeWrapper
-            } = setup({
-                loading: true,
-                newsDetailsHoverIn: false
-            });
-
-            expect(enzymeWrapper.render()).toMatchSnapshot();
-
-            enzymeWrapper.unmount();
-        });
-
-        it('should render only Loader', () => {
-            const props = setProps({
-                loading: true,
-                newsDetailsHoverIn: false
-            });
-            const wrapper = renderer
-                .create(<RemoveBlog {...props
-                                    }
-                />)
-                .toJSON();
-            expect(wrapper).toMatchSnapshot();
-        });
+        enzymeWrapper.unmount();
     });
 
-    describe('when isLoading is false', () => {
-        it('should render shallow render only when hoverIn is true', () => {
-            const {
-                enzymeWrapper
-            } = setup({
-                loading: false,
-            });
+    it('should render proper renderer', () => {
+        const props = setProps({index: '1'});
+        const wrapper = renderer.create(<RemoveBlog {...props} />).toJSON();
+        expect(wrapper).toMatchSnapshot();
+    });
 
-            enzymeWrapper.setState({
-                newsDetailsHoverIn: true
-            });
-            expect(enzymeWrapper.render()).toMatchSnapshot();
+    it('should proper invoke call functions on onClickAction', () => {
+        // Arrange
+        const props = setProps({index: '1'});
+        const component = mount(<RemoveBlog {...props} />);
 
-            enzymeWrapper.unmount();
-        });
+        // Act
+        // test: simulate UI events
+        component.find(RemoveWrapper).simulate('click');
 
-        it('should render shallow render only when hoverIn is false', () => {
-            const {
-                enzymeWrapper
-            } = setup({
-                loading: false,
-            });
+        // test: check componentDidMount
+        expect(props.removeBlog).toHaveBeenCalledWith('1');
 
-            enzymeWrapper.setState({
-                newsDetailsHoverIn: false
-            });
-            expect(enzymeWrapper.render()).toMatchSnapshot();
+        // Assert: component
+        // console.log(' >>> component.debug()', component.debug());
 
-            enzymeWrapper.unmount();
-        });
-
-        it('should proper invoke call functions on componentDidMount', () => {
-            // Arrange
-            const props = setProps({
-                loading: false,
-            });
-            const component = mount(<RemoveBlog {...props}/>);
-            component.setState({
-                newsDetailsHoverIn: false
-            });
-
-            // Act
-            // test: simulate UI events
-            component.find('div.loaded').simulate('mouseEnter');
-            expect(component.state().newsDetailsHoverIn).toEqual(true);
-            component.find('div.loaded').simulate('mouseLeave');
-            expect(component.state().newsDetailsHoverIn).toEqual(false);
-
-            // test: check componentDidMount
-            expect(props.fetchNewsViaSaga).toHaveBeenCalledWith('us');
-            expect(props.fetchNewsViaEpic).toHaveBeenCalledWith('ru');
-
-            // test: check forwarding attributes into child components
-            expect(component.find('NewsDetails').props())
-                .toEqual({
-                    classAnimation: 'showOff',
-                    news: [],
-                });
-            expect(component.find('NewsDetails').prop('classAnimation'))
-                .toEqual('showOff');
-            // Assert: component
-            // console.log(' >>> component.debug()', component.debug());
-
-            component.unmount();
-        });
-
-        // it('should render when hoverIn is true and news exist', () => {
-        //     props.news = [
-        //         {
-        //             url: 'www.example1.com',
-        //             urlToImage: 'www.exampleToImage1.com',
-        //             title: 'Title1',
-        //             author: 'Author Name',
-        //             source: {
-        //                 name: 'BBC'
-        //             },
-        //             description: 'A lot of news...',
-        //             publishedAt: 'Jan 1, 2018 12:00 AM'
-        //         },
-        //         {
-        //             url: 'www.example2.com',
-        //             urlToImage: 'www.exampleToImage2.com',
-        //             title: 'Title2',
-        //             author: 'Another Author Name',
-        //             source: {
-        //                 name: 'CNN'
-        //             },
-        //             description: 'A lot of news...',
-        //             publishedAt: 'Jan 2, 2018 12:00 AM'
-        //         }
-        //     ];
-        //     const wrapper = renderer
-        //         .create(<RemoveBlog {...props} />)
-        //         .toJSON();
-        //     expect(wrapper).toMatchSnapshot();
-        // });
+        component.unmount();
     });
 });

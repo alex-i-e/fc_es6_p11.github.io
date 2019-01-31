@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {filterNewsByTypeAndValue} from '../../../../actions/filterSector';
 import styled from 'styled-components';
+import {filterNewsByTypeAndValue} from '../../../../actions/filterSector';
 import InputField from '../../../shared/Input/InputField';
 
 const FilterWrapper = styled.div`
@@ -23,6 +23,7 @@ export class FilterSector extends Component {
     constructor(props) {
         super(props);
         this.onChangeFilter = this.onChangeFilter.bind(this);
+        this.filterRef = React.createRef();
     }
 
     onChangeFilter(e) {
@@ -33,10 +34,14 @@ export class FilterSector extends Component {
         return (
             <FilterWrapper>
                 <FilterBlock>
-                    <label htmlFor="blog-author">Filter By Author</label>
-                    <InputField type="search"
-                                id="blog-author"
-                                onChange={this.onChangeFilter}/>
+                    <InputField
+                        labelValue='Filter By Author'
+                        ref={this.filterRef}
+                        placeholder={'ex. Some filter\'s value'}
+                        type="search"
+                        id="blog-filter"
+                        onChange={this.onChangeFilter}
+                    />
                 </FilterBlock>
             </FilterWrapper>
         );

@@ -9,9 +9,10 @@ export const Input = styled.input`
 
 const InputField = React.forwardRef((props, ref) => {
     return (
+        // id={props.id}
         <Fragment>
             <label htmlFor={props.id}>{props.labelValue}</label>
-            <Input {...props} ref={ref}/>
+            <Input {...props} ref={ref} />
         </Fragment>
     );
 });

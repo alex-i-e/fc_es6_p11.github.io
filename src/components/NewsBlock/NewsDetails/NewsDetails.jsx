@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import AddBlog from './AddBlog/AddBlog';
 import {Topic} from '../../MainSector/BlogSector/BlogListItem/BlogListItem';
+import AddBlog from './AddBlog/AddBlog';
 
 const NewsDetailsWrapper = styled.div`
     height: 0;
@@ -46,8 +46,8 @@ const NewsDetails = (props) => (
             ? props.news.map((item, index) => (
                 <NewsHoverItem key={index} href={item.url} target="_blank">
                     <Topic className={'newsTopic'}>
-                        <Img src={item.urlToImage} alt="news"/>
-                        <AddBlog topic={item}/>
+                        <Img src={item.urlToImage} alt="news" />
+                        <AddBlog topic={item} />
                     </Topic>
                     <Title>{item.title}</Title>
                 </NewsHoverItem>

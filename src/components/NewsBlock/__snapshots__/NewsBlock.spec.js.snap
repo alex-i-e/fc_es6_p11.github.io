@@ -37,7 +37,7 @@ exports[`News Block when isLoading is false should render shallow render only wh
       <div
         class="c1"
       >
-        News...length = 0
+        News...length =0
       </div>
       <div
         class="showOff c2"
@@ -86,7 +86,7 @@ exports[`News Block when isLoading is false should render shallow render only wh
       <div
         class="c1"
       >
-        News...length = 0
+        News...length =0
       </div>
       <div
         class="showOn c2"

@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`News Block should render proper renderer 1`] = `
+.c0 {
+  background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);
+  display: none;
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 20px;
+  border-radius: 20px;
+  border-width: 0;
+  box-shadow: -3px 1px 9px 0px #adadad;
+}
+
+.c0::before {
+  content: '👍';
+}
+
+.c0:hover {
+  -webkit-animation: 3s colorLink ease backwards;
+  animation: 3s colorLink ease backwards;
+  box-shadow: -3px 1px 15px 0px;
+}
+
+.c0::before {
+  content: '👎🏾';
+}
+
+<button
+  className="c0"
+  onClick={[Function]}
+  title="Remove from Blog!"
+/>
+`;
+
+exports[`News Block should render shallow render only 1`] = `
+.c0 {
+  background: linear-gradient(-45deg,#ee7752,#e73c7e,#23a6d5,#23d5ab);
+  display: none;
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  right: 4px;
+  width: 30px;
+  height: 20px;
+  border-radius: 20px;
+  border-width: 0;
+  box-shadow: -3px 1px 9px 0px #adadad;
+}
+
+.c0::before {
+  content: '👍';
+}
+
+.c0:hover {
+  -webkit-animation: 3s colorLink ease backwards;
+  animation: 3s colorLink ease backwards;
+  box-shadow: -3px 1px 15px 0px;
+}
+
+.c0::before {
+  content: '👎🏾';
+}
+
+<button
+  class="c0"
+  title="Remove from Blog!"
+>
+  
+</button>
+`;

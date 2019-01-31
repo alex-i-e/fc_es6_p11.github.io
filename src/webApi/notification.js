@@ -1,9 +1,6 @@
 // @flow
 
 export default class NotificationFactory {
-    constructor() {
-    }
-
     requestDesktopNotificationPermission() {
         if (Notification && Notification.permission === 'default') {
             Notification.requestPermission(permission => {
@@ -23,8 +20,8 @@ export default class NotificationFactory {
         }
     }
 
-    sendDesktopNotification(text) {
-        let notification = new Notification('Awesome Notification!', {
+    sendDesktopNotification(text: string) {
+        const notification = new Notification('Awesome Notification!', {
             icon: 'https://cdn-images-1.medium.com/max/1024/1*oDLd0PmGaw49GW8qT2F1cg.png',
             body: text,
             tag: `pet-pro-notification`

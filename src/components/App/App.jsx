@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {NavLink} from 'react-router-dom';
@@ -10,23 +11,23 @@ import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
 import ThemeContainer from '../ThemeContainer/ThemeContainer';
 
 const AppBlock = styled.div`
-    text-align: center;
+  text-align: center;
 `;
 const Header = styled.header`
-    display: flex;
-    flex-flow: column-reverse;
-    align-items: center;
-    justify-content: center;
-    background-color: #222;
-    height: 150px;
-    padding: 20px;
-    color: white;
+  display: flex;
+  flex-flow: column-reverse;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
 `;
 const Title = styled.h1`
-    font-size: 1.5em;
+  font-size: 1.5em;
 `;
 const Chapter = styled.p`
-    font-size: large;
+  font-size: large;
 `;
 const rotate = keyframes`
     0% {
@@ -42,8 +43,8 @@ const AnimateLogo = styled.img`
   animation: ${rotate} 5s infinite linear;
 `;
 const NewsWrapper = styled(NewsBlock)`
-    color: #adadad;
-    width: 100%;
+  color: #adadad;
+  width: 100%;
 `;
 const GlobalStyle = createGlobalStyle`
     body {
@@ -53,55 +54,60 @@ const GlobalStyle = createGlobalStyle`
     }
 `;
 const TopMenu = styled.div`
-    position: fixed;
-    width: 100%;
-    height: 40px;
-    background-color: #080015;
-    color: snow;
-    display: flex;
-    flex-flow: row;
-    align-content: center;
-    justify-items: left;
-    align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 40px;
+  background-color: #080015;
+  color: snow;
+  display: flex;
+  flex-flow: row;
+  align-content: center;
+  justify-items: left;
+  align-items: center;
 `;
 const MenuItem = styled.div`
-    margin-left: 10px;
-    width: 70px;
-    text-overflow: ellipsis;
-    text-decoration: none;
+  margin-left: 10px;
+  width: 70px;
+  text-overflow: ellipsis;
+  text-decoration: none;
 `;
 
 const NavLinkWrapper = styled(NavLink)`
-    text-decoration: none;
-    
-    &:focus {
-        background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
-        border-radius: 4px;
-        padding: 2px 4px;
-    }
+  text-decoration: none;
+
+  &:focus {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    border-radius: 4px;
+    padding: 2px 4px;
+  }
 `;
 
-const Menu = (props) => {
+const Menu = () => {
     return (
         <TopMenu>
             <MenuItem>
-                <NavLinkWrapper to={'/main'}>Main info</NavLinkWrapper>
+                <NavLinkWrapper to="/main">Main info</NavLinkWrapper>
             </MenuItem>
-            <MenuItem><NavLinkWrapper to={'/base'}>Base</NavLinkWrapper></MenuItem>
-            <MenuItem><NavLinkWrapper to={'/about'}>About</NavLinkWrapper></MenuItem>
-            <MenuItem><NavLinkWrapper to={'/news'}>News</NavLinkWrapper></MenuItem>
+            <MenuItem>
+                <NavLinkWrapper to="/base">Base</NavLinkWrapper>
+            </MenuItem>
+            <MenuItem>
+                <NavLinkWrapper to="/about">About</NavLinkWrapper>
+            </MenuItem>
+            <MenuItem>
+                <NavLinkWrapper to="/news">News</NavLinkWrapper>
+            </MenuItem>
         </TopMenu>
     );
 };
 
-
 // {logo} // TODO : provide logo through SSR
-class App extends Component {
+export class App extends Component {
     constructor(props) {
         super(props);
         const defaultTheme = themes.green;
 
-        this.toggleTheme = (e) => {
+        this.toggleTheme = e => {
             const color = e.target.value;
             this.props.changeTheme(themes[color] || defaultTheme);
         };
@@ -109,33 +115,41 @@ class App extends Component {
 
     render() {
         return (
-            <ThemeContext.Provider value={{
-                theme: this.props.initTheme,
-                toggleTheme: this.toggleTheme,
-            }}>
+            <ThemeContext.Provider
+                value={{
+                    theme: this.props.initTheme,
+                    toggleTheme: this.toggleTheme
+                }}
+            >
                 <AppBlock>
-                    <GlobalStyle/>
-                    <Menu/>
+                    <GlobalStyle />
+                    <Menu />
                     <Header>
-                        <AnimateLogo src='./favicon.ico' alt="logo"/>
+                        <AnimateLogo src="./favicon.ico" alt="logo" />
                         <Title>Blog</Title>
-                        <NewsWrapper/>
-                        <ThemeContainer/>
+                        <NewsWrapper />
+                        <ThemeContainer />
                     </Header>
-                    <Chapter>
-                        Welcome to Blog Maker!
-                    </Chapter>
+                    <Chapter>Welcome to Blog Maker!</Chapter>
                     <ErrorBoundary>
-                        <MainSector/>
+                        <MainSector />
                     </ErrorBoundary>
                 </AppBlock>
             </ThemeContext.Provider>
         );
     }
+}
+
+App.propTypes = {
+    changeTheme: PropTypes.func.isRequired,
+    initTheme: PropTypes.objectOf(PropTypes.shape({
+        foreground: PropTypes.string,
+        background: PropTypes.string,
+    })).isRequired
 };
 
 export default connect(
-    (state) => ({
+    state => ({
         initTheme: state.theme.value
     }),
     {changeTheme}

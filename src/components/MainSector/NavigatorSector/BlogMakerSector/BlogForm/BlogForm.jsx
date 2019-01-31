@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import styled from 'styled-components';
 import {addNewBlog} from '../../../../../actions/blogActions';
 import ActionLink from '../../../../shared/ActionLink/ActionLink';
-import styled from 'styled-components';
 import InputField from '../../../../shared/Input/InputField';
 
 const FormWrapper = styled.div`
@@ -13,7 +14,7 @@ const FormBlock = styled.form`
     flex-flow: column;
 `;
 
-class BlogForm extends Component {
+export class BlogForm extends Component {
 
     constructor(props) {
         super(props);
@@ -33,46 +34,6 @@ class BlogForm extends Component {
         this.onSubmitPost = this.onSubmitPost.bind(this);
     }
 
-    render() {
-        const blog = this.newBlog;
-
-        return (
-            <FormWrapper>
-                <FormBlock onSubmit={this.onSubmitPost}>
-                    <InputField labelValue={'Author *'}
-                                ref={this.authorInput}
-                                placeholder={'ex. Some author\'s name'}
-                                type="text"
-                                required
-                                id="blog-author"/>
-                    <InputField labelValue={'Title'}
-                                ref={this.titleInput}
-                                placeholder={'ex. Awesome title'}
-                                type="text"
-                                id="blog-title"/>
-                    <InputField labelValue={'Body'}
-                                ref={this.bodyInput}
-                                placeholder={'ex. Body description ...'}
-                                type="textarea"
-                                rows="4"
-                                id="blog-body"/>
-                    <InputField labelValue={'Date'}
-                                ref={this.dateInput}
-                                placeholder={'ex. 01.01.2000'}
-                                type="date"
-                                id="blog-date"/>
-                    <ActionLink urlState="/main"
-                                onSubmitPost={this.onSubmitPost}>
-                        Submit
-                    </ActionLink>
-                    <ActionLink urlState="/main">
-                        Back
-                    </ActionLink>
-                </FormBlock>
-            </FormWrapper>
-        );
-    }
-
     onSubmitPost(e) {
         if (!this.authorInput.current.value) {
             e.preventDefault();
@@ -82,7 +43,7 @@ class BlogForm extends Component {
         }
 
         this.props.addNewBlog({
-            id: '' + Math.random(),
+            id: `${Math.random()}`,
             author: this.authorInput.current.value,
             title: this.titleInput.current.value,
             body: this.bodyInput.current.value,
@@ -91,7 +52,59 @@ class BlogForm extends Component {
 
         return true;
     };
+
+    render() {
+        return (
+            <FormWrapper>
+                <FormBlock onSubmit={this.onSubmitPost}>
+                    <InputField
+                        labelValue='Author *'
+                        ref={this.authorInput}
+                        placeholder={'ex. Some author\'s name'}
+                        type="text"
+                        required
+                        id="blog-author"
+                    />
+                    <InputField
+                        labelValue='Title'
+                        ref={this.titleInput}
+                        placeholder='ex. Awesome title'
+                        type="text"
+                        id="blog-title"
+                    />
+                    <InputField
+                        labelValue='Body'
+                        ref={this.bodyInput}
+                        placeholder='ex. Body description ...'
+                        type="textarea"
+                        rows="4"
+                        id="blog-body"
+                    />
+                    <InputField
+                        labelValue='Date'
+                        ref={this.dateInput}
+                        placeholder='ex. 01.01.2000'
+                        type="date"
+                        id="blog-date"
+                    />
+                    <ActionLink
+                        urlState="/main"
+                        onSubmitPost={this.onSubmitPost}
+                    >
+                        Submit
+                    </ActionLink>
+                    <ActionLink urlState="/main">
+                        Back
+                    </ActionLink>
+                </FormBlock>
+            </FormWrapper>
+        );
+    }
 }
+
+BlogForm.propTypes = {
+    addNewBlog: PropTypes.func.isRequired
+};
 
 export default connect(
     null,

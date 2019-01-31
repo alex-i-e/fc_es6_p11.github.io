@@ -30,17 +30,15 @@ exports[`A suite <FilterSector/> should render deep DOM 1`] = `
     className="c1"
   >
     <label
-      htmlFor="blog-author"
+      htmlFor="blog-filter"
     >
       Filter By Author
     </label>
-    <label
-      htmlFor="blog-author"
-    />
     <input
       className="c2"
-      id="blog-author"
+      id="blog-filter"
       onChange={[Function]}
+      placeholder="ex. Some filter's value"
       type="search"
     />
   </div>
@@ -77,18 +75,14 @@ exports[`A suite <FilterSector/> should render shallow render only 1`] = `
     class="c1"
   >
     <label
-      for="blog-author"
+      for="blog-filter"
     >
       Filter By Author
     </label>
-    <label
-      for="blog-author"
-    >
-      
-    </label>
     <input
       class="c2"
-      id="blog-author"
+      id="blog-filter"
+      placeholder="ex. Some filter's value"
       type="search"
     >
       

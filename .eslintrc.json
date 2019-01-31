@@ -2,7 +2,7 @@
   "parser": "babel-eslint",
   "extends": [
     "plugin:flowtype/recommended",
-    //    "airbnb",
+    "airbnb",
     "prettier",
     "plugin:jest/recommended",
     "plugin:react/recommended"
@@ -10,15 +10,13 @@
   "plugins": [
     "flowtype",
     "react-hooks",
-    //    "prettier",
+    "prettier",
     "jest",
     "import"
   ],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
-//    "prettier/prettier": [
-    //      "error"
-    //    ],
+    // "prettier/prettier": ["warn"],
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
@@ -34,9 +32,33 @@
       {
         "ignoreClassFields": true
       }
+    ],
+    "import/no-named-as-default": 0,
+    "indent": [
+      "error",
+      4
+    ],
+    "react/jsx-indent": [
+      "error",
+      4
+    ],
+    "react/jsx-indent-props": [
+      "error",
+      4
+    ],
+    "jsx-a11y/label-has-for": [
+      2,
+      {
+        "required": {
+          "every": [
+            "id"
+          ]
+        }
+      }
     ]
   },
   "env": {
-    "jest/globals": true
+    "jest/globals": true,
+    "browser": true
   }
 }

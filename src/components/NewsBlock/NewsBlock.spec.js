@@ -126,7 +126,7 @@ describe('News Block', () => {
             const props = setProps({
                 loading: false,
             });
-            const component = mount(<NewsBlock {...props}/>);
+            const component = mount(<NewsBlock {...props} />);
             component.setState({newsDetailsHoverIn: false});
 
             // Act

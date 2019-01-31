@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AuthorItem should render with empty matchingValue 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+}
+
+<div
+  class="c0"
+>
+  Torwwald
+</div>
+`;
+
+exports[`AuthorItem should render with matched matchingValue 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row;
+  -ms-flex-flow: row;
+  flex-flow: row;
+}
+
+<div
+  class="c0"
+>
+  <span>
+    <b
+      style="background-color: yellow"
+    >
+      Tor
+    </b>
+    wwald
+  </span>
+</div>
+`;

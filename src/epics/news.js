@@ -1,11 +1,9 @@
 import axios from 'axios';
-
+import {combineEpics, ofType} from 'redux-observable';
 import 'rxjs';
-import {combineEpics} from 'redux-observable';
-import {ofType} from 'redux-observable';
 import {map, mergeMap} from 'rxjs/operators';
+import {apiKey, newsApi} from '../config';
 import {EPIC_NEWS_FETCH_REQUESTED, EPIC_NEWS_FETCH_SUCCEEDED} from '../constants/actionTypes';
-import {newsApi, apiKey} from '../config';
 
 const TOP_HEADLINES_API = `${newsApi}/top-headlines`;
 

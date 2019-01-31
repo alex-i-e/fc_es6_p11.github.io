@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import {ThemeContext} from '../../../context/theme-context';
-import PropTypes from 'prop-types';
 import withToggle from '../../HOC/withToggle';
 
 const NavLinkWrapper = styled(NavLink)`
@@ -30,7 +30,9 @@ const NavLinkWrapper = styled(NavLink)`
 
 const propTypes = {
     urlState: PropTypes.string.isRequired,
-    onSubmitPost: PropTypes.func
+    onSubmitPost: PropTypes.func.isRequired,
+    withToggleAction: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired
 };
 
 
@@ -48,14 +50,16 @@ class ActionLink extends Component {
     }
 
     render() {
-        const props = this.props;
+        const {urlState, children} = this.props;
         const themeContext = this.context;
 
         return (
-            <NavLinkWrapper to={props.urlState}
-                            theme={themeContext.theme}
-                            onClick={this.onClickAction}>
-                {props.children}
+            <NavLinkWrapper
+                to={urlState}
+                theme={themeContext.theme}
+                onClick={this.onClickAction}
+            >
+                {children}
             </NavLinkWrapper>
         );
     }
