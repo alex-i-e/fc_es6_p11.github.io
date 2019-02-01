@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { Route, Router, Switch } from 'react-router';
 import styled from 'styled-components';
 import { ThemeContext } from '../../context/theme-context';
@@ -57,7 +57,19 @@ const withRouterComponent = withRouterWrapper(Base);
 
 const About = () => <div>About</div>;
 
-const News = () => <div>News</div>;
+function News() {
+  // Declare a new state variable, which we'll call "count"
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>You clicked {count} times</p>
+      <button type="button" onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
+}
 
 const InitPage = () => <div>Init Page</div>;
 
