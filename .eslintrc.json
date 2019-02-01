@@ -3,14 +3,14 @@
   "extends": [
     "plugin:flowtype/recommended",
     "airbnb",
-    "prettier",
+    //    "prettier",
     "plugin:jest/recommended",
     "plugin:react/recommended"
   ],
   "plugins": [
     "flowtype",
     "react-hooks",
-    "prettier",
+    //    "prettier",
     "jest",
     "import"
   ],
@@ -26,6 +26,40 @@
       "error",
       "windows"
     ],
+    "react/jsx-one-expression-per-line": "off",
+    "operator-linebreak": "off",
+    "no-trailing-spaces": "off",
+    "implicit-arrow-linebreak": "off",
+    "comma-dangle": "off",
+    "arrow-parens": "off",
+    "no-param-reassign": "off",
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true
+      }
+    ],
+    "max-len": [
+      "error",
+      120
+    ],
+    "space-before-function-paren": "off",
+    "object-curly-newline": "off",
+    "arrow-body-style": "off",
+    "eol-last": "off",
+    "react/jsx-tag-spacing": "off",
+    "no-nested-ternary": "off",
+    "import/prefer-default-export": "off",
+    "no-restricted-globals": "off",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "__PRELOADED_STATE__"
+        ]
+      }
+    ],
     "react/destructuring-assignment": [
       "enabled",
       "never",
@@ -36,15 +70,22 @@
     "import/no-named-as-default": 0,
     "indent": [
       "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "react/no-array-index-key": [
+      "error",
       4
     ],
     "react/jsx-indent": [
       "error",
-      4
+      2
     ],
     "react/jsx-indent-props": [
       "error",
-      4
+      2
     ],
     "jsx-a11y/label-has-for": [
       2,
@@ -55,7 +96,8 @@
           ]
         }
       }
-    ]
+    ],
+    "global-require": "off"
   },
   "env": {
     "jest/globals": true,

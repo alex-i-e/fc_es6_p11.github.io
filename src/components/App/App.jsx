@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {NavLink} from 'react-router-dom';
-import styled, {createGlobalStyle, keyframes} from 'styled-components';
-import {changeTheme} from '../../actions/theme';
-import {ThemeContext, themes} from '../../context/theme-context';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import { changeTheme } from '../../actions/theme';
+import { ThemeContext, themes } from '../../context/theme-context';
 import MainSector from '../MainSector/MainSector';
 import NewsBlock from '../NewsBlock/NewsBlock';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
@@ -83,74 +83,74 @@ const NavLinkWrapper = styled(NavLink)`
 `;
 
 const Menu = () => {
-    return (
-        <TopMenu>
-            <MenuItem>
-                <NavLinkWrapper to="/main">Main info</NavLinkWrapper>
-            </MenuItem>
-            <MenuItem>
-                <NavLinkWrapper to="/base">Base</NavLinkWrapper>
-            </MenuItem>
-            <MenuItem>
-                <NavLinkWrapper to="/about">About</NavLinkWrapper>
-            </MenuItem>
-            <MenuItem>
-                <NavLinkWrapper to="/news">News</NavLinkWrapper>
-            </MenuItem>
-        </TopMenu>
-    );
+  return (
+    <TopMenu>
+      <MenuItem>
+        <NavLinkWrapper to="/main">Main info</NavLinkWrapper>
+      </MenuItem>
+      <MenuItem>
+        <NavLinkWrapper to="/base">Base</NavLinkWrapper>
+      </MenuItem>
+      <MenuItem>
+        <NavLinkWrapper to="/about">About</NavLinkWrapper>
+      </MenuItem>
+      <MenuItem>
+        <NavLinkWrapper to="/news">News</NavLinkWrapper>
+      </MenuItem>
+    </TopMenu>
+  );
 };
 
 // {logo} // TODO : provide logo through SSR
 export class App extends Component {
-    constructor(props) {
-        super(props);
-        const defaultTheme = themes.green;
+  constructor(props) {
+    super(props);
+    const defaultTheme = themes.green;
 
-        this.toggleTheme = e => {
-            const color = e.target.value;
-            this.props.changeTheme(themes[color] || defaultTheme);
-        };
-    }
+    this.toggleTheme = e => {
+      const color = e.target.value;
+      this.props.changeTheme(themes[color] || defaultTheme);
+    };
+  }
 
-    render() {
-        return (
-            <ThemeContext.Provider
-                value={{
-                    theme: this.props.initTheme,
-                    toggleTheme: this.toggleTheme
-                }}
-            >
-                <AppBlock>
-                    <GlobalStyle />
-                    <Menu />
-                    <Header>
-                        <AnimateLogo src="./favicon.ico" alt="logo" />
-                        <Title>Blog</Title>
-                        <NewsWrapper />
-                        <ThemeContainer />
-                    </Header>
-                    <Chapter>Welcome to Blog Maker!</Chapter>
-                    <ErrorBoundary>
-                        <MainSector />
-                    </ErrorBoundary>
-                </AppBlock>
-            </ThemeContext.Provider>
-        );
-    }
+  render() {
+    return (
+      <ThemeContext.Provider
+        value={{
+          theme: this.props.initTheme,
+          toggleTheme: this.toggleTheme
+        }}
+      >
+        <AppBlock>
+          <GlobalStyle />
+          <Menu />
+          <Header>
+            <AnimateLogo src="./favicon.ico" alt="logo" />
+            <Title>Blog</Title>
+            <NewsWrapper />
+            <ThemeContainer />
+          </Header>
+          <Chapter>Welcome to Blog Maker!</Chapter>
+          <ErrorBoundary>
+            <MainSector />
+          </ErrorBoundary>
+        </AppBlock>
+      </ThemeContext.Provider>
+    );
+  }
 }
 
 App.propTypes = {
-    changeTheme: PropTypes.func.isRequired,
-    initTheme: PropTypes.objectOf(PropTypes.shape({
-        foreground: PropTypes.string,
-        background: PropTypes.string,
-    })).isRequired
+  changeTheme: PropTypes.func.isRequired,
+  initTheme: PropTypes.shape({
+    foreground: PropTypes.string,
+    background: PropTypes.string
+  }).isRequired
 };
 
 export default connect(
-    state => ({
-        initTheme: state.theme.value
-    }),
-    {changeTheme}
+  state => ({
+    initTheme: state.theme.value
+  }),
+  { changeTheme }
 )(App);

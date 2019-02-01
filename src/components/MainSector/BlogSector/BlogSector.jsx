@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import BlogListItem from './BlogListItem/BlogListItem';
 
@@ -15,43 +15,43 @@ const BlogListBlock = styled.div`
 
 const FILTER_TYPE = 'author';
 
-export const BlogSector = ({blogList = [], value = ''}) => {
-    return (
-        <BlogListBlock>
-            <BlogListItem blogList={blogList} filterType={FILTER_TYPE} filterValue={value} />
-        </BlogListBlock>
-    );
+export const BlogSector = ({ blogList = [], value = '' }) => {
+  return (
+    <BlogListBlock>
+      <BlogListItem blogList={blogList} filterType={FILTER_TYPE} filterValue={value} />
+    </BlogListBlock>
+  );
 };
 
 BlogSector.defaultProps = {
-    blogList: [],
-    value: ''
+  blogList: [],
+  value: ''
 };
 
 BlogSector.propTypes = {
-    blogList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string,
-            image: PropTypes.string,
-            title: PropTypes.string,
-            body: PropTypes.string,
-            date: PropTypes.string,
-            author: PropTypes.string
-        })
-    ),
-    value: PropTypes.string
+  blogList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      image: PropTypes.string,
+      title: PropTypes.string,
+      body: PropTypes.string,
+      date: PropTypes.string,
+      author: PropTypes.string
+    })
+  ),
+  value: PropTypes.string
 };
 
-export const getVisibleBlogList = (blogList, {type, value}) =>
-    blogList.filter(item => item[type].indexOf(value) !== -1);
+export const getVisibleBlogList = (blogList, { type, value }) =>
+  blogList.filter(item => item[type].indexOf(value) !== -1);
 
 export default connect(
-    state => ({
-        blogList: getVisibleBlogList(state.home.blogList, {
-            type: FILTER_TYPE,
-            value: state.filter.value
-        }),
-        value: state.filter.value
+  state => ({
+    blogList: getVisibleBlogList(state.home.blogList, {
+      type: FILTER_TYPE,
+      value: state.filter.value
     }),
-    null
+    value: state.filter.value
+  }),
+  null
 )(BlogSector);

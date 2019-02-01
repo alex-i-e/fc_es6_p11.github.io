@@ -65,43 +65,43 @@ const NoItems = styled.div`
   flex-flow: row;
 `;
 
-const BlogListItem = ({blogList, filterValue}) => (
-    <BlogListBlock>
-        {blogList.length ? (
-            blogList.map((row, number) => (
-                <BlogItem className="newsTopic" key={number.toString()}>
-                    <Topic>
-                        <Title>{row.title}</Title>
-                        <RemoveBlog index={row.id}/>
-                    </Topic>
-                    <BodyBlock>
-                        {row.image ? <Img src={row.image} alt="news image"/> : ''}
-                        <Body>{row.body}</Body>
-                    </BodyBlock>
-                    <Footer>
-                        <Date>{moment(row.date).format('lll')}</Date>
-                        <Author value={row.author} matchingValue={filterValue}/>
-                    </Footer>
-                </BlogItem>
-            ))
-        ) : (
-            <NoItems>No items!</NoItems>
-        )}
-    </BlogListBlock>
+const BlogListItem = ({ blogList, filterValue }) => (
+  <BlogListBlock>
+    {blogList.length ? (
+      blogList.map((row, number) => (
+        <BlogItem className="newsTopic" key={number.toString()}>
+          <Topic>
+            <Title>{row.title}</Title>
+            <RemoveBlog index={row.id} />
+          </Topic>
+          <BodyBlock>
+            {row.image ? <Img src={row.image} alt="news image" /> : ''}
+            <Body>{row.body}</Body>
+          </BodyBlock>
+          <Footer>
+            <Date>{moment(row.date).format('lll')}</Date>
+            <Author value={row.author} matchingValue={filterValue} />
+          </Footer>
+        </BlogItem>
+      ))
+    ) : (
+      <NoItems>No items!</NoItems>
+    )}
+  </BlogListBlock>
 );
 
 BlogListItem.propTypes = {
-    blogList: PropTypes.arrayOf(
-        PropTypes.shape({
-            id: PropTypes.string,
-            image: PropTypes.string,
-            title: PropTypes.string,
-            body: PropTypes.string,
-            date: PropTypes.string,
-            author: PropTypes.string
-        })
-    ).isRequired,
-    filterValue: PropTypes.string.isRequired
+  blogList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      image: PropTypes.string,
+      title: PropTypes.string,
+      body: PropTypes.string,
+      date: PropTypes.string,
+      author: PropTypes.string
+    })
+  ).isRequired,
+  filterValue: PropTypes.string.isRequired
 };
 
 export default BlogListItem;

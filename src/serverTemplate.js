@@ -5,10 +5,10 @@ export default (body, preloadedState) => `
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
         <meta name="theme-color" content="#000000">
-        <link rel="manifest" href="/manifest.json">
-        <link rel="shortcut icon" href="/favicon.ico"><title>React App</title>
+        <link rel="manifest" href="static/manifest.json">
+        <link rel="shortcut icon" href="static/favicon.ico"><title>React App</title>
 
-        <link href="static/css/main.c074d513.css" rel="stylesheet">
+        <link href="static/css/main.7e376ec3.css" rel="stylesheet">
 
     </head>
     <body>
@@ -19,6 +19,6 @@ export default (body, preloadedState) => `
           // http://redux.js.org/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
         </script>
-        <script type="text/javascript" src="static/js/main.a22c3d69.js"></script>
+        <script type="text/javascript" src="static/js/main.3e6349c0.js"></script>
     </body>
-</html>`
+</html>`;

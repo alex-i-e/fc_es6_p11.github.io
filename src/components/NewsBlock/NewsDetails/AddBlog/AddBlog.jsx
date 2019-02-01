@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {addNewBlog} from '../../../../actions/blogActions';
+import { addNewBlog } from '../../../../actions/blogActions';
 
 export const BtnWrapper = styled.button`
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -28,48 +28,48 @@ export const BtnWrapper = styled.button`
 `;
 
 export class AddBlog extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.onClickAction = this.onClickAction.bind(this);
+    this.onClickAction = this.onClickAction.bind(this);
+  }
+
+  onClickAction(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
     }
 
-    onClickAction(e) {
-        if (e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+    this.props.addNewBlog({
+      id: `${Math.random()}`,
+      author: `${this.props.topic.source.name} - ${this.props.topic.author}`,
+      title: this.props.topic.title,
+      body: this.props.topic.description,
+      image: this.props.topic.urlToImage,
+      date: this.props.topic.publishedAt
+    });
+  }
 
-        this.props.addNewBlog({
-            id: `${Math.random()}`,
-            author: `${this.props.topic.source.name} - ${this.props.topic.author}`,
-            title: this.props.topic.title,
-            body: this.props.topic.description,
-            image: this.props.topic.urlToImage,
-            date: this.props.topic.publishedAt
-        });
-    }
-
-    render() {
-        return <BtnWrapper title="Add to Blog!" onClick={this.onClickAction} />;
-    }
+  render() {
+    return <BtnWrapper title="Add to Blog!" onClick={this.onClickAction} />;
+  }
 }
 
 AddBlog.propTypes = {
-    addNewBlog: PropTypes.func.isRequired,
-    topic: PropTypes.shape({
-        source: PropTypes.shape({
-            name: PropTypes.string
-        }),
-        author: PropTypes.string,
-        title: PropTypes.string,
-        description: PropTypes.string,
-        urlToImage: PropTypes.string,
-        publishedAt: PropTypes.string
-    }).isRequired
+  addNewBlog: PropTypes.func.isRequired,
+  topic: PropTypes.shape({
+    source: PropTypes.shape({
+      name: PropTypes.string
+    }),
+    author: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    urlToImage: PropTypes.string,
+    publishedAt: PropTypes.string
+  }).isRequired
 };
 
 export default connect(
-    null,
-    {addNewBlog}
+  null,
+  { addNewBlog }
 )(AddBlog);

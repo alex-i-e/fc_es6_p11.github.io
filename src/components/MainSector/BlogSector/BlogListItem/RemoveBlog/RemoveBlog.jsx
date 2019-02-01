@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { removeBlog } from '../../../../../actions/blogActions';
 import { BtnWrapper } from '../../../../NewsBlock/NewsDetails/AddBlog/AddBlog';
 
@@ -10,6 +10,7 @@ export const RemoveWrapper = styled(BtnWrapper)`
     content: '👎🏾';
   }
 `;
+
 export class RemoveBlog extends Component {
   constructor(props) {
     super(props);

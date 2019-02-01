@@ -1,7 +1,7 @@
 /*
 Fonts*/
 * {
-    font: small-caption;
+  font: small-caption;
 }
 
 /*
@@ -9,116 +9,121 @@ MarkUp
 */
 
 @media (min-width: 500px) {
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 50px 1fr;
-        grid-template-rows: auto;
-        grid-template-areas: "header header header header" "main main . sidebar" "footer footer footer footer";
-    }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 50px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 'header header header header' 'main main . sidebar' 'footer footer footer footer';
+  }
 }
 
 @media (max-width: 400px) {
-    .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 50px 1fr;
-        grid-template-rows: auto;
-        grid-template-areas: "sidebar sidebar sidebar sidebar" "main main main main" "footer footer footer footer";
-    }
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 50px 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 'sidebar sidebar sidebar sidebar' 'main main main main' 'footer footer footer footer';
+  }
 }
 
 .loaded {
-    color: black;
-    background-color: white;
-    box-shadow: -3px 1px 9px 0px #adadad;
-    width: 200px;
-    height: 20px;
-    position: fixed;
-    top: 16px;
-    right: -200px;
-    z-index: 100;
-    animation: 1s slidein linear forwards;
+  color: black;
+  background-color: white;
+  box-shadow: -3px 1px 9px 0px #adadad;
+  width: 200px;
+  height: 20px;
+  position: fixed;
+  top: 16px;
+  right: -200px;
+  z-index: 100;
+  animation: 1s slidein linear forwards;
 }
 
 @keyframes slidein {
-    from {
-        transform: translateX(0);
-    }
+  from {
+    transform: translateX(0);
+  }
 
-    to {
-        transform: translateX(-200px);
-    }
+  to {
+    transform: translateX(-200px);
+  }
 }
 
 .showOn {
-    animation: 1s showIn linear both;
+  animation: 1s showIn linear both;
 }
 
 .showOff {
-    animation: 1s showOut linear both;
+  animation: 1s showOut linear both;
 }
 
 @keyframes showIn {
-    from {
-        /*height: 0;*/
-    }
+  from {
+    /*height: 0;*/
+  }
 
-    to {
-        height: 700px;
-    }
+  to {
+    height: 700px;
+  }
 }
 
 @keyframes showOut {
-    from {
-        /*height: 700px;*/
-    }
+  from {
+    /*height: 700px;*/
+  }
 
-    to {
-        height: 0;
-    }
+  to {
+    height: 0;
+  }
 }
 
-
 .activeLink {
-    background-color: #2a0f46;
-    border: #2a0f46;
-    font-weight: bold;
-    /*border: 1px;*/
+  background-color: #2a0f46;
+  border: #2a0f46;
+  font-weight: bold;
+  /*border: 1px;*/
 }
 
 @keyframes colorLink {
-    from {
-    }
+  from {
+  }
 
-    to {
-        background-color: #2a0f46;
-        color: white;
-    }
+  to {
+    background-color: #2a0f46;
+    color: white;
+  }
 }
 
 /* tooltip for buttons with [title]*/
 a[title]:hover:after {
-    content: attr(title);
-    padding: 4px 8px;
-    color: #333;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    white-space: nowrap;
-    z-index: 20px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-box-shadow: 0px 0px 4px #222;
-    -webkit-box-shadow: 0px 0px 4px #222;
-    box-shadow: 0px 0px 4px #222;
-    background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #eeeeee), color-stop(1, #cccccc));
-    background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
-    background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
-    background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
-    background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+  content: attr(title);
+  padding: 4px 8px;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  white-space: nowrap;
+  z-index: 20px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0px 0px 4px #222;
+  -webkit-box-shadow: 0px 0px 4px #222;
+  box-shadow: 0px 0px 4px #222;
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #eeeeee),
+    color-stop(1, #cccccc)
+  );
+  background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
 }
 
 .newsTopic:hover button {
-    display: block;
+  display: block;
 }

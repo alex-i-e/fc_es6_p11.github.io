@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {compose} from 'redux';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 // const enhance = compose(
 //     connect(mapStateToProps, mapDispatchToProps),
@@ -12,41 +12,33 @@ import PropTypes from 'prop-types';
 //     export default enhance(MyComponent);
 
 export function getDisplayName(WrappedComponent) {
-    return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-const withToggleWrapper = (WrapperComponent) => {
-    class WithToggle extends Component {
-        constructor(props) {
-            super(props);
-            this.withToggleAction = this.withToggleAction.bind(this);
-        }
-
-        withToggleAction(e) {
-            console.log('>>> withToggleAction');
-        };
-
-        render() {
-            return <WrapperComponent
-                withToggleAction={this.withToggleAction}
-                {...this.props}
-            />;
-        }
+const withToggleWrapper = WrapperComponent => {
+  class WithToggle extends Component {
+    static withToggleAction() {
+      console.log('>>> withToggleAction');
     }
 
-    WithToggle.displayName = `WithToggle(${getDisplayName(WrapperComponent)})`;
+    render() {
+      return <WrapperComponent withToggleAction={WithToggle.withToggleAction} {...this.props} />;
+    }
+  }
 
-    return WithToggle;
+  WithToggle.displayName = `WithToggle(${getDisplayName(WrapperComponent)})`;
+
+  return WithToggle;
 };
 
 withToggleWrapper.propTypes = {
-    toggleBlogCreator: PropTypes.func
+  toggleBlogCreator: PropTypes.func
 };
 
 export default compose(
-    connect(
-        null,
-        null
-    ),
-    withToggleWrapper
+  connect(
+    null,
+    null
+  ),
+  withToggleWrapper
 );
