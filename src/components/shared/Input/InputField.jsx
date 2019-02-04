@@ -7,7 +7,6 @@ export const Input = styled.input`
 `;
 
 const InputField = React.forwardRef((props, ref) => (
-  // id={props.id}
   <Fragment>
     <label htmlFor={props.id}>{props.labelValue}</label>
     <Input {...props} ref={ref} />

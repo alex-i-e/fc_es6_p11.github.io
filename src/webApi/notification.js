@@ -29,7 +29,7 @@ export default class NotificationFactory {
     // ’tag’ handles muti tab scenario i.e when multiple tabs are
     // open then only one notification is sent
     // 3. handle notification events and set timeout
-    notification.onclick = function () {
+    notification.onclick = function notificationOnClick() {
       parent.focus();
       window.focus(); // just in case, older browsers
       window.close();

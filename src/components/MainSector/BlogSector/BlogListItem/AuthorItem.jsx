@@ -7,7 +7,7 @@ const Author = styled.div`
   flex-flow: row;
 `;
 
-const AuthorItem = ({ value, matchingValue }) => {
+const AuthorItem = ({ value, matchingValue, className }) => {
   let innerHtml = value;
   if (value && matchingValue) {
     const regexp = new RegExp(matchingValue, 'g');
@@ -17,13 +17,14 @@ const AuthorItem = ({ value, matchingValue }) => {
     )}</span>`;
   }
   // TODO: use sanitise DOM, ex. DOMPurify
-
-  return <Author dangerouslySetInnerHTML={{ __html: innerHtml }} />;
+  
+  return <Author className={className} dangerouslySetInnerHTML={{ __html: innerHtml }} />;
 };
 
 AuthorItem.propTypes = {
   value: PropTypes.string.isRequired,
-  matchingValue: PropTypes.string.isRequired
+  matchingValue: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired
 };
 
 export default AuthorItem;

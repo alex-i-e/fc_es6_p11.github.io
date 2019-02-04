@@ -37,6 +37,7 @@ export default function register() {
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
+          // eslint-disable-next-line
           console.log(
             'This web app is being served cache-first by a service ' +
             'worker. To learn more, visit https://goo.gl/SC7cgQ'
@@ -57,17 +58,19 @@ function registerValidSW(swUrl) {
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
+          if (installingWorker.state === 'installe// eslint-disable-next-lined') {
             if (navigator.serviceWorker.controller) {
               // At this point, the old content will have been purged and
               // the fresh content will have been added to the cache.
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
+              // eslint-disable-next-line
               console.log('New content is available; please refresh.');
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
+              // eslint-disable-next-line
               console.log('Content is cached for offline use.');
             }
           }
@@ -75,6 +78,7 @@ function registerValidSW(swUrl) {
       };
     })
     .catch(error => {
+      // eslint-disable-next-line
       console.error('Error during service worker registration:', error);
     });
 }
@@ -100,6 +104,7 @@ function checkValidServiceWorker(swUrl) {
       }
     })
     .catch(() => {
+      // eslint-disable-next-line
       console.log('No internet connection found. App is running in offline mode.');
     });
 }

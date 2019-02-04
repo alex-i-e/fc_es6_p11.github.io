@@ -11,7 +11,6 @@ import serverTemplate from './src/serverTemplate';
 const app = express();
 
 app.get('/', function (req, res) {
-  console.log('');
   // Create a new Redux store instance
   const store = createStore(reducer);
   
@@ -46,4 +45,5 @@ app.get('/', function (req, res) {
 app.use('/static', express.static('./build/static'));
 
 app.listen(9000);
+// eslint-disable-next-line
 console.log('GOOD: /localhost:9000');

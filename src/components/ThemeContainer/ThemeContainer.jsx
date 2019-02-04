@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { ThemeContext } from '../../context/theme-context';
+import { ThemeContext, themes } from '../../context/theme-context';
 
 const Wrapper = styled.div`
   position: relative;
@@ -10,20 +10,20 @@ const Wrapper = styled.div`
   width: 100px;
 `;
 
-const ThemeContainer = () => (
-  <ThemeContext.Consumer>
-    {({ theme, toggleTheme }) => (
-      <Wrapper>
-        <select onChange={toggleTheme} style={{ backgroundColor: theme.background }}>
-          {['light', 'dark', 'red', 'green', 'blue', 'default'].map((item, index) => (
-            <option key={index.toString()} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </Wrapper>
-    )}
-  </ThemeContext.Consumer>
-);
+const ThemeContainer = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  
+  return (
+    <Wrapper>
+      <select onChange={toggleTheme} style={{ backgroundColor: theme.background }}>
+        {Object.keys(themes).map((item, index) => (
+          <option key={index.toString()} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
+    </Wrapper>
+  );
+};
 
 export default ThemeContainer;

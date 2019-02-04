@@ -39,11 +39,12 @@ const Title = styled.div`
   margin: 8px;
 `;
 
-const NewsDetails = props => (
-  <NewsDetailsWrapper className={props.classAnimation}>
-    {props.news.length
-      ? props.news.map(item => (
-        <NewsHoverItem key={item.id} href={item.url} target="_blank">
+const NewsDetails = ({ news, classAnimation }) => (
+  <NewsDetailsWrapper className={classAnimation}>
+    {news.length
+      ? news.map((item) => (
+        <NewsHoverItem key={Math.floor(Math.random() * 10000)} href={item.url} target="_blank">
+          <pre>{item.id}</pre>
           <Topic className="newsTopic">
             <Img src={item.urlToImage} alt="news" />
             <AddBlog topic={item} />

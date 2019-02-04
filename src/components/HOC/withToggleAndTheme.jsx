@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { ThemeContext } from '../../context/theme-context';
 
 // const enhance = compose(
 //     connect(mapStateToProps, mapDispatchToProps),
@@ -15,23 +16,29 @@ export function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || 'Component';
 }
 
-const withToggleWrapper = WrapperComponent => {
-  class WithToggle extends Component {
-    static withToggleAction() {
+const withToggleAndThemeWrapper = WrapperComponent => {
+  const WithToggle = (props) => {
+    const themeContext = useContext(ThemeContext);
+    
+    function withToggleAction() {
+      // eslint-disable-next-line
       console.log('>>> withToggleAction');
     }
-
-    render() {
-      return <WrapperComponent withToggleAction={WithToggle.withToggleAction} {...this.props} />;
-    }
-  }
-
+    
+    return (
+      <WrapperComponent
+        withToggleAction={withToggleAction}
+        theme={themeContext.theme}
+        {...props}
+      />);
+  };
+  
   WithToggle.displayName = `WithToggle(${getDisplayName(WrapperComponent)})`;
-
+  
   return WithToggle;
 };
 
-withToggleWrapper.propTypes = {
+withToggleAndThemeWrapper.propTypes = {
   toggleBlogCreator: PropTypes.func
 };
 
@@ -40,5 +47,5 @@ export default compose(
     null,
     null
   ),
-  withToggleWrapper
+  withToggleAndThemeWrapper
 );

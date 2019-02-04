@@ -1,6 +1,6 @@
 // @flow
 
-import { NEWS_FETCH_REQUESTED, EPIC_NEWS_FETCH_REQUESTED } from '../constants/actionTypes';
+import { EPIC_NEWS_FETCH_REQUESTED, NEWS_FETCH_REQUESTED } from '../constants/actionTypes';
 
 export function fetchNewsViaSaga(country: string) {
   return {

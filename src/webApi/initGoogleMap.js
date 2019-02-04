@@ -1,6 +1,7 @@
 /* global google */
 
 export default function initGoogleMap() {
+  // eslint-disable-next-line
   console.log(' >>> init MAP ...');
 
   return new Promise((res, rej) => {
@@ -20,6 +21,7 @@ export default function initGoogleMap() {
 }
 
 export function onLoadCallback() {
+  // eslint-disable-next-line
   console.log(' >>> onLoadCallback MAP ...');
 
   return new Promise((res, rej) => {

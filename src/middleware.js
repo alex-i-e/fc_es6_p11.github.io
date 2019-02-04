@@ -14,6 +14,7 @@ const promiseMiddleware = store => next => action => {
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return;
         }
+        // eslint-disable-next-line
         console.log('RESULT', res);
         action.payload = res;
         store.dispatch({ type: ASYNC_END, promise: action.payload });
@@ -24,6 +25,7 @@ const promiseMiddleware = store => next => action => {
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
           return;
         }
+        // eslint-disable-next-line
         console.log('ERROR', error);
         action.error = true;
         action.payload = error.response.body;

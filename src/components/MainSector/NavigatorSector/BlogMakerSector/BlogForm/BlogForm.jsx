@@ -36,13 +36,14 @@ export class BlogForm extends Component {
   onSubmitPost(e) {
     if (!this.authorInput.current.value) {
       e.preventDefault();
+      // eslint-disable-next-line
       alert('Required fields need to fill');
 
       return false;
     }
 
     this.props.addNewBlog({
-      id: `${Math.random()}`,
+      id: `${Math.floor(Math.random() * 10000)}`,
       author: this.authorInput.current.value,
       title: this.titleInput.current.value,
       body: this.bodyInput.current.value,

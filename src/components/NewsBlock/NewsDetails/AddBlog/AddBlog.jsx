@@ -41,7 +41,7 @@ export class AddBlog extends Component {
     }
 
     this.props.addNewBlog({
-      id: `${Math.random()}`,
+      id: `${Math.floor(Math.random() * 10000)}`,
       author: `${this.props.topic.source.name} - ${this.props.topic.author}`,
       title: this.props.topic.title,
       body: this.props.topic.description,

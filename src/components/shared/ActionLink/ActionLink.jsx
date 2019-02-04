@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import { ThemeContext } from '../../../context/theme-context';
-import withToggle from '../../HOC/withToggle';
+import { themes } from '../../../context/theme-context';
+import withToggle from '../../HOC/withToggleAndTheme';
 
 const NavLinkWrapper = styled(NavLink)`
   display: inline-block;
@@ -30,30 +30,43 @@ const NavLinkWrapper = styled(NavLink)`
 
 const propTypes = {
   urlState: PropTypes.string.isRequired,
-  onSubmitPost: PropTypes.func.isRequired,
-  withToggleAction: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
+  onSubmitPost: PropTypes.func,
+  children: PropTypes.node.isRequired,
+  withToggleAction: PropTypes.func,
+  theme: PropTypes.shape({
+    foreground: PropTypes.string,
+    background: PropTypes.string,
+  }),
 };
+const defaultProps = {
+  onSubmitPost: () => {},
+  withToggleAction: () => {},
+  theme: themes.light
+};
+
 
 class ActionLink extends Component {
   constructor(props) {
     super(props);
-
+    
     this.onClickAction = this.onClickAction.bind(this);
   }
-
+  
   onClickAction(e) {
     if (this.props.onSubmitPost && this.props.onSubmitPost(e)) {
       this.props.withToggleAction();
     }
   }
-
+  
   render() {
-    const { urlState, children } = this.props;
-    const themeContext = this.context;
-
+    const { urlState, children, theme } = this.props;
+    
     return (
-      <NavLinkWrapper to={urlState} theme={themeContext.theme} onClick={this.onClickAction}>
+      <NavLinkWrapper
+        to={urlState}
+        theme={theme}
+        onClick={this.onClickAction}
+      >
         {children}
       </NavLinkWrapper>
     );
@@ -61,6 +74,6 @@ class ActionLink extends Component {
 }
 
 ActionLink.propTypes = propTypes;
-ActionLink.contextType = ThemeContext;
+ActionLink.defaultProps = defaultProps;
 
 export default withToggle(ActionLink);

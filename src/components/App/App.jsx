@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { changeTheme } from '../../actions/theme';
 import { ThemeContext, themes } from '../../context/theme-context';
+import changeThemeReducer from '../../reducers/group/theme';
+import { store } from '../../store';
 import MainSector from '../MainSector/MainSector';
 import NewsBlock from '../NewsBlock/NewsBlock';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
@@ -102,50 +103,46 @@ const Menu = () => {
 };
 
 // {logo} // TODO : provide logo through SSR
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    const defaultTheme = themes.green;
-
-    this.toggleTheme = e => {
-      const color = e.target.value;
-      this.props.changeTheme(themes[color] || defaultTheme);
-    };
+export const App = () => {
+  const [{ value }, dispatch] = useReducer(
+    changeThemeReducer,
+    store.getState().theme,
+    changeTheme(themes.light)
+  );
+  
+  useEffect(() => {
+    // eslint-disable-next-line
+    console.log(' state => ', value);
+  });
+  
+  function toggleTheme(e) {
+    const color = e.target.value;
+    dispatch(changeTheme(themes[color] || themes.green));
   }
-
-  render() {
-    return (
-      <ThemeContext.Provider
-        value={{
-          theme: this.props.initTheme,
-          toggleTheme: this.toggleTheme
-        }}
-      >
-        <AppBlock>
-          <GlobalStyle />
-          <Menu />
-          <Header>
-            <AnimateLogo src="./favicon.ico" alt="logo" />
-            <Title>Blog</Title>
-            <NewsWrapper />
-            <ThemeContainer />
-          </Header>
-          <Chapter>Welcome to Blog Maker!</Chapter>
-          <ErrorBoundary>
-            <MainSector />
-          </ErrorBoundary>
-        </AppBlock>
-      </ThemeContext.Provider>
-    );
-  }
-}
-
-App.propTypes = {
-  changeTheme: PropTypes.func.isRequired,
-  initTheme: PropTypes.shape({
-    foreground: PropTypes.string,
-    background: PropTypes.string
-  }).isRequired
+  
+  return (
+    <ThemeContext.Provider
+      value={{
+        theme: value,
+        toggleTheme
+      }}
+    >
+      <AppBlock>
+        <GlobalStyle />
+        <Menu />
+        <Header>
+          <AnimateLogo src="./favicon.ico" alt="logo" />
+          <Title>Blog</Title>
+          <NewsWrapper />
+          <ThemeContainer />
+        </Header>
+        <Chapter>Welcome to Blog Maker!</Chapter>
+        <ErrorBoundary>
+          <MainSector />
+        </ErrorBoundary>
+      </AppBlock>
+    </ThemeContext.Provider>
+  );
 };
 
 export default connect(

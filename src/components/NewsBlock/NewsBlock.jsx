@@ -53,7 +53,7 @@ export class NewsBlock extends Component<any, {}> {
   }
   
   render() {
-    const { loading, news } = this.props;
+    const { loading, news, className } = this.props;
     const { newsDetailsHoverIn } = this.state;
     const classAnimation =
       newsDetailsHoverIn === null ? '' : newsDetailsHoverIn === true ? 'showOn' : 'showOff';
@@ -63,9 +63,9 @@ export class NewsBlock extends Component<any, {}> {
         {loading ? (
           <Loader>Loading...</Loader>
         ) : (
-          <NewsContainer>
+          <NewsContainer className={className}>
             <NewsInnerContainer
-              className={loading ? 'loading' : 'loaded'}
+              className={loading ? '' : 'loaded'}
               onMouseEnter={this.onHoverIn}
               onMouseLeave={this.onHoverOut}
             >
@@ -83,7 +83,8 @@ NewsBlock.propTypes = {
   loading: PropTypes.bool,
   news: PropTypes.arrayOf(PropTypes.object),
   fetchNewsViaSaga: PropTypes.func.isRequired,
-  fetchNewsViaEpic: PropTypes.func.isRequired
+  fetchNewsViaEpic: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired
 };
 
 NewsBlock.defaultProps = {

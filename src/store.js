@@ -16,7 +16,7 @@ const sagaMiddleware = createSagaMiddleware();
 const epicMiddleware = createEpicMiddleware();
 
 export const history =
-  typeof document !== 'undefined' // `${process.env.BROWSER}` !== 'false' // TODO : check why does not work env.BROWSER
+  typeof document !== 'undefined' // `${process.env.BROWSER}` !== 'false'
     ? createHistory() // createHistory()
     : createMemoryHistory();
 
@@ -45,7 +45,7 @@ const getMiddleware = () => {
   );
 };
 
-// const persistedState = (`${process.env.BROWSER}` !== 'false') // TODO : check why does not work env.BROWSER
+// const persistedState = (typeof document !== 'undefined') // TODO : check why does not work env.BROWSER
 //     ? loadState()
 //     : null;
 

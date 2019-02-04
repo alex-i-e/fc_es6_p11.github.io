@@ -19,6 +19,6 @@ export default (body, preloadedState) => `
           // http://redux.js.org/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
         </script>
-        <script type="text/javascript" src="static/js/main.3e6349c0.js"></script>
+        <script type="text/javascript" src="static/js/main.b2bad11e.js"></script>
     </body>
 </html>`;

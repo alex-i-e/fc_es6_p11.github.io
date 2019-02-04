@@ -103,7 +103,7 @@ a[title]:hover:after {
   left: 0;
   top: 100%;
   white-space: nowrap;
-  z-index: 20px;
+  z-index: 20;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
