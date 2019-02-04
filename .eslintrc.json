@@ -22,10 +22,7 @@
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
-    "linebreak-style": [
-      "error",
-      "windows"
-    ],
+    "linebreak-style": ["error", "windows"],
     "react/jsx-one-expression-per-line": "off",
     "operator-linebreak": "off",
     "no-trailing-spaces": "off",
@@ -40,10 +37,7 @@
         "classes": true
       }
     ],
-    "max-len": [
-      "error",
-      120
-    ],
+    "max-len": ["error", 120],
     "space-before-function-paren": "off",
     "object-curly-newline": "off",
     "arrow-body-style": "off",
@@ -55,9 +49,7 @@
     "no-underscore-dangle": [
       "error",
       {
-        "allow": [
-          "__PRELOADED_STATE__"
-        ]
+        "allow": ["__PRELOADED_STATE__"]
       }
     ],
     "react/destructuring-assignment": [
@@ -75,25 +67,14 @@
         "SwitchCase": 1
       }
     ],
-    "react/no-array-index-key": [
-      "error",
-      4
-    ],
-    "react/jsx-indent": [
-      "error",
-      2
-    ],
-    "react/jsx-indent-props": [
-      "error",
-      2
-    ],
+    "react/no-array-index-key": ["error", 4],
+    "react/jsx-indent": ["error", 2],
+    "react/jsx-indent-props": ["error", 2],
     "jsx-a11y/label-has-for": [
       2,
       {
         "required": {
-          "every": [
-            "id"
-          ]
+          "every": ["id"]
         }
       }
     ],

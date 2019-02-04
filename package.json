@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ag-grid-community": "^20.0.0",
+    "ag-grid-react": "^20.0.0",
     "autoprefixer": "7.1.6",
     "axios": "0.18.0",
     "babel-cli": "6.26.0",

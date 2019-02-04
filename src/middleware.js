@@ -6,7 +6,7 @@ const promiseMiddleware = store => next => action => {
     store.dispatch({ type: ASYNC_START, subtype: action.type });
 
     const currentView = store.getState().viewChangeCounter;
-    const skipTracking = action.skipTracking;
+    const { skipTracking } = action;
 
     action.payload.then(
       res => {

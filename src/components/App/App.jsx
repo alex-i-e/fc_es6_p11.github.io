@@ -1,11 +1,10 @@
-import React, { useEffect, useReducer } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { changeTheme } from '../../actions/theme';
 import { ThemeContext, themes } from '../../context/theme-context';
-import changeThemeReducer from '../../reducers/group/theme';
-import { store } from '../../store';
 import MainSector from '../MainSector/MainSector';
 import NewsBlock from '../NewsBlock/NewsBlock';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
@@ -103,27 +102,16 @@ const Menu = () => {
 };
 
 // {logo} // TODO : provide logo through SSR
-export const App = () => {
-  const [{ value }, dispatch] = useReducer(
-    changeThemeReducer,
-    store.getState().theme,
-    changeTheme(themes.light)
-  );
-  
-  useEffect(() => {
-    // eslint-disable-next-line
-    console.log(' state => ', value);
-  });
-  
+export const App = ({ initTheme, changeThemeAction }) => {
   function toggleTheme(e) {
     const color = e.target.value;
-    dispatch(changeTheme(themes[color] || themes.green));
+    changeThemeAction(themes[color] || themes.light);
   }
-  
+
   return (
     <ThemeContext.Provider
       value={{
-        theme: value,
+        theme: initTheme,
         toggleTheme
       }}
     >
@@ -145,9 +133,17 @@ export const App = () => {
   );
 };
 
+App.propTypes = {
+  changeThemeAction: PropTypes.func.isRequired,
+  initTheme: PropTypes.shape({
+    foreground: PropTypes.string,
+    background: PropTypes.string
+  }).isRequired
+};
+
 export default connect(
   state => ({
     initTheme: state.theme.value
   }),
-  { changeTheme }
+  { changeThemeAction: changeTheme }
 )(App);

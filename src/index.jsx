@@ -12,8 +12,6 @@ import NotificationFactory from './webApi/notification';
 NotificationFactory.requestDesktopNotificationPermission();
 
 const store = configureStore();
-
-// render / hydrate
 ReactDOM.hydrate(<Root store={store} />, document.getElementById('root'));
 
 registerServiceWorker();
