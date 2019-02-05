@@ -12,6 +12,9 @@
 # vscode
 /.vscode
 
+# webstorm
+/.idea
+
 # misc
 .DS_Store
 .env.local

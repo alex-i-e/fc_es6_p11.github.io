@@ -8,7 +8,7 @@ import 'jest-enzyme';
 import 'jest-styled-components';
 
 // to Use in node.js
-//import 'jsdom-global/register'; //at the top of file , even  , before importing react
+// import 'jsdom-global/register'; //at the top of file , even  , before importing react
 
 // in order to Use Enzyme with JSDOM
 import { JSDOM } from 'jsdom';
