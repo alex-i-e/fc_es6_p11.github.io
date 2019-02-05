@@ -5,10 +5,10 @@ import { NavLink } from 'react-router-dom';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { changeTheme } from '../../actions/theme';
 import { ThemeContext, themes } from '../../context/theme-context';
-import MainSector from '../MainSector/MainSector';
-import NewsBlock from '../NewsBlock/NewsBlock';
+import MainLayout from './MainLayout/MainLayout';
+import NewsHeader from './NewsHeader/NewsHeader';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
-import ThemeContainer from '../ThemeContainer/ThemeContainer';
+import ThemeContainer from './ThemeContainer/ThemeContainer';
 
 const AppBlock = styled.div`
   text-align: center;
@@ -42,7 +42,7 @@ const rotate = keyframes`
 const AnimateLogo = styled.img`
   animation: ${rotate} 5s infinite linear;
 `;
-const NewsWrapper = styled(NewsBlock)`
+const NewsWrapper = styled(NewsHeader)`
   color: #adadad;
   width: 100%;
 `;
@@ -126,7 +126,7 @@ export const App = ({ initTheme, changeThemeAction }) => {
         </Header>
         <Chapter>Welcome to Blog Maker!</Chapter>
         <ErrorBoundary>
-          <MainSector />
+          <MainLayout />
         </ErrorBoundary>
       </AppBlock>
     </ThemeContext.Provider>

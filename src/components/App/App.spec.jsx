@@ -11,14 +11,6 @@ import { App } from './App';
 test.skip('should render shallow DOM', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);
-  // const store = mockStore({
-  //     theme: {
-  //         value: {
-  //             foreground: '#fff',
-  //             background: '#fff',
-  //         }
-  //     }
-  // });
 
   const props = {
     changeTheme: jest.fn(),

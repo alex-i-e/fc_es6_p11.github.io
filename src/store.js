@@ -8,7 +8,8 @@ import { createEpicMiddleware } from 'redux-observable';
 import createSagaMiddleware from 'redux-saga';
 import newsEpic from './epics/news';
 // import {loadState} from './localStorageState';
-// import {localStorageMiddleware, promiseMiddleware} from './middleware';
+// import {localStorageMiddleware, promiseMiddleware} from './middleware/middleware';
+import { crashReporter } from './middleware/apiPerformance';
 import reducer from './reducers/reducer';
 import newsSaga from './sagas/news';
 
@@ -33,7 +34,7 @@ const getMiddleware = () => {
       epicMiddleware
     );
   }
-  
+
   // Enable additional logging in non-production environments.
   return applyMiddleware(
     myRouterMiddleware,
@@ -41,6 +42,7 @@ const getMiddleware = () => {
     // localStorageMiddleware,
     sagaMiddleware,
     epicMiddleware,
+    crashReporter,
     createLogger()
   );
 };

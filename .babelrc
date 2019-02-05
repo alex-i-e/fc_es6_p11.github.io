@@ -1,11 +1,13 @@
 {
-  "presets": [
-    "env",
-    "react",
-    "flow"
-  ],
+  "presets": ["env", "react", "flow"],
   "plugins": [
+    "syntax-dynamic-import",
     "transform-object-rest-spread",
-    "transform-runtime"
-  ]
+    "transform-runtime",
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }] // `style: true` for less
+  ],
+  "env": {
+    "development": { "plugins": ["transform-es2015-modules-commonjs"] },
+    "test": { "plugins": ["transform-es2015-modules-commonjs"] }
+  }
 }

@@ -8,7 +8,7 @@ export default (body, preloadedState) => `
         <link rel="manifest" href="static/manifest.json">
         <link rel="shortcut icon" href="static/favicon.ico"><title>React App</title>
 
-        <link href="static/css/main.7e376ec3.css" rel="stylesheet">
+        <link href="static/css/main.e5f154b2.css" rel="stylesheet">
 
     </head>
     <body>
@@ -19,6 +19,6 @@ export default (body, preloadedState) => `
           // http://redux.js.org/recipes/ServerRendering.html#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\\u003c')}
         </script>
-        <script type="text/javascript" src="static/js/main.b2bad11e.js"></script>
+        <script type="text/javascript" src="static/js/main.a4cbc3bc.js"></script>
     </body>
 </html>`;
