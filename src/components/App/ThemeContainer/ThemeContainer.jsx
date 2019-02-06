@@ -1,27 +1,33 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Select } from 'antd';
 import { ThemeContext, themes } from '../../../context/theme-context';
 
+const { Option } = Select;
+
 const Wrapper = styled.div`
-  position: relative;
-  top: 0;
+  position: fixed;
+  top: 8px;
   right: 0;
-  margin: 8px;
   width: 100px;
 `;
 
+const PatSelect = styled(Select)`
+  width: 80px;
+`;
+
 const ThemeContainer = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { toggleTheme } = useContext(ThemeContext);
 
   return (
     <Wrapper>
-      <select onChange={toggleTheme} style={{ backgroundColor: theme.background }}>
+      <PatSelect onChange={toggleTheme}>
         {Object.keys(themes).map((item, index) => (
-          <option key={index.toString()} value={item}>
+          <Option key={index.toString()} value={item}>
             {item}
-          </option>
+          </Option>
         ))}
-      </select>
+      </PatSelect>
     </Wrapper>
   );
 };

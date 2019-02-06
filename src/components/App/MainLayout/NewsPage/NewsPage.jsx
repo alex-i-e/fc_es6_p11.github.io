@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact } from 'ag-grid-react';
-
+import { Button } from 'antd';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+
+const CustomButtom = ({ counter, counterFunc, ...rest }) => {
+  return (
+    <Button onClick={() => counterFunc(counter)} {...rest}>
+      + {counter}
+    </Button>
+  );
+};
+CustomButtom.propTypes = {
+  counter: PropTypes.number.isRequired,
+  counterFunc: PropTypes.func.isRequired
+};
 
 export const NewsPage = ({ initialTableProps }) => {
   // Declare a new state variable, which we'll call "count"
@@ -28,21 +40,11 @@ export const NewsPage = ({ initialTableProps }) => {
   return (
     <div>
       <p>You clicked {count} times</p>
-      <button type="button" onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-      <button type="button" onClick={() => addExtraRow(1)}>
-        Fill 1+
-      </button>
-      <button type="button" onClick={() => addExtraRow(100)}>
-        Fill 100+
-      </button>
-      <button type="button" onClick={() => addExtraRow(10000)}>
-        Fill 10000+
-      </button>
-      <button type="button" onClick={() => addExtraRow(1000000)}>
-        Fill 1000000+
-      </button>
+      <Button shape="circle" icon="download" onClick={() => setCount(count + 1)} />
+      <CustomButtom shape="round" icon="plus-circle" type="primary" counter={1} counterFunc={addExtraRow} />
+      <CustomButtom icon="plus-circle" counter={100} counterFunc={addExtraRow} />
+      <CustomButtom icon="plus-circle" counter={10000} counterFunc={addExtraRow} />
+      <CustomButtom icon="plus-circle" counter={1000000} counterFunc={addExtraRow} />
       <div
         className="ag-theme-balham"
         style={{

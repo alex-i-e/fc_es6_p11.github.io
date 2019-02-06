@@ -5,7 +5,7 @@ import { Topic } from '../../MainLayout/MainPage/BlogSector/BlogListItem/BlogLis
 import AddBlog from './AddBlog/AddBlog';
 
 const NewsDetailsWrapper = styled.div`
-  height: 0;
+  max-height: 0;
   width: inherit;
   display: flex;
   flex-flow: column;
@@ -16,6 +16,8 @@ const NewsDetailsWrapper = styled.div`
   overflow-x: hidden;
 
   box-shadow: -3px 1px 9px 0px #adadad;
+
+  transition: max-height 1s ease-out;
 `;
 const NewsHoverItem = styled.a`
   text-decoration: none;

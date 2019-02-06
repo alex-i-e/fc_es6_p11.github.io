@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import { Menu, Icon } from 'antd';
 import { changeTheme } from '../../actions/theme';
 import { ThemeContext, themes } from '../../context/theme-context';
 import MainLayout from './MainLayout/MainLayout';
@@ -14,6 +15,16 @@ const AppBlock = styled.div`
   text-align: center;
 `;
 const Header = styled.header`
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+`;
+const HeaderMain = styled.header`
   display: flex;
   flex-flow: column-reverse;
   align-items: center;
@@ -53,58 +64,54 @@ const GlobalStyle = createGlobalStyle`
       font-family: sans-serif;
     }
 `;
-const TopMenu = styled.div`
+const StyledMenu = styled(Menu)`
   position: fixed;
+  top: 0;
   width: 100%;
-  height: 40px;
-  background-color: #080015;
-  color: snow;
-  display: flex;
-  flex-flow: row;
-  align-content: center;
-  justify-items: left;
-  align-items: center;
-`;
-const MenuItem = styled.div`
-  margin-left: 10px;
-  width: 70px;
-  text-overflow: ellipsis;
-  text-decoration: none;
 `;
 
-const NavLinkWrapper = styled(NavLink)`
-  text-decoration: none;
+const CustomMenu = () => {
+  const [menuItem, setMenuItem] = useState(null);
 
-  &:focus {
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    border-radius: 4px;
-    padding: 2px 4px;
-  }
-`;
+  const handleClick = e => {
+    setMenuItem({
+      menuItem: e.key
+    });
+  };
 
-const Menu = () => {
   return (
-    <TopMenu>
-      <MenuItem>
-        <NavLinkWrapper to="/main">Main info</NavLinkWrapper>
-      </MenuItem>
-      <MenuItem>
-        <NavLinkWrapper to="/base">Base</NavLinkWrapper>
-      </MenuItem>
-      <MenuItem>
-        <NavLinkWrapper to="/about">About</NavLinkWrapper>
-      </MenuItem>
-      <MenuItem>
-        <NavLinkWrapper to="/news">News</NavLinkWrapper>
-      </MenuItem>
-    </TopMenu>
+    <StyledMenu onClick={handleClick} selectedKeys={[menuItem]} mode="horizontal">
+      <Menu.Item key="mail">
+        <NavLink to="/main">
+          <Icon type="mail" />
+          Main info
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="check-circle">
+        <NavLink to="/base">
+          <Icon type="check-circle" />
+          Base
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="info-circle">
+        <NavLink to="/about">
+          <Icon type="info-circle" />
+          About
+        </NavLink>
+      </Menu.Item>
+      <Menu.Item key="question-circle">
+        <NavLink to="/news">
+          <Icon type="question-circle" />
+          News
+        </NavLink>
+      </Menu.Item>
+    </StyledMenu>
   );
 };
 
 // {logo} // TODO : provide logo through SSR
 export const App = ({ initTheme, changeThemeAction }) => {
-  function toggleTheme(e) {
-    const color = e.target.value;
+  function toggleTheme(color) {
     changeThemeAction(themes[color] || themes.light);
   }
 
@@ -117,12 +124,14 @@ export const App = ({ initTheme, changeThemeAction }) => {
     >
       <AppBlock>
         <GlobalStyle />
-        <Menu />
         <Header>
-          <AnimateLogo src="./favicon.ico" alt="logo" />
-          <Title>Blog</Title>
-          <NewsWrapper />
+          <CustomMenu />
           <ThemeContainer />
+          <HeaderMain>
+            <AnimateLogo src="./favicon.ico" alt="logo" />
+            <Title>Blog</Title>
+          </HeaderMain>
+          <NewsWrapper />
         </Header>
         <Chapter>Welcome to Blog Maker!</Chapter>
         <ErrorBoundary>

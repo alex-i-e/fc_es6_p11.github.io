@@ -2,11 +2,16 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Icon } from 'antd';
 import { fetchNewsViaEpic, fetchNewsViaSaga } from '../../../actions/newsBlock';
 import NewsDetails from './NewsDetails/NewsDetails';
 
 const Header = styled.div`
   z-index: 100;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 export const Loader = styled.div`
   position: fixed;
@@ -18,46 +23,74 @@ const NewsContainer = styled.div`
   overflow: hidden;
   position: absolute;
 `;
-export const NewsInnerContainer = styled.div``;
+const HeaderText = styled.span`
+  margin-left: 12px;
+`;
+
+export const NewsInnerContainer = styled.div`
+  color: black;
+  background-color: white;
+  box-shadow: -3px 1px 9px 0px #adadad;
+  width: 200px;
+  height: 40px;
+  position: fixed;
+  top: 48px;
+  right: -160px;
+  z-index: 100;
+
+  transition: transform 2.5s;
+`;
 
 export class NewsHeader extends Component<any, {}> {
   constructor() {
     super();
-    
+
     this.state = {
-      newsDetailsHoverIn: null
+      newsDetailsHoverIn: null,
+      openNews: false
     };
-    
+
     this.onHoverIn = this.onHoverIn.bind(this);
     this.onHoverOut = this.onHoverOut.bind(this);
+    this.onClickAction = this.onClickAction.bind(this);
   }
-  
+
   componentDidMount() {
     this.props.fetchNewsViaSaga('us');
     this.props.fetchNewsViaEpic('ru');
   }
-  
-  componentDidUpdate() {
-  }
-  
+
+  componentDidUpdate() {}
+
   onHoverIn() {
-    this.setState({ newsDetailsHoverIn: true });
+    if (this.state.openNews) {
+      this.setState({ newsDetailsHoverIn: true });
+    }
   }
-  
+
   onHoverOut() {
-    this.setState({ newsDetailsHoverIn: false });
+    if (this.state.openNews) {
+      this.setState({ newsDetailsHoverIn: false });
+    }
   }
-  
+
+  onClickAction() {
+    this.setState(({ openNews }) => ({
+      openNews: !openNews,
+      newsDetailsHoverIn: !openNews
+    }));
+  }
+
   getSnapshotBeforeUpdate() {
     return null;
   }
-  
+
   render() {
     const { loading, news, className } = this.props;
-    const { newsDetailsHoverIn } = this.state;
-    const classAnimation =
-      newsDetailsHoverIn === null ? '' : newsDetailsHoverIn === true ? 'showOn' : 'showOff';
-    
+    const { newsDetailsHoverIn, openNews } = this.state;
+    const classAnimation = newsDetailsHoverIn === true ? 'showOn' : '';
+    const newsContainerClass = openNews ? ' news-show-in ' : '';
+
     return (
       <div>
         {loading ? (
@@ -65,11 +98,18 @@ export class NewsHeader extends Component<any, {}> {
         ) : (
           <NewsContainer className={className}>
             <NewsInnerContainer
-              className={loading ? '' : 'loaded'}
+              className={newsContainerClass}
               onMouseEnter={this.onHoverIn}
               onMouseLeave={this.onHoverOut}
             >
-              <Header>News...length ={news.length}</Header>
+              <Header onClick={this.onClickAction}>
+                <Icon
+                  className="svg-arrow"
+                  style={{ fontSize: '24px', color: '#08c', marginLeft: '12px' }}
+                  type="right-circle"
+                />
+                <HeaderText>News...length ={news.length}</HeaderText>
+              </Header>
               <NewsDetails classAnimation={classAnimation} news={news} />
             </NewsInnerContainer>
           </NewsContainer>
