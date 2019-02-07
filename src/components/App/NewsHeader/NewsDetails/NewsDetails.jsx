@@ -17,7 +17,7 @@ const NewsDetailsWrapper = styled.div`
 
   box-shadow: -3px 1px 9px 0px #adadad;
 
-  transition: max-height 1s ease-out;
+  transition: max-height 0.5s ease-out;
 `;
 const NewsHoverItem = styled.a`
   text-decoration: none;

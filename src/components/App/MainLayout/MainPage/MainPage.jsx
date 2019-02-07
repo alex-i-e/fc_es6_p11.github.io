@@ -4,6 +4,7 @@ import BlogSector from './BlogSector/BlogSector';
 import NavigatorSector from './NavigatorSector/NavigatorSector';
 import { themes } from '../../../../context/theme-context';
 
+// style={{ backgroundColor: theme.background }}
 export const MainPage = ({ theme }) => (
   <div className="container main-sector" style={{ backgroundColor: theme.background }}>
     <BlogSector />

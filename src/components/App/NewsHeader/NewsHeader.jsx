@@ -38,7 +38,7 @@ export const NewsInnerContainer = styled.div`
   right: -160px;
   z-index: 100;
 
-  transition: transform 2.5s;
+  transition: transform .5s;
 `;
 
 export class NewsHeader extends Component<any, {}> {

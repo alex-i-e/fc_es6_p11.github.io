@@ -48,7 +48,7 @@ Responsive
 }
 
 .svg-arrow {
-  transition: transform 0.3s 2.3s;
+  transition: transform 0.1s 0.3s;
 }
 
 /*   NewsDetailsWrapper  */

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// @flow
+
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -74,32 +76,30 @@ const CustomMenu = () => {
   const [menuItem, setMenuItem] = useState(null);
 
   const handleClick = e => {
-    setMenuItem({
-      menuItem: e.key
-    });
+    setMenuItem(e.key);
   };
 
   return (
     <StyledMenu onClick={handleClick} selectedKeys={[menuItem]} mode="horizontal">
-      <Menu.Item key="mail">
+      <Menu.Item key="main">
         <NavLink to="/main">
           <Icon type="mail" />
           Main info
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="check-circle">
+      <Menu.Item key="base">
         <NavLink to="/base">
           <Icon type="check-circle" />
           Base
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="info-circle">
+      <Menu.Item key="about">
         <NavLink to="/about">
           <Icon type="info-circle" />
           About
         </NavLink>
       </Menu.Item>
-      <Menu.Item key="question-circle">
+      <Menu.Item key="news">
         <NavLink to="/news">
           <Icon type="question-circle" />
           News
@@ -111,9 +111,29 @@ const CustomMenu = () => {
 
 // {logo} // TODO : provide logo through SSR
 export const App = ({ initTheme, changeThemeAction }) => {
+  const [keyEvent, setKeyEvent] = useState(null);
   function toggleTheme(color) {
     changeThemeAction(themes[color] || themes.light);
   }
+
+  const onKeyDown = (e: KeyboardEvent) => {
+    // eslint-disable-next-line
+    console.log(' ... e=> ', e);
+    // eslint-disable-next-line
+    console.log(' ... e.altKey=> ', e.altKey);
+
+    setKeyEvent(e);
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    console.log(' ...useEffect => keyEvent=> ', keyEvent);
+    document.addEventListener('keydown', onKeyDown, false);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  });
 
   return (
     <ThemeContext.Provider
@@ -122,7 +142,7 @@ export const App = ({ initTheme, changeThemeAction }) => {
         toggleTheme
       }}
     >
-      <AppBlock>
+      <AppBlock onKeyDown={onKeyDown}>
         <GlobalStyle />
         <Header>
           <CustomMenu />

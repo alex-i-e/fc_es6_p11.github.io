@@ -35,7 +35,7 @@ BlogSector.propTypes = {
       image: PropTypes.string,
       title: PropTypes.string,
       body: PropTypes.string,
-      date: PropTypes.string,
+      date: PropTypes.date,
       author: PropTypes.string
     })
   ),

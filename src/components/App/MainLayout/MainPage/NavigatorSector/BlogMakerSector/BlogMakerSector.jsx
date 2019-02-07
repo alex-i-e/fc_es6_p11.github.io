@@ -23,7 +23,11 @@ const BlogMakerSector = () => {
           <Route
             path="/main"
             exact
-            render={() => <ActionLink urlState="main/edit">Create record</ActionLink>}
+            render={() => (
+              <ActionLink type="primary" urlState="/main/edit">
+                Create record
+              </ActionLink>
+            )}
           />
         </Switch>
       </Router>
