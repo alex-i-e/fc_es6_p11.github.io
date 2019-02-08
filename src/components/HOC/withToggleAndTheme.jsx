@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { ThemeContext } from '../../context/theme-context';
+import { getDisplayName } from './utils';
 
 // const enhance = compose(
 //     connect(mapStateToProps, mapDispatchToProps),
@@ -10,31 +11,24 @@ import { ThemeContext } from '../../context/theme-context';
 //     withStyles(styles, 'some style'),
 //     ....
 //
-//     export default enhance(MyComponent);
-
-export function getDisplayName(WrappedComponent) {
-  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
-}
+// export default enhance(MyComponent);
 
 const withToggleAndThemeWrapper = WrapperComponent => {
-  const WithToggle = (props) => {
+  const WithToggle = props => {
     const themeContext = useContext(ThemeContext);
-    
+
     function withToggleAction() {
       // eslint-disable-next-line
       console.log('>>> withToggleAction');
     }
-    
+
     return (
-      <WrapperComponent
-        withToggleAction={withToggleAction}
-        theme={themeContext.theme}
-        {...props}
-      />);
+      <WrapperComponent withToggleAction={withToggleAction} theme={themeContext.theme} {...props} />
+    );
   };
-  
+
   WithToggle.displayName = `WithToggle(${getDisplayName(WrapperComponent)})`;
-  
+
   return WithToggle;
 };
 
@@ -44,7 +38,9 @@ withToggleAndThemeWrapper.propTypes = {
 
 export default compose(
   connect(
-    null,
+    state => ({
+      initTheme: state.theme.value
+    }),
     null
   ),
   withToggleAndThemeWrapper

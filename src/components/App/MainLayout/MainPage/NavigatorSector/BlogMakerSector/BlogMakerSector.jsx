@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { history } from '../../../../../../store';
 import ActionLink from '../../../../../shared/ActionLink/ActionLink';
 import BlogForm from './BlogForm/BlogForm';
+import withKeyboardTooltip from '../../../../../HOC/withKeyboardTooltip';
+// import withNewsDetails from '../../../../../HOC/withNewsDetails';
 
 const BlogBlock = styled.div`
   display: flex;
@@ -13,6 +15,8 @@ const BlogBlock = styled.div`
   padding: 8px;
   box-shadow: -3px 1px 9px 0px #adadad;
 `;
+
+const WithTooltip = withKeyboardTooltip(ActionLink);
 
 const BlogMakerSector = () => {
   return (
@@ -24,9 +28,9 @@ const BlogMakerSector = () => {
             path="/main"
             exact
             render={() => (
-              <ActionLink type="primary" urlState="/main/edit">
+              <WithTooltip titleText="Ctrl + C" type="primary" urlState="/main/edit">
                 Create record
-              </ActionLink>
+              </WithTooltip>
             )}
           />
         </Switch>

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, forwardRef } from 'react';
 // import styled from 'styled-components';
 import { Input } from 'antd';
 
@@ -7,7 +7,7 @@ import { Input } from 'antd';
 //   line-height: 16px;
 // `;
 
-const InputField = React.forwardRef(({ labelValue, id, ...rest }, ref) => {
+const InputField = forwardRef(({ labelValue, id, ...rest }, ref) => {
   const label = (
     <span>
       {labelValue}

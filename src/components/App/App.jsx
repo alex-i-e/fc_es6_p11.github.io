@@ -12,6 +12,7 @@ import MainLayout from './MainLayout/MainLayout';
 import NewsHeader from './NewsHeader/NewsHeader';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
 import ThemeContainer from './ThemeContainer/ThemeContainer';
+import { changeKeyPressValue } from '../../actions/keyPressAction';
 
 const AppBlock = styled.div`
   text-align: center;
@@ -110,8 +111,9 @@ const CustomMenu = () => {
 };
 
 // {logo} // TODO : provide logo through SSR
-export const App = ({ initTheme, changeThemeAction }) => {
-  const [keyEvent, setKeyEvent] = useState(null);
+export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
+  const [keyEvent] = useState(null);
+
   function toggleTheme(color) {
     changeThemeAction(themes[color] || themes.light);
   }
@@ -119,10 +121,10 @@ export const App = ({ initTheme, changeThemeAction }) => {
   const onKeyDown = (e: KeyboardEvent) => {
     // eslint-disable-next-line
     console.log(' ... e=> ', e);
-    // eslint-disable-next-line
-    console.log(' ... e.altKey=> ', e.altKey);
-
-    setKeyEvent(e);
+  
+    // setKeyEvent(e);
+    // return e;
+    changeKeyPress(e);
   };
 
   useEffect(() => {
@@ -131,10 +133,15 @@ export const App = ({ initTheme, changeThemeAction }) => {
     document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
-      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('keydown', onKeyDown, false);
     };
-  });
+  }, []);
 
+  // <KeyDownEventContext.Provider value={{
+  //   keyDownEvent:
+  //   changeKeyDownEvent:
+  // }}>
+  // </KeyDownEventContext.Provider>
   return (
     <ThemeContext.Provider
       value={{
@@ -164,6 +171,7 @@ export const App = ({ initTheme, changeThemeAction }) => {
 
 App.propTypes = {
   changeThemeAction: PropTypes.func.isRequired,
+  changeKeyPress: PropTypes.func.isRequired,
   initTheme: PropTypes.shape({
     foreground: PropTypes.string,
     background: PropTypes.string
@@ -174,5 +182,5 @@ export default connect(
   state => ({
     initTheme: state.theme.value
   }),
-  { changeThemeAction: changeTheme }
+  { changeThemeAction: changeTheme, changeKeyPress: changeKeyPressValue }
 )(App);

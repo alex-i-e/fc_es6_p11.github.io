@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
@@ -8,13 +8,23 @@ const propTypes = {
   children: PropTypes.node.isRequired
 };
 
-const ActionLink = ({ onClick, urlState, children, ...props }) => {
+const ActionLink = forwardRef(({ onClick, urlState, children, ...props }, ref) => {
+  // const inputRef = useRef();
+
+  // useImperativeHandle(ref, () => ({
+  //   click: () => {
+  //     inputRef.current.click();
+  //   }
+  // }));
+  // onClick={onClick}
   return (
-    <Button {...props} onClick={onClick}>
-      <Link to={urlState}>{children}</Link>
+    <Button onClick={onClick} {...props}>
+      <Link to={urlState} ref={ref}>
+        {children}
+      </Link>
     </Button>
   );
-};
+});
 
 ActionLink.propTypes = propTypes;
 

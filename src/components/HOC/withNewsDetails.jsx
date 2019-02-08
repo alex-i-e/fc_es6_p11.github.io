@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { toggleNewsDetails } from '../../actions/blogActions';
-import { getDisplayName } from './withToggleAndTheme';
+import { getDisplayName } from './utils';
 
 const withNewsDetails = WrapperComponent => {
   class WithNewsDetails extends Component {
-    constructor(props) {
-      super(props);
-      this.withNewsDetailsAction = this.withNewsDetailsAction.bind(this);
-    }
-
-    withNewsDetailsAction(e) {
+    static withNewsDetailsAction() {
+      // eslint-disable-next-line
       console.log('>>> withNewsDetailsAction');
     }
 
     render() {
       return (
-        <WrapperComponent withNewsDetailsAction={this.withNewsDetailsAction} {...this.props} />
+        <WrapperComponent
+          withNewsDetailsAction={WithNewsDetails.withNewsDetailsAction}
+          {...this.props}
+        />
       );
     }
   }
@@ -30,7 +28,7 @@ const withNewsDetails = WrapperComponent => {
 export default compose(
   connect(
     null,
-    { toggleNewsDetails }
+    null
   ),
   withNewsDetails
 );

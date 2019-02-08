@@ -7,6 +7,7 @@ import home from './group/home';
 import logService from './group/logService';
 import news from './group/news';
 import theme from './group/theme';
+import keyPress from './group/keyPress';
 
 export default combineReducers({
   home,
@@ -14,6 +15,7 @@ export default combineReducers({
   news,
   epicNews,
   theme,
+  keyPress,
   logService,
   router: routerReducer
 });
