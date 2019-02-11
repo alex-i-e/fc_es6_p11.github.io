@@ -2,26 +2,25 @@ import PropTypes from 'prop-types';
 import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
+import withKeyboardTooltip from '../../HOC/withKeyboardTooltip';
 
 const propTypes = {
   urlState: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired
 };
-
-const ActionLink = forwardRef(({ onClick, urlState, children, ...props }, ref) => {
-  // const inputRef = useRef();
-
-  // useImperativeHandle(ref, () => ({
-  //   click: () => {
-  //     inputRef.current.click();
-  //   }
-  // }));
-  // onClick={onClick}
+const NavLinkWithTooltip = withKeyboardTooltip(Link);
+const ActionLink = forwardRef(({ onClick, urlState, children, titleText, ...props }, ref) => {
   return (
     <Button onClick={onClick} {...props}>
-      <Link to={urlState} ref={ref}>
-        {children}
-      </Link>
+      {!titleText ? (
+        <Link to={urlState} ref={ref}>
+          {children}
+        </Link>
+      ) : (
+        <NavLinkWithTooltip to={urlState} ref={ref} titleText={titleText}>
+          {children}
+        </NavLinkWithTooltip>
+      )}
     </Button>
   );
 });

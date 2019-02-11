@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Router, Switch } from 'react-router';
 import { history } from '../../../store';
-import withToggleAndTheme from '../../HOC/withToggleAndTheme';
 import withGoogleMap from '../../HOC/withGoogleMap';
-import AboutPage from './AboutPage/AboutPage';
-import NewsPage from './NewsPage/NewsPage';
-import MainPage from './MainPage/MainPage';
-import BasePage from './BasePage/BasePage';
-import InitPage from './InitPage/InitPage';
-import NoMatchPage from './NoMatchPage/NoMatchPage';
+
+const Loading = () => <div>Loading...</div>;
+const LazyInitPage = lazy(() => import('./InitPage/InitPage'));
+const LazyAboutPage = lazy(() => import('./AboutPage/AboutPage'));
+const LazyMainPage = lazy(() => import('./MainPage/MainPage'));
+const LazyBasePage = lazy(() => import('./BasePage/BasePage'));
+const LazyNoMatchPage = lazy(() => import('./NoMatchPage/NoMatchPage'));
+const LazyNewsPage = lazy(() => import('./NewsPage/NewsPage'));
 
 const MainSector = () => {
   const tableProps = {
@@ -26,14 +27,16 @@ const MainSector = () => {
 
   return (
     <Router history={history}>
-      <Switch>
-        <Route exact path="/" component={InitPage} />
-        <Route path="/main" component={withToggleAndTheme(MainPage)} />
-        <Route path="/base" component={withGoogleMap(BasePage)} />
-        <Route path="/about" component={AboutPage} />
-        <Route path="/news" render={() => <NewsPage initialTableProps={tableProps} />} />
-        <Route component={NoMatchPage} />
-      </Switch>
+      <Suspense fallback={Loading}>
+        <Switch>
+          <Route exact path="/" component={LazyInitPage} />
+          <Route path="/main" component={LazyMainPage} />
+          <Route path="/base" component={withGoogleMap(LazyBasePage)} />
+          <Route path="/about" component={LazyAboutPage} />
+          <Route path="/news" render={() => <LazyNewsPage initialTableProps={tableProps} />} />
+          <Route component={LazyNoMatchPage} />
+        </Switch>
+      </Suspense>
     </Router>
   );
 };

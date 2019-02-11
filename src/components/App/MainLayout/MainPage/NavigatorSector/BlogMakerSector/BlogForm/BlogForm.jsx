@@ -171,7 +171,9 @@ export class BlogForm extends Component {
             >
               Submit
             </ActionLink>
-            <ActionLink urlState="/main">Back</ActionLink>
+            <ActionLink urlState="/main" titleText="Ctrl + X">
+              Back
+            </ActionLink>
           </ButtonSector>
         </FormBlock>
       </FormWrapper>

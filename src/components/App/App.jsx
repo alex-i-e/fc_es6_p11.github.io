@@ -8,11 +8,13 @@ import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { Menu, Icon } from 'antd';
 import { changeTheme } from '../../actions/theme';
 import { ThemeContext, themes } from '../../context/theme-context';
+import { KeyDownEventContext } from '../../context/keyPress-context';
 import MainLayout from './MainLayout/MainLayout';
 import NewsHeader from './NewsHeader/NewsHeader';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
 import ThemeContainer from './ThemeContainer/ThemeContainer';
 import { changeKeyPressValue } from '../../actions/keyPressAction';
+import withKeyboardTooltip from '../HOC/withKeyboardTooltip';
 
 const AppBlock = styled.div`
   text-align: center;
@@ -73,6 +75,8 @@ const StyledMenu = styled(Menu)`
   width: 100%;
 `;
 
+const NavLinkWithTooltip = withKeyboardTooltip(NavLink);
+
 const CustomMenu = () => {
   const [menuItem, setMenuItem] = useState(null);
 
@@ -83,36 +87,37 @@ const CustomMenu = () => {
   return (
     <StyledMenu onClick={handleClick} selectedKeys={[menuItem]} mode="horizontal">
       <Menu.Item key="main">
-        <NavLink to="/main">
+        <NavLinkWithTooltip to="/main" titleText="Ctrl + M">
           <Icon type="mail" />
           Main info
-        </NavLink>
+        </NavLinkWithTooltip>
       </Menu.Item>
       <Menu.Item key="base">
-        <NavLink to="/base">
+        <NavLinkWithTooltip to="/base" titleText="Ctrl + B">
           <Icon type="check-circle" />
           Base
-        </NavLink>
+        </NavLinkWithTooltip>
       </Menu.Item>
       <Menu.Item key="about">
-        <NavLink to="/about">
+        <NavLinkWithTooltip to="/about" titleText="Ctrl + Y">
           <Icon type="info-circle" />
           About
-        </NavLink>
+        </NavLinkWithTooltip>
       </Menu.Item>
       <Menu.Item key="news">
-        <NavLink to="/news">
+        <NavLinkWithTooltip to="/news" titleText="Ctrl + L">
           <Icon type="question-circle" />
           News
-        </NavLink>
+        </NavLinkWithTooltip>
       </Menu.Item>
     </StyledMenu>
   );
 };
 
 // {logo} // TODO : provide logo through SSR
+/* eslint-disable */
 export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
-  const [keyEvent] = useState(null);
+  const [keyEvent, setKeyEvent] = useState(null);
 
   function toggleTheme(color) {
     changeThemeAction(themes[color] || themes.light);
@@ -121,10 +126,10 @@ export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
   const onKeyDown = (e: KeyboardEvent) => {
     // eslint-disable-next-line
     console.log(' ... e=> ', e);
-  
-    // setKeyEvent(e);
-    // return e;
-    changeKeyPress(e);
+
+    setKeyEvent(e);
+
+    // changeKeyPress(e);
   };
 
   useEffect(() => {
@@ -149,22 +154,29 @@ export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
         toggleTheme
       }}
     >
-      <AppBlock onKeyDown={onKeyDown}>
-        <GlobalStyle />
-        <Header>
-          <CustomMenu />
-          <ThemeContainer />
-          <HeaderMain>
-            <AnimateLogo src="./favicon.ico" alt="logo" />
-            <Title>Blog</Title>
-          </HeaderMain>
-          <NewsWrapper />
-        </Header>
-        <Chapter>Welcome to Blog Maker!</Chapter>
-        <ErrorBoundary>
-          <MainLayout />
-        </ErrorBoundary>
-      </AppBlock>
+      <KeyDownEventContext.Provider
+        value={{
+          keyDownEvent: keyEvent,
+          changeKeyDownEvent: setKeyEvent
+        }}
+      >
+        <AppBlock onKeyDown={onKeyDown}>
+          <GlobalStyle />
+          <Header>
+            <CustomMenu />
+            <ThemeContainer />
+            <HeaderMain>
+              <AnimateLogo src="./favicon.ico" alt="logo" />
+              <Title>Blog</Title>
+            </HeaderMain>
+            <NewsWrapper />
+          </Header>
+          <Chapter>Welcome to Blog Maker!</Chapter>
+          <ErrorBoundary>
+            <MainLayout />
+          </ErrorBoundary>
+        </AppBlock>
+      </KeyDownEventContext.Provider>
     </ThemeContext.Provider>
   );
 };

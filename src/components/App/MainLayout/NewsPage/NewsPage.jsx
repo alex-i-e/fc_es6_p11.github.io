@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, memo } from 'react';
 import PropTypes from 'prop-types';
 import { AgGridReact } from 'ag-grid-react';
 import { Button } from 'antd';
@@ -17,16 +17,24 @@ CustomButtom.propTypes = {
   counterFunc: PropTypes.func.isRequired
 };
 
-export const NewsPage = ({ initialTableProps }) => {
-  // Declare a new state variable, which we'll call "count"
+const DocumentClicker = () => {
   const [count, setCount] = useState(0);
-  const [rows, setRowsCount] = useState(initialTableProps.rowData);
 
-  // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     // Update the document title using the browser API
     document.title = `You clicked ${count} times`;
   }, [count]);
+
+  return (
+    <Fragment>
+      <p>You clicked {count} times</p>
+      <Button shape="circle" icon="download" onClick={() => setCount(count + 1)} />
+    </Fragment>
+  );
+};
+
+export const NewsPage = memo(({ initialTableProps }) => {
+  const [rows, setRowsCount] = useState(initialTableProps.rowData);
 
   const addExtraRow = (fillNumber = 1) => {
     setRowsCount(
@@ -39,9 +47,14 @@ export const NewsPage = ({ initialTableProps }) => {
 
   return (
     <div>
-      <p>You clicked {count} times</p>
-      <Button shape="circle" icon="download" onClick={() => setCount(count + 1)} />
-      <CustomButtom shape="round" icon="plus-circle" type="primary" counter={1} counterFunc={addExtraRow} />
+      <DocumentClicker />
+      <CustomButtom
+        shape="round"
+        icon="plus-circle"
+        type="primary"
+        counter={1}
+        counterFunc={addExtraRow}
+      />
       <CustomButtom icon="plus-circle" counter={100} counterFunc={addExtraRow} />
       <CustomButtom icon="plus-circle" counter={10000} counterFunc={addExtraRow} />
       <CustomButtom icon="plus-circle" counter={1000000} counterFunc={addExtraRow} />
@@ -56,7 +69,8 @@ export const NewsPage = ({ initialTableProps }) => {
       </div>
     </div>
   );
-};
+});
+
 NewsPage.propTypes = {
   initialTableProps: PropTypes.shape({
     columnDefs: PropTypes.arrayOf(

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { history } from '../../../../../../store';
 import ActionLink from '../../../../../shared/ActionLink/ActionLink';
 import BlogForm from './BlogForm/BlogForm';
-import withKeyboardTooltip from '../../../../../HOC/withKeyboardTooltip';
+// import withKeyboardTooltip from '../../../../../HOC/withKeyboardTooltip';
 // import withNewsDetails from '../../../../../HOC/withNewsDetails';
 
 const BlogBlock = styled.div`
@@ -16,7 +16,10 @@ const BlogBlock = styled.div`
   box-shadow: -3px 1px 9px 0px #adadad;
 `;
 
-const WithTooltip = withKeyboardTooltip(ActionLink);
+// const WithTooltip = withKeyboardTooltip(ActionLink);
+// <WithTooltip titleText="Ctrl + C" type="primary" urlState="/main/edit">
+// Create record
+// </WithTooltip>
 
 const BlogMakerSector = () => {
   return (
@@ -28,9 +31,9 @@ const BlogMakerSector = () => {
             path="/main"
             exact
             render={() => (
-              <WithTooltip titleText="Ctrl + C" type="primary" urlState="/main/edit">
+              <ActionLink titleText="Ctrl + C" type="primary" urlState="/main/edit">
                 Create record
-              </WithTooltip>
+              </ActionLink>
             )}
           />
         </Switch>
