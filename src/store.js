@@ -10,7 +10,7 @@ import newsEpic from './epics/news';
 // import {loadState} from './localStorageState';
 // import {localStorageMiddleware, promiseMiddleware} from './middleware/middleware';
 import { crashReporter } from './middleware/apiPerformance';
-import reducer from './reducers/reducer';
+import reducer from './reducers';
 import newsSaga from './sagas/news';
 
 const sagaMiddleware = createSagaMiddleware();
