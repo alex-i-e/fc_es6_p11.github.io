@@ -55,42 +55,22 @@ export class BlogForm extends Component {
 
     this.onSubmitPost = this.onSubmitPost.bind(this);
     this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
-    this.onChangeInput = this.onChangeInput.bind(this);
+    this.checkFormValidate = this.checkFormValidate.bind(this);
     this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeBody = this.onChangeBody.bind(this);
   }
 
   onChangeAuthor() {
-    return this.onChangeInput('author');
+    return this.checkFormValidate('author');
   }
 
   onChangeTitle() {
-    return this.onChangeInput('title');
+    return this.checkFormValidate('title');
   }
 
   onChangeBody() {
-    return this.onChangeInput('body');
-  }
-
-  onChangeInput(type) {
-    return e => {
-      const currentInputValue = e.target.value;
-      const author = this.authorInput.current.state.value;
-      const title = this.titleInput.current.state.value;
-      const body = this.bodyInput.current.state.value;
-      const formState = {
-        author,
-        title,
-        body
-      };
-
-      this.setState({
-        validForm: !Object.values({ ...formState, ...{ [type]: currentInputValue } }).some(
-          item => !item
-        )
-      });
-    };
+    return this.checkFormValidate('body');
   }
 
   onChangeDatePicker(date) {
@@ -117,6 +97,26 @@ export class BlogForm extends Component {
     success();
 
     return true;
+  }
+
+  checkFormValidate(type) {
+    return e => {
+      const currentInputValue = e.target.value;
+      const author = this.authorInput.current.state.value;
+      const title = this.titleInput.current.state.value;
+      const body = this.bodyInput.current.state.value;
+      const formState = {
+        author,
+        title,
+        body
+      };
+
+      this.setState({
+        validForm: !Object.values({ ...formState, ...{ [type]: currentInputValue } }).some(
+          item => !item
+        )
+      });
+    };
   }
 
   render() {

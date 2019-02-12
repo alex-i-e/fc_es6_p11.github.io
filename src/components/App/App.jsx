@@ -13,7 +13,6 @@ import MainLayout from './MainLayout/MainLayout';
 import NewsHeader from './NewsHeader/NewsHeader';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
 import ThemeContainer from './ThemeContainer/ThemeContainer';
-import { changeKeyPressValue } from '../../actions/keyPressAction';
 import withKeyboardTooltip from '../HOC/withKeyboardTooltip';
 
 const AppBlock = styled.div`
@@ -99,13 +98,13 @@ const CustomMenu = () => {
         </NavLinkWithTooltip>
       </Menu.Item>
       <Menu.Item key="about">
-        <NavLinkWithTooltip to="/about" titleText="Ctrl + Y">
+        <NavLinkWithTooltip to="/about" titleText="Ctrl + I">
           <Icon type="info-circle" />
           About
         </NavLinkWithTooltip>
       </Menu.Item>
       <Menu.Item key="news">
-        <NavLinkWithTooltip to="/news" titleText="Ctrl + L">
+        <NavLinkWithTooltip to="/news" titleText="Ctrl + Y">
           <Icon type="question-circle" />
           News
         </NavLinkWithTooltip>
@@ -115,26 +114,20 @@ const CustomMenu = () => {
 };
 
 // {logo} // TODO : provide logo through SSR
-/* eslint-disable */
-export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
+export const App = ({ initTheme, changeThemeAction }) => {
   const [keyEvent, setKeyEvent] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   function toggleTheme(color) {
     changeThemeAction(themes[color] || themes.light);
   }
 
   const onKeyDown = (e: KeyboardEvent) => {
-    // eslint-disable-next-line
-    console.log(' ... e=> ', e);
-
+    setVisible(e.ctrlKey ? true : e.code !== 'Escape');
     setKeyEvent(e);
-
-    // changeKeyPress(e);
   };
 
   useEffect(() => {
-    // eslint-disable-next-line
-    console.log(' ...useEffect => keyEvent=> ', keyEvent);
     document.addEventListener('keydown', onKeyDown, false);
 
     return () => {
@@ -142,11 +135,6 @@ export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
     };
   }, []);
 
-  // <KeyDownEventContext.Provider value={{
-  //   keyDownEvent:
-  //   changeKeyDownEvent:
-  // }}>
-  // </KeyDownEventContext.Provider>
   return (
     <ThemeContext.Provider
       value={{
@@ -157,7 +145,7 @@ export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
       <KeyDownEventContext.Provider
         value={{
           keyDownEvent: keyEvent,
-          changeKeyDownEvent: setKeyEvent
+          tooltipVisibility: visible
         }}
       >
         <AppBlock onKeyDown={onKeyDown}>
@@ -183,7 +171,6 @@ export const App = ({ initTheme, changeThemeAction, changeKeyPress }) => {
 
 App.propTypes = {
   changeThemeAction: PropTypes.func.isRequired,
-  changeKeyPress: PropTypes.func.isRequired,
   initTheme: PropTypes.shape({
     foreground: PropTypes.string,
     background: PropTypes.string
@@ -194,5 +181,7 @@ export default connect(
   state => ({
     initTheme: state.theme.value
   }),
-  { changeThemeAction: changeTheme, changeKeyPress: changeKeyPressValue }
+  {
+    changeThemeAction: changeTheme
+  }
 )(App);

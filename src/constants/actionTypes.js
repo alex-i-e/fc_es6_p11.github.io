@@ -25,7 +25,6 @@ export const EPIC_NEWS_FETCH_SUCCEEDED = 'EPIC_NEWS_FETCH_SUCCEEDED';
 export const EPIC_NEWS_FETCH_FAILED = 'EPIC_NEWS_FETCH_FAILED';
 
 export const CHANGE_THEME = 'CHANGE_THEME';
-export const KEY_PRESS = 'KEY_PRESS';
 
 export const LOG_ERROR = 'LOG_ERROR';
 
@@ -43,7 +42,6 @@ export type ThemeState = {
   }
 };
 export type ThemeAction = { type: typeof CHANGE_THEME, payload: { value: string } };
-export type KeyPressAction = { type: typeof KEY_PRESS, payload: { value: KeyboardEvent } };
 
 export type FilterState = {
   value: string,
