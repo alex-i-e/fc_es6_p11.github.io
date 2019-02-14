@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { Menu, Icon } from 'antd';
+import * as _ from 'lodash';
 import { changeTheme } from '../../actions/theme';
 import { ThemeContext, themes } from '../../context/theme-context';
 import { KeyDownEventContext } from '../../context/keyPress-context';
@@ -86,7 +87,7 @@ const CustomMenu = () => {
   return (
     <StyledMenu onClick={handleClick} selectedKeys={[menuItem]} mode="horizontal">
       <Menu.Item key="main">
-        <NavLinkWithTooltip to="/main" titleText="Ctrl + M">
+        <NavLinkWithTooltip to="/main" titleText="Ctrl + X">
           <Icon type="mail" />
           Main info
         </NavLinkWithTooltip>
@@ -124,14 +125,19 @@ export const App = ({ initTheme, changeThemeAction }) => {
 
   const onKeyDown = (e: KeyboardEvent) => {
     setVisible(e.ctrlKey ? true : e.code !== 'Escape');
-    setKeyEvent(e);
+
+    if (e.target && e.target.localName !== 'BODY' && (e.ctrlKey || e.code === 'Escape')) {
+      setKeyEvent(e);
+    }
   };
 
   useEffect(() => {
-    document.addEventListener('keydown', onKeyDown, false);
+    const debounceKeyDown = _.debounce(onKeyDown, 200, { leading: true });
+
+    document.addEventListener('keydown', debounceKeyDown, false);
 
     return () => {
-      document.removeEventListener('keydown', onKeyDown, false);
+      document.removeEventListener('keydown', debounceKeyDown, false);
     };
   }, []);
 
