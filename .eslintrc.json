@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "typescript-eslint-parser",
   "extends": [
     "plugin:flowtype/recommended",
     "airbnb",
@@ -12,9 +12,11 @@
     "react-hooks",
     //    "prettier",
     "jest",
-    "import"
+    "import",
+    "typescript"
   ],
   "rules": {
+    "typescript/rule-name": "error",
     "react-hooks/rules-of-hooks": "error",
     // "prettier/prettier": ["warn"],
     "jest/no-disabled-tests": "warn",

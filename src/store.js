@@ -20,7 +20,7 @@ export const history =
   typeof document !== 'undefined' // `${process.env.BROWSER}` !== 'false'
     ? createHistory() // createHistory()
     : createMemoryHistory();
-
+ 
 // Build the middleware for intercepting and dispatching navigation actions
 const myRouterMiddleware = routerMiddleware(history);
 
