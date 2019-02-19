@@ -1,24 +1,20 @@
 {
   "parser": "typescript-eslint-parser",
+  "parserOptions": {
+    "jsx": true,
+    "useJSXTextNode": true
+  },
   "extends": [
-    "plugin:flowtype/recommended",
     "airbnb",
-    //    "prettier",
     "plugin:jest/recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "tslint:recommended"
   ],
-  "plugins": [
-    "flowtype",
-    "react-hooks",
-    //    "prettier",
-    "jest",
-    "import",
-    "typescript"
-  ],
+  "plugins": ["react-hooks", "jest", "import", "typescript", "tslint"],
   "rules": {
+    "jsx-wrap-multiline": false,
     "typescript/rule-name": "error",
     "react-hooks/rules-of-hooks": "error",
-    // "prettier/prettier": ["warn"],
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
@@ -48,38 +44,14 @@
     "no-nested-ternary": "off",
     "import/prefer-default-export": "off",
     "no-restricted-globals": "off",
-    "no-underscore-dangle": [
-      "error",
-      {
-        "allow": ["__PRELOADED_STATE__"]
-      }
-    ],
-    "react/destructuring-assignment": [
-      "enabled",
-      "never",
-      {
-        "ignoreClassFields": true
-      }
-    ],
+    "no-underscore-dangle": ["error", { "allow": ["__PRELOADED_STATE__"] }],
+    "react/destructuring-assignment": ["enabled", "never", { "ignoreClassFields": true }],
     "import/no-named-as-default": 0,
-    "indent": [
-      "error",
-      2,
-      {
-        "SwitchCase": 1
-      }
-    ],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "react/no-array-index-key": ["error", 4],
     "react/jsx-indent": ["error", 2],
     "react/jsx-indent-props": ["error", 2],
-    "jsx-a11y/label-has-for": [
-      2,
-      {
-        "required": {
-          "every": ["id"]
-        }
-      }
-    ],
+    "jsx-a11y/label-has-for": [2, { "required": { "every": ["id"] } }],
     "global-require": "off"
   },
   "env": {
