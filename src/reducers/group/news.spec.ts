@@ -8,7 +8,7 @@ import {
 } from '../../constants/actionTypes';
 import reducer from '../reducer';
 
-describe('news', () => {
+describe('news.ts', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);
   let store;

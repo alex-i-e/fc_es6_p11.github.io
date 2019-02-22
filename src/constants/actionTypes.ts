@@ -1,5 +1,4 @@
-// @flow
-import type { BlogType } from '../components/types/blogTypes';
+import {BlogType} from '../components/types/blogTypes';
 
 export const HOME_PAGE_LOADED = 'HOME_PAGE_LOADED';
 export const BLOG_FILTER_WAS_CHANGED = 'BLOG_FILTER_WAS_CHANGED';
@@ -28,25 +27,16 @@ export const CHANGE_THEME = 'CHANGE_THEME';
 
 export const LOG_ERROR = 'LOG_ERROR';
 
-export type FilterByAuthorAction = {
-  type: typeof BLOG_FILTER_WAS_CHANGED,
-  payload: { value: string, type?: string }
-};
-export type AddNewBlogAction = { type: typeof ADD_NEW_BLOG, payload: { value: BlogType } };
-export type RemoveBlogAction = { type: typeof REMOVE_BLOG, payload: { value: string } };
-
 export type ThemeState = {
-  value: {
-    foreground: string,
-    background: string
-  }
+    value: {
+        foreground: string,
+        background: string
+    }
 };
 export type ThemeAction = { type: typeof CHANGE_THEME, payload: { value: string } };
 
 export type FilterState = {
-  value: string,
-  type: string
+    value: string,
+    type: string
 };
-export type FilterAction = { type: typeof CHANGE_THEME, payload: { value: string } };
-
-export type Action = FilterByAuthorAction | AddNewBlogAction | RemoveBlogAction;
+export type FilterAction = { type: typeof BLOG_FILTER_WAS_CHANGED, payload: { value: string } };

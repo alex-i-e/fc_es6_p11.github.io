@@ -3,7 +3,7 @@ import { filterNewsByTypeAndValue } from '../../actions/filterSector';
 import { BLOG_FILTER_WAS_CHANGED } from '../../constants/actionTypes';
 import reducer from '../reducer';
 
-describe('filter', () => {
+describe('filter.ts', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);
   let store;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const themes = {
+export const themes: { [key in string]: {foreground: string, background: string}} = {
   light: {
     foreground: '#000000',
     background: '#eeeeee'

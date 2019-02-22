@@ -1,6 +1,6 @@
 // @flow
 
-import type { BlogType } from '../components/types/blogTypes';
+import { BlogType } from '../components/types/blogTypes';
 import { ADD_NEW_BLOG, REMOVE_BLOG } from '../constants/actionTypes';
 
 export function addNewBlog(newBlog: BlogType) {

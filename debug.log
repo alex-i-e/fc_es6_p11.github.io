@@ -1,0 +1,24 @@
+
+> react-app@0.1.0 start C:\PROJECTS\_pets\fc_es6_p11.github.io
+> cross-env PORT=3100 node scripts/start.js
+
+Fri, 22 Feb 2019 15:35:24 GMT detect-port detect free port between [3100, 3110)
+Fri, 22 Feb 2019 15:35:24 GMT detect-port get free 0.0.0.0:3100
+Fri, 22 Feb 2019 15:35:24 GMT detect-port get free null:3100
+Fri, 22 Feb 2019 15:35:24 GMT detect-port get free localhost:3100
+Fri, 22 Feb 2019 15:35:24 GMT detect-port get free 10.0.75.1:3100
+clean-webpack-plugin: C:\PROJECTS\_pets\fc_es6_p11.github.io\config\build has been removed.
+Failed to compile.
+
+Cannot read property 'run' of undefined
+
+npm ERR! code ELIFECYCLE
+npm ERR! errno 1
+npm ERR! react-app@0.1.0 start: `cross-env PORT=3100 node scripts/start.js`
+npm ERR! Exit status 1
+npm ERR! 
+npm ERR! Failed at the react-app@0.1.0 start script.
+npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     C:\Users\aeremin\AppData\Roaming\npm-cache\_logs\2019-02-22T15_35_24_873Z-debug.log

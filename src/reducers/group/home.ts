@@ -1,19 +1,16 @@
-// @flow
-
-import type { BlogType } from '../../components/types/blogTypes';
-import type { Action } from '../../constants/actionTypes';
+import { BlogType } from '../../components/types/blogTypes';
 import { ADD_NEW_BLOG, HOME_PAGE_LOADED, REMOVE_BLOG } from '../../constants/actionTypes';
-import BlogListMock from '../../mock/blogListMock.json';
+import * as BlogListMock from '../../mock/blogListMock.json';
 
 type State = {
-  +blogList: Array<BlogType>
+  blogList: BlogType[]
 };
 
 const initState = {
   blogList: BlogListMock.blogList || []
 };
 
-export default (state: State = initState, action: Action) => {
+export default (state: State = initState, action: any) => {
   switch (action.type) {
     case HOME_PAGE_LOADED:
       return {

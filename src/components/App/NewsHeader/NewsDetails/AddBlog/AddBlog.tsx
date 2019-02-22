@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { addNewBlog } from '../../../../../actions/blogActions';
@@ -27,14 +26,27 @@ export const BtnWrapper = styled.button`
   }
 `;
 
-export class AddBlog extends Component {
-  constructor(props) {
+type Props = {
+  addNewBlog: Function;
+  topic: {
+    source: {
+      name: string;
+    };
+    author: string;
+    title: string;
+    description: string;
+    urlToImage: string;
+    publishedAt: string;
+  };
+};
+export class AddBlog extends React.Component<Props, {}> {
+  constructor(props: any) {
     super(props);
 
     this.onClickAction = this.onClickAction.bind(this);
   }
 
-  onClickAction(e) {
+  onClickAction(e: MouseEvent | any) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -55,19 +67,19 @@ export class AddBlog extends Component {
   }
 }
 
-AddBlog.propTypes = {
-  addNewBlog: PropTypes.func.isRequired,
-  topic: PropTypes.shape({
-    source: PropTypes.shape({
-      name: PropTypes.string
-    }),
-    author: PropTypes.string,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    urlToImage: PropTypes.string,
-    publishedAt: PropTypes.string
-  }).isRequired
-};
+// AddBlog.propTypes = {
+//   addNewBlog: PropTypes.func.isRequired,
+//   topic: PropTypes.shape({
+//     source: PropTypes.shape({
+//       name: PropTypes.string
+//     }),
+//     author: PropTypes.string,
+//     title: PropTypes.string,
+//     description: PropTypes.string,
+//     urlToImage: PropTypes.string,
+//     publishedAt: PropTypes.string
+//   }).isRequired
+// };
 
 export default connect(
   null,

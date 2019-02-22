@@ -52,14 +52,14 @@ const getMiddleware = () => {
 //     : null;
 
 if (typeof window === 'undefined') {
-  global.window = {};
+  (global as any).window = {};
 }
 
 // Grab the state from a global variable injected into the server-generated HTML
-const preloadedState = window.__PRELOADED_STATE__;
+const preloadedState = (window as any).__PRELOADED_STATE__;
 
 // Allow the passed state to be garbage-collected
-delete window.__PRELOADED_STATE__;
+delete (window as any).__PRELOADED_STATE__;
 
 export const store = createStore(
   reducer,

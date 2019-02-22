@@ -115,11 +115,11 @@ const CustomMenu = () => {
 };
 
 // {logo} // TODO : provide logo through SSR
-export const App = ({ initTheme, changeThemeAction }) => {
+export const App = ({ initTheme, changeThemeAction }: any) => {
   const [keyEvent, setKeyEvent] = useState(null);
   const [visible, setVisible] = useState(false);
 
-  function toggleTheme(color) {
+  function toggleTheme(color: string) {
     changeThemeAction(themes[color] || themes.light);
   }
 
@@ -184,7 +184,7 @@ App.propTypes = {
 };
 
 export default connect(
-  state => ({
+  (state: any) => ({
     initTheme: state.theme.value
   }),
   {

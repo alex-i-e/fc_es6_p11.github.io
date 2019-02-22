@@ -3,7 +3,7 @@ export type BlogType = {
   id: string,
   title: string,
   body: string,
-  date: Date,
+  date: string,
   author: string,
   image?: string
 };

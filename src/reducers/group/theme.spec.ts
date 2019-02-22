@@ -1,12 +1,12 @@
 import configureStore from 'redux-mock-store';
 import { changeTheme } from '../../actions/theme';
 import { CHANGE_THEME } from '../../constants/actionTypes';
-import reducer from '../reducer';
+import reducer from '../../reducers';
 
 describe('theme', () => {
-  const middlewares = [];
+  const middlewares: any[] = [];
   const mockStore = configureStore(middlewares);
-  let store;
+  let store: any;
   let initState = {
     value: {
       foreground: '#ffffff',
@@ -66,12 +66,12 @@ describe('theme', () => {
       };
 
       expect(
-        reducer(
-          {
-            theme: initState
-          },
-          action
-        ).theme
+          (reducer(
+              {
+                theme: initState
+              },
+              action
+          ) as any).theme
       ).toEqual({
         value: {
           foreground: '#ffffff',
