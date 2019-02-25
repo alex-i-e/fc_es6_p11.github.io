@@ -18,6 +18,9 @@
 # webstorm
 /.idea
 
+# .nyc_output
+/.nyc_output
+
 # misc
 .DS_Store
 .env.local
