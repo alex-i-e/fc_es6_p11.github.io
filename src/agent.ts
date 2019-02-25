@@ -1,3 +1,4 @@
+/* tslint:disable */
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 
@@ -73,6 +74,7 @@ const Comments = {
     forArticle: slug => requests.get(`/articles/${slug}/comments`)
 };
 
+const Profile = {
 const Profile = {
     follow: username => requests.post(`/profiles/${username}/follow`),
     get: username => requests.get(`/profiles/${username}`),

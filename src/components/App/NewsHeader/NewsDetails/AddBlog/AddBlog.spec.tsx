@@ -1,8 +1,11 @@
 import { mount, shallow } from 'enzyme';
-import React from 'react';
+import * as React from 'react';
 import { AddBlog, BtnWrapper } from './AddBlog';
+import { TopicItem } from '../../NewsDetails/NewsDetails';
 
-function setup({ topic }) {
+function setup({
+  topic
+}: {topic: TopicItem}) {
   const props = {
     addNewBlog: jest.fn(),
     topic
@@ -27,7 +30,7 @@ describe('AddBlog', () => {
         description: 'Some theme...',
         urlToImage: '',
         publishedAt: '01/01/2000'
-      }
+      } as TopicItem
     });
 
     expect(enzymeWrapper.render()).toMatchSnapshot();
@@ -36,7 +39,7 @@ describe('AddBlog', () => {
 
   it('should simulate onClick action', () => {
     // Arrange
-    jest.spyOn(Math, 'random').mockReturnValue('123');
+    jest.spyOn(Math, 'random').mockReturnValue(123);
     const { props } = setup({
       topic: {
         source: {
@@ -47,7 +50,7 @@ describe('AddBlog', () => {
         description: 'Some theme...',
         urlToImage: '',
         publishedAt: '01/01/2000'
-      }
+      } as TopicItem
     });
     const component = mount(<AddBlog {...props} />);
 

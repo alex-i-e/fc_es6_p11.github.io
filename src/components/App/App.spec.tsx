@@ -9,7 +9,7 @@ import { App } from './App';
 // });
 
 test.skip('should render shallow DOM', () => {
-  const middlewares = [];
+  const middlewares: any = [];
   const mockStore = configureStore(middlewares);
 
   const props = {

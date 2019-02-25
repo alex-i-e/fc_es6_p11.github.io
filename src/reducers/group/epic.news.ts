@@ -1,3 +1,4 @@
+import { lazy } from 'react';
 import {
   EPIC_NEWS_FETCH_FAILED,
   EPIC_NEWS_FETCH_ING,
@@ -5,11 +6,17 @@ import {
   EPIC_NEWS_FETCH_SUCCEEDED
 } from '../../constants/actionTypes';
 
+type NewsPayload = {};
+
+export interface EpicNewsState extends NewsPayload {
+  loading: boolean;
+}
+
 const initState = {
   loading: false
 };
 
-export default (state = initState, action) => {
+export default (state: EpicNewsState = initState, action: any): EpicNewsState => {
   switch (action.type) {
     case EPIC_NEWS_FETCH_REQUESTED:
       return {

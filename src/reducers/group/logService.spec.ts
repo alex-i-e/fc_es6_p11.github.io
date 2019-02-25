@@ -1,14 +1,14 @@
 import configureStore from 'redux-mock-store';
 import { logComponentStackToMyService } from '../../actions/logService';
 import { LOG_ERROR } from '../../constants/actionTypes';
-import reducer from '../reducer';
-import logService from './logService';
+import reducer, { GeneralStore } from '../../reducers';
+import { LogState } from './logService';
 
 describe('logService', () => {
-  const middlewares = [];
+  const middlewares: any = [];
   const mockStore = configureStore(middlewares);
-  let store;
-  let initState = {
+  let store: any;
+  let initState: LogState = {
     logList: []
   };
   const error = {
@@ -63,7 +63,7 @@ describe('logService', () => {
         reducer(
           {
             logService: initState
-          },
+          } as GeneralStore,
           action
         ).logService
       ).toEqual({ logList: [error] });

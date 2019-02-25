@@ -6,12 +6,12 @@ import {
   EPIC_NEWS_FETCH_REQUESTED,
   EPIC_NEWS_FETCH_SUCCEEDED
 } from '../../constants/actionTypes';
-import reducer from '../reducer';
+import reducer, { GeneralStore } from '../../reducers';
 
 describe('news.ts', () => {
-  const middlewares = [];
+  const middlewares: any = [];
   const mockStore = configureStore(middlewares);
-  let store;
+  let store: any;
   let initState = {
     loading: false
   };
@@ -93,7 +93,7 @@ describe('news.ts', () => {
         reducer(
           {
             epicNews: initState
-          },
+          } as GeneralStore,
           action
         ).epicNews
       ).toEqual({
@@ -108,7 +108,7 @@ describe('news.ts', () => {
         reducer(
           {
             epicNews: initState
-          },
+          } as GeneralStore,
           action
         ).epicNews
       ).toEqual({
@@ -123,7 +123,7 @@ describe('news.ts', () => {
         reducer(
           {
             epicNews: initState
-          },
+          } as GeneralStore,
           action
         ).epicNews
       ).toEqual({
@@ -139,7 +139,7 @@ describe('news.ts', () => {
         reducer(
           {
             epicNews: initState
-          },
+          } as GeneralStore,
           action
         ).epicNews
       ).toEqual({

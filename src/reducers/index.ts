@@ -1,12 +1,22 @@
-import { routerReducer } from 'react-router-redux';
+import { routerReducer, RouterState } from 'react-router-redux';
 
-import { combineReducers } from 'redux';
-import epicNews from './group/epic.news';
-import filter from './group/filter';
-import home from './group/home';
-import logService from './group/logService';
-import news from './group/news';
-import theme from './group/theme';
+import { combineReducers, Reducer, ReducersMapObject } from 'redux';
+import epicNews, { EpicNewsState } from './group/epic.news';
+import filter, { FilterState } from './group/filter';
+import home, { HomeState } from './group/home';
+import logService, { LogState } from './group/logService';
+import news, { NewsState } from './group/news';
+import theme, { ThemeState } from './group/theme';
+
+export type GeneralStore = {
+  home: HomeState;
+  filter: FilterState;
+  news: NewsState;
+  epicNews: EpicNewsState;
+  theme: ThemeState;
+  logService: LogState;
+  router: RouterState;
+};
 
 export default combineReducers({
   home,
@@ -16,4 +26,4 @@ export default combineReducers({
   theme,
   logService,
   router: routerReducer
-});
+}) as Reducer<GeneralStore>;

@@ -1,12 +1,12 @@
 import configureStore from 'redux-mock-store';
 import { filterNewsByTypeAndValue } from '../../actions/filterSector';
 import { BLOG_FILTER_WAS_CHANGED } from '../../constants/actionTypes';
-import reducer from '../reducer';
+import reducer, { GeneralStore } from '../../reducers';
 
 describe('filter.ts', () => {
-  const middlewares = [];
+  const middlewares: any = [];
   const mockStore = configureStore(middlewares);
-  let store;
+  let store: any;
   const initState = {
     value: '',
     type: 'author'
@@ -33,7 +33,7 @@ describe('filter.ts', () => {
         reducer(
           {
             filter: initState
-          },
+          } as GeneralStore,
           action
         ).filter
       ).toEqual({

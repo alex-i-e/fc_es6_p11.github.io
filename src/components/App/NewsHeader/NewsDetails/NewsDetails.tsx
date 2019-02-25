@@ -41,7 +41,25 @@ const Title = styled.div`
   margin: 8px;
 `;
 
-const NewsDetails = ({ news, classAnimation }) => (
+export type TopicItem = {
+  id: string,
+  url: string,
+  urlToImage: string,
+  author: string,
+  title: string,
+  description: string,
+  source: {
+    name: string
+  },
+  publishedAt: string
+};
+
+type PropsType = {
+  news: TopicItem[],
+  classAnimation: string
+}
+
+const NewsDetails = ({ news, classAnimation }: PropsType) => (
   <NewsDetailsWrapper className={classAnimation}>
     {news.length
       ? news.map(item => (
