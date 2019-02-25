@@ -8,13 +8,13 @@ import App from './src/components/App/App';
 import reducer from './src/reducers';
 import serverTemplate from './src/serverTemplate';
 
-const app = express();
+const app: any = express();
 
-app.get('/', (req, res) => {
+app.get('/', (req: any, res: any) => {
   // Create a new Redux store instance
   const store = createStore(reducer);
 
-  const context = {};
+  const context: any = {};
   const appString = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={context}>

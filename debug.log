@@ -2,16 +2,101 @@
 > react-app@0.1.0 start C:\PROJECTS\_pets\fc_es6_p11.github.io
 > cross-env PORT=3100 node scripts/start.js
 
-Fri, 22 Feb 2019 15:35:24 GMT detect-port detect free port between [3100, 3110)
-Fri, 22 Feb 2019 15:35:24 GMT detect-port get free 0.0.0.0:3100
-Fri, 22 Feb 2019 15:35:24 GMT detect-port get free null:3100
-Fri, 22 Feb 2019 15:35:24 GMT detect-port get free localhost:3100
-Fri, 22 Feb 2019 15:35:24 GMT detect-port get free 10.0.75.1:3100
+Mon, 25 Feb 2019 11:48:02 GMT detect-port detect free port between [3100, 3110)
+Mon, 25 Feb 2019 11:48:02 GMT detect-port get free 0.0.0.0:3100
+Mon, 25 Feb 2019 11:48:02 GMT detect-port get free null:3100
+Mon, 25 Feb 2019 11:48:02 GMT detect-port get free localhost:3100
+Mon, 25 Feb 2019 11:48:02 GMT detect-port get free 10.0.75.1:3100
 clean-webpack-plugin: C:\PROJECTS\_pets\fc_es6_p11.github.io\config\build has been removed.
-Failed to compile.
-
-Cannot read property 'run' of undefined
-
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "x-powered-by" to true
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "etag" to 'weak'
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "etag fn" to [Function: generateETag]
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "env" to 'development'
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "query parser" to 'extended'
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "query parser fn" to [Function: parseExtendedQueryString]
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "subdomain offset" to 2
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "trust proxy" to false
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "trust proxy fn" to [Function: trustNone]
+Mon, 25 Feb 2019 11:48:02 GMT express:application booting in development mode
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "view" to [Function: View]
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "views" to 'C:\\PROJECTS\\_pets\\fc_es6_p11.github.io\\views'
+Mon, 25 Feb 2019 11:48:02 GMT express:application set "jsonp callback name" to 'callback'
+Mon, 25 Feb 2019 11:48:02 GMT express:router use '/' query
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router use '/' expressInit
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route new '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route acl '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route bind '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route checkout '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route connect '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route copy '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route delete '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route get '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route head '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route link '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route lock '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route m-search '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route merge '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route mkactivity '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route mkcalendar '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route mkcol '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route move '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route notify '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route options '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route patch '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route post '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route propfind '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route proppatch '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route purge '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route put '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route rebind '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route report '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route search '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route source '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route subscribe '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route trace '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route unbind '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route unlink '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route unlock '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:route unsubscribe '*'
+Mon, 25 Feb 2019 11:48:02 GMT express:router:layer new '/'
+Plugin could not be registered at 'html-webpack-plugin-before-html-processing'. Hook was not found.
+BREAKING CHANGE: There need to exist a hook at 'this.hooks'. To create a compatibility layer for this hook, hook into 'this._pluginCompat'.
 npm ERR! code ELIFECYCLE
 npm ERR! errno 1
 npm ERR! react-app@0.1.0 start: `cross-env PORT=3100 node scripts/start.js`
@@ -21,4 +106,4 @@ npm ERR! Failed at the react-app@0.1.0 start script.
 npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 
 npm ERR! A complete log of this run can be found in:
-npm ERR!     C:\Users\aeremin\AppData\Roaming\npm-cache\_logs\2019-02-22T15_35_24_873Z-debug.log
+npm ERR!     C:\Users\aeremin\AppData\Roaming\npm-cache\_logs\2019-02-25T11_48_02_845Z-debug.log

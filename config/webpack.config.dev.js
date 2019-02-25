@@ -9,7 +9,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { CheckerPlugin } = require('awesome-typescript-loader')
+const { CheckerPlugin } = require('awesome-typescript-loader');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -107,20 +107,20 @@ module.exports = {
 
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
-      {
-        test: /\.(tsx?|js|jsx|mjs)$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint')
-            },
-            loader: require.resolve('eslint-loader')
-          }
-        ],
-        include: paths.appSrc
-      },
+      // {
+      //   test: /\.(tsx?|js|jsx|mjs)$/,
+      //   enforce: 'pre',
+      //   use: [
+      //     {
+      //       options: {
+      //         formatter: eslintFormatter,
+      //         eslintPath: require.resolve('eslint')
+      //       },
+      //       loader: require.resolve('eslint-loader')
+      //     }
+      //   ],
+      //   include: paths.appSrc
+      // },
       {
         // "oneOf" will traverse all following loaders until one will
         // match the requirements. When no loader matches it will fall
@@ -141,13 +141,13 @@ module.exports = {
           {
             test: /\.(tsx?|js|jsx|mjs)$/,
             include: paths.appSrc,
-            loader: 'awesome-typescript-loader', // require.resolve('babel-loader'),
-            options: {
-              // This is a feature of `babel-loader` for webpack (not Babel itself).
-              // It enables caching results in ./node_modules/.cache/babel-loader/
-              // directory for faster rebuilds.
-              cacheDirectory: true
-            }
+            loader: 'awesome-typescript-loader' // require.resolve('babel-loader'),
+            // options: {
+            //   // This is a feature of `babel-loader` for webpack (not Babel itself).
+            //   // It enables caching results in ./node_modules/.cache/babel-loader/
+            //   // directory for faster rebuilds.
+            //   cacheDirectory: true
+            // }
           },
           // "postcss" loader applies autoprefixer to our CSS.
           // "css" loader resolves paths in CSS and adds assets as dependencies.
@@ -213,12 +213,12 @@ module.exports = {
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     // In development, this will be an empty string.
-    new InterpolateHtmlPlugin(env.raw),
+    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     // Generates an `index.html` file with the <script> injected.
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: paths.appHtml
-    }),
+    // new HtmlWebpackPlugin({
+    //   inject: true,
+    //   template: paths.appHtml
+    // }),
     // Add module names to factory functions so they appear in browser profiler.
     new webpack.NamedModulesPlugin(),
     // Makes some environment variables available to the JS code, for example:
