@@ -9,8 +9,8 @@ type WithNewsDetailsType = {
   withNewsDetailsAction: Function
 }
 
-const withNewsDetails = <T extends React.Component<WithNewsDetailsType, any>>(WrapperComponent: new (props: WithNewsDetailsType, context?: any) => T) => {
-  class WithNewsDetails extends Component<any, any> {
+const withNewsDetails = <P extends WithNewsDetailsType>(WrapperComponent: React.ComponentType<P>) => {
+  class WithNewsDetails extends Component<P, null> { // P => Subtract<P, WithNewsDetailsType>
     static withNewsDetailsAction() {
       // eslint-disable-next-line
       console.log('>>> withNewsDetailsAction');
