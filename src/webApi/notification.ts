@@ -5,7 +5,7 @@ export default class NotificationFactory {
     if (Notification && Notification.permission === 'default') {
       Notification.requestPermission(permission => {
         if (!('permission' in Notification)) {
-          Notification.permission = permission;
+          (Notification as any).permission = permission;
           
           NotificationFactory.desktopNotification();
         }

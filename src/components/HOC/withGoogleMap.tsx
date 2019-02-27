@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import { affixScriptToHead, onLoadCallback } from '../../webApi/initGoogleMap';
 
-export const withGoogleMap = WrappedComponent => {
+type WithGoogleMapType = {
+  children?: React.ReactNode;
+};
+
+export const withGoogleMap = <P extends WithGoogleMapType>(
+  WrappedComponent: React.ComponentType<any>
+) => {
   const API_KEY = 'AIzaSyCKA-4G14Aehm3qsiejmYsk3E6aSH2cKNI';
 
-  class routerWrapper extends Component {
-    constructor(props) {
+  type WithGoogleMapState = {
+    googleMapData: google.maps.Data | null;
+  };
+
+  class routerWrapper extends Component<P, WithGoogleMapState> {
+    constructor(props: any) {
       super(props);
 
       this.state = {
@@ -18,8 +28,8 @@ export const withGoogleMap = WrappedComponent => {
         `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`, // &callback=initMap
         onLoadCallback
       )
-        .then(data => data())
-        .then(data => {
+        .then((data: any) => data())
+        .then((data: any) => {
           // eslint-disable-next-line
           console.log(' >>>', data);
           this.setState({ googleMapData: data });

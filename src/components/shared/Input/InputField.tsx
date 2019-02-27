@@ -1,4 +1,4 @@
-import React, { Fragment, forwardRef } from 'react';
+import React, { Fragment, forwardRef, Ref } from 'react';
 // import styled from 'styled-components';
 import { Input } from 'antd';
 
@@ -7,19 +7,23 @@ import { Input } from 'antd';
 //   line-height: 16px;
 // `;
 
-const InputField = forwardRef(({ labelValue, id, ...rest }, ref) => {
-  const label = (
-    <span>
-      {labelValue}
-      <span style={{ color: 'red' }}>{rest.required ? ' *' : ''}</span>
-    </span>
-  );
-  return (
-    <Fragment>
-      <label htmlFor={id}>{label}</label>
-      <Input {...rest} ref={ref} />
-    </Fragment>
-  );
-});
+// : ({ labelValue: string, id: string, required: boolean}, ref: Ref<Input>)
+
+const InputField = forwardRef(
+  ({ labelValue, id, required, ...rest }: any, ref: Ref<Input>) => {
+    const label = (
+      <span>
+        {labelValue}
+        <span style={{ color: 'red' }}>{required ? ' *' : ''}</span>
+      </span>
+    );
+    return (
+      <Fragment>
+        <label htmlFor={id}>{label}</label>
+        <Input {...rest} ref={ref} />
+      </Fragment>
+    );
+  }
+);
 
 export default InputField;

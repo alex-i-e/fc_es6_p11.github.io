@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { Component, ErrorInfo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { logComponentStackToMyService } from '../../../actions/logService';
@@ -8,18 +7,27 @@ const ErrorBoundaryWrapper = styled.h1`
   margin: 8px;
 `;
 
-class ErrorBoundary extends Component {
-  constructor(props) {
+export type ErrorBoundaryProps = {
+  children: React.ReactElement;
+  logComponentStackToMyService: Function;
+};
+
+export type ErrorBoundaryState = {
+  hasError: boolean;
+};
+
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: any) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: any) {
     // Update state so the next render will show the fallback UI.
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: Error, info: ErrorInfo) {
     // Example "componentStack":
     //   in ComponentThatThrows (created by App)
     //   in ErrorBoundary (created by App)
@@ -37,11 +45,6 @@ class ErrorBoundary extends Component {
     return this.props.children;
   }
 }
-
-ErrorBoundary.propTypes = {
-  children: PropTypes.node.isRequired,
-  logComponentStackToMyService: PropTypes.func.isRequired
-};
 
 export default connect(
   null,

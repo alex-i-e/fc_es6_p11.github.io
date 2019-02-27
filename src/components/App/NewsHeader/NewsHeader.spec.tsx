@@ -1,9 +1,10 @@
 // import axios from 'axios';
 // import MockAdapter from 'axios-mock-adapter';
-import { mount, shallow } from 'enzyme';
+import {mount, ReactWrapper, shallow, ShallowWrapper} from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { NewsHeader } from './NewsHeader';
+import { NewsHeaderProps, NewsHeaderState} from './NewsHeader';
 
 // This sets the mock adapter on the default instance
 // const mock = new MockAdapter(axios);
@@ -38,7 +39,7 @@ function setup({ loading = true, news = [], newsDetailsHoverIn = false }) {
     newsDetailsHoverIn
   });
 
-  const enzymeWrapper = shallow(<NewsHeader {...props} />);
+  const enzymeWrapper: ShallowWrapper<NewsHeaderProps,NewsHeaderState, NewsHeader> = shallow(<NewsHeader {...props} />);
 
   return {
     props,
@@ -114,7 +115,7 @@ describe('News Block', () => {
       const props = setProps({
         loading: false
       });
-      const component = mount(<NewsHeader {...props} />);
+      const component: ReactWrapper<NewsHeaderProps,NewsHeaderState, NewsHeader> /* React.Component<NewsHeaderProps,NewsHeaderState> */ = mount(<NewsHeader {...props} />);
       component.setState({ newsDetailsHoverIn: false });
 
       // Act

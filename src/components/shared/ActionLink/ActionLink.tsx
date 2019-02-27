@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import React, { forwardRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { forwardRef, Ref } from 'react';
+import { Link, LinkProps } from 'react-router-dom';
 import { Button } from 'antd';
 import withKeyboardTooltip from '../../HOC/withKeyboardTooltip';
 
-const propTypes = {
-  urlState: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired
+export type ActionLinkProps = {
+  urlState: string;
+  children: React.ReactElement;
 };
+
 const NavLinkWithTooltip = withKeyboardTooltip(Link);
-const ActionLink = forwardRef(({ onClick, urlState, children, titleText, ...props }, ref) => {
+const ActionLink = forwardRef(({ onClick, urlState, children, titleText, ...props }: any, ref: Ref<Link>) => {
   return (
     <Button onClick={onClick} {...props}>
       {!titleText ? (
@@ -24,7 +24,5 @@ const ActionLink = forwardRef(({ onClick, urlState, children, titleText, ...prop
     </Button>
   );
 });
-
-ActionLink.propTypes = propTypes;
 
 export default ActionLink;

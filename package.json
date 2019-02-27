@@ -78,16 +78,22 @@
     "test-snapshot-update": "npm run test-pure -- -u",
     "server": "babel-node server.js --BROWSER=false",
     "hot-server": "nodemon server.js --exec babel-node --BROWSER=false",
-    "lint": "tslint 'src/**/*.{ts,tsx}'"
+    "lint": "tslint 'src/**/*.{ts,tsx}'",
+    "tsc": "tsc"
   },
   "devDependencies": {
+    "@types/antd": "1.0.0",
     "@types/enzyme": "3.9.0",
+    "@types/googlemaps": "3.30.16",
     "@types/history": "4.7.2",
     "@types/jest": "24.0.6",
+    "@types/lodash": "4.14.121",
     "@types/react": "16.8.4",
     "@types/react-dom": "16.8.2",
     "@types/react-redux": "7.0.1",
+    "@types/react-router-dom": "4.3.1",
     "@types/react-router-redux": "5.0.18",
+    "@types/react-test-renderer": "16.8.1",
     "@types/redux-logger": "3.0.7",
     "@types/redux-mock-store": "1.0.0",
     "@types/styled-components": "4.1.10",
@@ -125,6 +131,7 @@
     "tslint": "5.13.0",
     "typescript": "3.3.3333",
     "typescript-eslint-parser": "22.0.0",
+    "utility-types": "3.4.1",
     "webpack-bundle-analyzer": "3.0.4"
   },
   "jest": {

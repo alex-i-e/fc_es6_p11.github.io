@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Icon } from 'antd';
 import { fetchNewsViaEpic, fetchNewsViaSaga } from '../../../actions/newsBlock';
 import NewsDetails from './NewsDetails/NewsDetails';
+import { GeneralStore } from '../../../reducers/index';
 
 const Header = styled.div`
   z-index: 100;
@@ -41,9 +41,27 @@ export const NewsInnerContainer = styled.div`
   transition: transform .5s;
 `;
 
-export class NewsHeader extends Component<any, {}> {
-  constructor() {
-    super();
+export type NewsHeaderProps = {
+  loading: boolean,
+  news: any[],
+  fetchNewsViaSaga: Function,
+  fetchNewsViaEpic: Function,
+  className?: string
+};
+
+export type NewsHeaderState = {
+  newsDetailsHoverIn: boolean | null,
+  openNews: boolean,
+};
+
+export class NewsHeader extends Component<NewsHeaderProps, NewsHeaderState> {
+  static defaultProps = {
+    loading: false,
+    news: []
+  };
+
+  constructor(props: any) {
+    super(props);
 
     this.state = {
       newsDetailsHoverIn: null,
@@ -119,21 +137,8 @@ export class NewsHeader extends Component<any, {}> {
   }
 }
 
-NewsHeader.propTypes = {
-  loading: PropTypes.bool,
-  news: PropTypes.arrayOf(PropTypes.object),
-  fetchNewsViaSaga: PropTypes.func.isRequired,
-  fetchNewsViaEpic: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired
-};
-
-NewsHeader.defaultProps = {
-  loading: false,
-  news: []
-};
-
 export default connect(
-  state => ({
+  (state: GeneralStore) => ({
     loading: state.news.loading,
     news: state.news.status ? state.news.articles : []
   }),

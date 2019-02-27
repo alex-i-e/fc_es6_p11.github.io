@@ -14,11 +14,28 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["es2015", "dom"],
-    "typeRoots": ["node_modules/@types"]
+    // "typeRoots": ["node_modules/@types"],
+    "types": [
+      "enzyme",
+      "history",
+      "jest",
+      "react",
+      "react-dom",
+      "react-redux",
+      "react-router-dom",
+      "react-router-redux",
+      "react-test-renderer",
+      "redux-logger",
+      "redux-mock-store",
+      "styled-components",
+      "superagent",
+      "googlemaps",
+      "lodash"
+    ]
   },
   "awesomeTypescriptLoaderOptions": {
     /* ... */
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["./node_modules"]
 }

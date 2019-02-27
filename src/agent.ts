@@ -1,4 +1,3 @@
-/* tslint:disable */
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 
@@ -75,7 +74,6 @@ const Comments = {
 };
 
 const Profile = {
-const Profile = {
     follow: username => requests.post(`/profiles/${username}/follow`),
     get: username => requests.get(`/profiles/${username}`),
     unfollow: username => requests.del(`/profiles/${username}/follow`)
@@ -90,4 +88,4 @@ export default {
     setToken: _token => {
         token = _token;
     }
-};
+}

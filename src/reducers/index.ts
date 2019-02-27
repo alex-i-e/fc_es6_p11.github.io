@@ -1,6 +1,6 @@
 import { routerReducer, RouterState } from 'react-router-redux';
 
-import { combineReducers, Reducer, ReducersMapObject } from 'redux';
+import { combineReducers, Reducer } from 'redux';
 import epicNews, { EpicNewsState } from './group/epic.news';
 import filter, { FilterState } from './group/filter';
 import home, { HomeState } from './group/home';

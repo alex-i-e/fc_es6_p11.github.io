@@ -1,3 +1,4 @@
+import { GeneralStore } from './../index';
 import configureStore from 'redux-mock-store';
 import { changeTheme } from '../../actions/theme';
 import { CHANGE_THEME } from '../../constants/actionTypes';
@@ -69,7 +70,7 @@ describe('theme', () => {
           (reducer(
               {
                 theme: initState
-              },
+              } as GeneralStore,
               action
           ) as any).theme
       ).toEqual({

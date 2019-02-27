@@ -1,5 +1,3 @@
-/* global google */
-
 export default function initGoogleMap() {
   // eslint-disable-next-line
   console.log(' >>> init MAP ...');
@@ -40,11 +38,14 @@ export function onLoadCallback() {
   });
 }
 
-function loadError(oError) {
+function loadError(oError: any): void {
   throw new URIError(`The script ${oError.target.src} didn't load correctly.`);
 }
 
-export function prefixScript(url, onloadFunction) {
+export function prefixScript(
+  url: string,
+  onloadFunction: (this: GlobalEventHandlers, ev: Event) => any
+) {
   const newScript = document.createElement('script');
   newScript.onerror = loadError;
 
@@ -52,11 +53,11 @@ export function prefixScript(url, onloadFunction) {
     newScript.onload = onloadFunction;
   }
 
-  document.currentScript.parentNode.insertBefore(newScript, document.currentScript);
+  (document as any).currentScript.parentNode.insertBefore(newScript, document.currentScript);
   newScript.src = url;
 }
 
-export function affixScriptToHead(url, onloadFunction) {
+export function affixScriptToHead(url: string, onloadFunction: Function) {
   return new Promise((resolve, reject) => {
     const s = document.createElement('script');
     s.src = url;
