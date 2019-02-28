@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Context} from 'react';
 
 type KeyDownEventContextType = {
   keyDownEvent: KeyboardEvent | null;
@@ -7,5 +7,5 @@ type KeyDownEventContextType = {
 
 export const KeyDownEventContext = React.createContext({
   keyDownEvent: null,
-  tooltipVisibility: null
+  tooltipVisibility: false
 }) as Context<KeyDownEventContextType>;

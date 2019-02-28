@@ -1,6 +1,4 @@
-// @flow
-
-import { CHANGE_THEME, ThemeAction } from '../../constants/actionTypes';
+import {CHANGE_THEME, ThemeAction} from '../../constants/actionTypes';
 import { themes } from '../../context/theme-context';
 
 export type ThemeValue = {

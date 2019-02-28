@@ -40,7 +40,10 @@ describe('theme', () => {
     });
 
     it('should return proper action from changeTheme', () => {
-      const themeType = 'GREEN';
+      const themeType = {
+        foreground: 'green',
+        background: 'green'
+      };
       expect(changeTheme(themeType)).toEqual({
         type: CHANGE_THEME,
         payload: {
@@ -67,12 +70,12 @@ describe('theme', () => {
       };
 
       expect(
-          (reducer(
-              {
-                theme: initState
-              } as GeneralStore,
-              action
-          ) as any).theme
+        (reducer(
+          {
+            theme: initState
+          } as GeneralStore,
+          action
+        ) as any).theme
       ).toEqual({
         value: {
           foreground: '#ffffff',

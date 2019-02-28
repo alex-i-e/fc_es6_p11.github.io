@@ -1,12 +1,7 @@
 import configureStore from 'redux-mock-store';
 import { fetchNewsViaEpic } from '../../actions/newsBlock';
-import {
-  EPIC_NEWS_FETCH_FAILED,
-  EPIC_NEWS_FETCH_ING,
-  EPIC_NEWS_FETCH_REQUESTED,
-  EPIC_NEWS_FETCH_SUCCEEDED
-} from '../../constants/actionTypes';
 import reducer, { GeneralStore } from '../../reducers';
+import { EPIC_NEWS } from '../../constants/actionTypes';
 
 describe('news.ts', () => {
   const middlewares: any = [];
@@ -24,25 +19,25 @@ describe('news.ts', () => {
   });
 
   describe('actions', () => {
-    it('should dispatch action EPIC_NEWS_FETCH_REQUESTED', () => {
-      const action = { type: EPIC_NEWS_FETCH_REQUESTED, payload: { loading: true } };
+    it('should dispatch action REQUESTED', () => {
+      const action = { type: EPIC_NEWS.EPIC_NEWS_FETCH_REQUESTED, payload: { loading: true } };
       store.dispatch(action);
 
       const actions = store.getActions();
       expect(actions).toEqual([action]);
     });
 
-    it('should dispatch action EPIC_NEWS_FETCH_ING', () => {
-      const action = { type: EPIC_NEWS_FETCH_ING, payload: { loading: true } };
+    it('should dispatch action ING', () => {
+      const action = { type: EPIC_NEWS.EPIC_NEWS_FETCH_ING, payload: { loading: true } };
       store.dispatch(action);
 
       const actions = store.getActions();
       expect(actions).toEqual([action]);
     });
 
-    it('should dispatch action EPIC_NEWS_FETCH_SUCCEEDED', () => {
+    it('should dispatch action SUCCEEDED', () => {
       const action = {
-        type: EPIC_NEWS_FETCH_SUCCEEDED,
+        type: EPIC_NEWS.EPIC_NEWS_FETCH_SUCCEEDED,
         payload: {
           articles: ['articel1', 'articel2'],
           status: 'OK',
@@ -56,9 +51,9 @@ describe('news.ts', () => {
       expect(actions).toEqual([action]);
     });
 
-    it('should dispatch action EPIC_NEWS_FETCH_FAILED', () => {
+    it('should dispatch action FAILED', () => {
       const action = {
-        type: EPIC_NEWS_FETCH_FAILED,
+        type: EPIC_NEWS.EPIC_NEWS_FETCH_FAILED,
         payload: {
           loading: false,
           status: 'ERROR'
@@ -73,7 +68,7 @@ describe('news.ts', () => {
     it('should return proper action from fetchNewsViaEpic', () => {
       const country = 'us';
       expect(fetchNewsViaEpic(country)).toEqual({
-        type: EPIC_NEWS_FETCH_REQUESTED,
+        type: EPIC_NEWS.EPIC_NEWS_FETCH_REQUESTED,
         payload: {
           country
         }
@@ -86,8 +81,8 @@ describe('news.ts', () => {
       expect(store.getState()).toEqual(initState);
     });
 
-    it('should setup proper state when dispatch action EPIC_NEWS_FETCH_REQUESTED', () => {
-      const action = { type: EPIC_NEWS_FETCH_REQUESTED };
+    it('should setup proper state when dispatch action REQUESTED', () => {
+      const action = { type: EPIC_NEWS.EPIC_NEWS_FETCH_REQUESTED };
 
       expect(
         reducer(
@@ -101,8 +96,8 @@ describe('news.ts', () => {
       });
     });
 
-    it('should setup proper state when dispatch action EPIC_NEWS_FETCH_ING', () => {
-      const action = { type: EPIC_NEWS_FETCH_ING };
+    it('should setup proper state when dispatch action ING', () => {
+      const action = { type: EPIC_NEWS.EPIC_NEWS_FETCH_ING };
 
       expect(
         reducer(
@@ -116,8 +111,8 @@ describe('news.ts', () => {
       });
     });
 
-    it('should setup proper state when dispatch action EPIC_NEWS_FETCH_SUCCEEDED', () => {
-      const action = { type: EPIC_NEWS_FETCH_SUCCEEDED, payload: { articles: ['some data'] } };
+    it('should setup proper state when dispatch action SUCCEEDED', () => {
+      const action = { type: EPIC_NEWS.EPIC_NEWS_FETCH_SUCCEEDED, payload: { articles: ['some data'] } };
 
       expect(
         reducer(
@@ -132,8 +127,8 @@ describe('news.ts', () => {
       });
     });
 
-    it('should setup proper state when dispatch action EPIC_NEWS_FETCH_FAILED', () => {
-      const action = { type: EPIC_NEWS_FETCH_FAILED, payload: { status: 'ERROR' } };
+    it('should setup proper state when dispatch action FAILED', () => {
+      const action = { type: EPIC_NEWS.EPIC_NEWS_FETCH_FAILED, payload: { status: 'ERROR' } };
 
       expect(
         reducer(

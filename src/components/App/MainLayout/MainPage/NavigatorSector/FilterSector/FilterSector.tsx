@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, {Component, RefObject, SyntheticEvent} from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { filterNewsByTypeAndValue } from '../../../../../../actions/filterSector';
 import InputField from '../../../../../shared/Input/InputField';
+import {Input} from 'antd';
 
 const FilterWrapper = styled.div`
   margin: 8px;
@@ -20,15 +21,22 @@ export const FilterBlock = styled.div`
 
 const FILTER_TYPE = 'author';
 
-export class FilterSector extends Component {
-  constructor(props) {
+
+export type FilterSectorType = {
+  filterNewsByTypeAndValue: Function
+};
+
+export class FilterSector extends Component<FilterSectorType> {
+  public filterRef: RefObject<Input>;
+
+  constructor(props: any) {
     super(props);
     this.onChangeFilter = this.onChangeFilter.bind(this);
     this.filterRef = React.createRef();
   }
 
-  onChangeFilter(e) {
-    this.props.filterNewsByTypeAndValue(FILTER_TYPE, e.target.value);
+  onChangeFilter(e: SyntheticEvent<HTMLInputElement, KeyboardEvent>) {
+    this.props.filterNewsByTypeAndValue(FILTER_TYPE, e.currentTarget.value);
   }
 
   render() {
@@ -48,10 +56,6 @@ export class FilterSector extends Component {
     );
   }
 }
-
-FilterSector.propTypes = {
-  filterNewsByTypeAndValue: PropTypes.func.isRequired
-};
 
 export default connect(
   null,

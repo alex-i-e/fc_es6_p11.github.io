@@ -33,15 +33,29 @@ const DocumentClicker = () => {
   );
 };
 
-export const NewsPage = memo(({ initialTableProps }) => {
+
+type RowData = {
+  make: string;
+  model: string;
+  price: number;
+};
+
+export type NewsPageType = {
+  initialTableProps: {
+    columnDefs: {
+      headerName: string;
+      field: string;
+    }[];
+    rowData: RowData[];
+  };
+};
+
+export const NewsPage = memo(({ initialTableProps }: NewsPageType) => {
   const [rows, setRowsCount] = useState(initialTableProps.rowData);
 
   const addExtraRow = (fillNumber = 1) => {
     setRowsCount(
-      Array.concat(
-        rows,
-        Array(fillNumber).fill({ make: 'Toyota', model: 'Celica', price: 35000 }, 0)
-      )
+      [].concat(rows as never, Array(fillNumber).fill({ make: 'Toyota', model: 'Celica', price: 35000 }, 0) as never)
     );
   };
 
@@ -70,23 +84,5 @@ export const NewsPage = memo(({ initialTableProps }) => {
     </div>
   );
 });
-
-NewsPage.propTypes = {
-  initialTableProps: PropTypes.shape({
-    columnDefs: PropTypes.arrayOf(
-      PropTypes.shape({
-        headerName: PropTypes.string,
-        field: PropTypes.string
-      })
-    ),
-    rowData: PropTypes.arrayOf(
-      PropTypes.shape({
-        make: PropTypes.string,
-        model: PropTypes.string,
-        price: PropTypes.number
-      })
-    )
-  }).isRequired
-};
 
 export default NewsPage;
