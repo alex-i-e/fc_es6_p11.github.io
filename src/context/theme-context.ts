@@ -25,5 +25,5 @@ export const themes: { [key in string]: {foreground: string, background: string}
 
 export const ThemeContext = React.createContext({
   theme: themes.dark,
-  toggleTheme: () => {}
+  toggleTheme: (color: string) => {}
 });

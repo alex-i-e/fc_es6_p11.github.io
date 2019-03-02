@@ -1,8 +1,8 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { BlogSector, getVisibleBlogList } from './BlogSector';
+import { BlogSector, getVisibleBlogList, BlogSectorType } from './BlogSector';
 
-function setup({ blogList = [], value }) {
+function setup({ blogList = [], value }: BlogSectorType) {
   const props = {
     blogList,
     value
@@ -17,7 +17,7 @@ function setup({ blogList = [], value }) {
 
 describe('News Block', () => {
   it('should render shallow render only', () => {
-    const { enzymeWrapper } = setup({ index: '' });
+    const { enzymeWrapper } = setup({blogList: [], value: '' });
     expect(enzymeWrapper.render()).toMatchSnapshot();
     enzymeWrapper.unmount();
   });
@@ -29,14 +29,14 @@ describe('News Block', () => {
           id: '1',
           title: 'Some perfect title',
           body: 'SOme perfect body',
-          date: '01.01.2018',
+          date: new Date('01.01.2018'),
           author: 'Torwald Linux'
         },
         {
           id: '2',
           title: 'Best perfect title asd ',
           body: 'SOme perfect body asd',
-          date: '01.04.2018',
+          date: new Date('01.04.2018'),
           author: 'Washington Tom'
         }
       ],

@@ -1,11 +1,12 @@
 // @flow
-import React, {Component, RefObject, SyntheticEvent} from 'react';
-import {connect} from 'react-redux';
+import React, { LegacyRef, Component, Ref, RefObject, SyntheticEvent } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {DatePicker, Input, message, notification} from 'antd';
-import {addNewBlog} from '../../../../../../../actions/blogActions';
+import { DatePicker, Input, message, notification } from 'antd';
+import { addNewBlog } from '../../../../../../../actions/blogActions';
 import InputField from '../../../../../../shared/Input/InputField';
 import ActionLink from '../../../../../../shared/ActionLink/ActionLink';
+import { Moment } from 'moment';
 
 const FormWrapper = styled.div`
   margin: 8px;
@@ -25,7 +26,7 @@ const openNotification = () => {
   notification.open({
     key,
     message: 'Blog info',
-    description: 'Blog wasn\'t added!'
+    description: "Blog wasn't added!"
   });
   setTimeout(() => {
     notification.open({
@@ -40,32 +41,31 @@ const success = () => {
 };
 
 export type BlogFormProps = {
-  addNewBlog: Function
+  addNewBlog: Function;
 };
 export type BlogFormState = {
-  validForm: boolean
+  validForm: boolean;
 };
 
 export class BlogForm extends Component<BlogFormProps, BlogFormState> {
   public authorInput: RefObject<Input>;
   public titleInput: RefObject<Input>;
   public bodyInput: RefObject<Input>;
-  public dateInput: RefObject<Input>;
-  public dateInputString: Date;
-  
+  public dateInput: RefObject<Date>;
+  public dateInputString: Moment;
+
   constructor(props: any) {
     super(props);
-    
+
     this.state = {
       validForm: false
     };
-    
+
     this.authorInput = React.createRef();
     this.titleInput = React.createRef();
     this.bodyInput = React.createRef();
     this.dateInput = React.createRef();
-    // this.dateInputString = '';
-    
+
     this.onSubmitPost = this.onSubmitPost.bind(this);
     this.onChangeDatePicker = this.onChangeDatePicker.bind(this);
     this.checkFormValidate = this.checkFormValidate.bind(this);
@@ -73,67 +73,67 @@ export class BlogForm extends Component<BlogFormProps, BlogFormState> {
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeBody = this.onChangeBody.bind(this);
   }
-  
+
   onChangeAuthor() {
     return this.checkFormValidate('author');
   }
-  
+
   onChangeTitle() {
     return this.checkFormValidate('title');
   }
-  
+
   onChangeBody() {
     return this.checkFormValidate('body');
   }
-  
-  onChangeDatePicker(date: Date) {
+
+  onChangeDatePicker(date: Moment) {
     this.dateInputString = date;
   }
-  
-  onSubmitPost(e: Event) {
+
+  onSubmitPost(e: any) {
     e.preventDefault();
     e.stopPropagation();
-    if (!this.authorInput.current!.state.value) {
+    if (!(this.authorInput as any).current!.state.value) {
       // eslint-disable-next-line
       openNotification();
       return false;
     }
-    
+
     this.props.addNewBlog({
       id: `${Math.floor(Math.random() * 10000)}`,
-      author: this.authorInput.current!.state.value,
-      title: this.titleInput.current!.state.value,
-      body: this.bodyInput.current!.state.value,
+      author: (this.authorInput as any).current!.state.value,
+      title: (this.titleInput as any).current!.state.value,
+      body: (this.bodyInput as any).current!.state.value,
       date: (this.dateInput && `${(this.dateInput as any).format()}`) || new Date()
     });
-    
+
     success();
-    
+
     return true;
   }
-  
+
   checkFormValidate(type: string) {
     return (e: SyntheticEvent<HTMLInputElement, KeyboardEvent>) => {
       const currentInputValue = e.currentTarget.value;
-      const author = this.authorInput.current!.state.value;
-      const title = this.titleInput.current!.state.value;
-      const body = this.bodyInput.current!.state.value;
+      const author = (this.authorInput as any).current!.state.value;
+      const title = (this.titleInput as any).current!.state.value;
+      const body = (this.bodyInput as any).current!.state.value;
       const formState = {
         author,
         title,
         body
       };
-      
+
       this.setState({
-        validForm: !Object.values({...formState, ...{[type]: currentInputValue}}).some(
+        validForm: !Object.values({ ...formState, ...{ [type]: currentInputValue } }).some(
           (item: any) => !item
         )
       });
     };
   }
-  
+
   render() {
-    const {validForm} = this.state;
+    const { validForm } = this.state;
     return (
       <FormWrapper>
         <FormBlock onSubmit={this.onSubmitPost}>
@@ -196,5 +196,5 @@ export class BlogForm extends Component<BlogFormProps, BlogFormState> {
 
 export default connect(
   null,
-  {addNewBlog}
+  { addNewBlog }
 )(BlogForm);

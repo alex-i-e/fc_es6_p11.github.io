@@ -1,20 +1,17 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { RemoveBlog, RemoveWrapper } from './RemoveBlog';
+import { RemoveBlog, RemoveWrapper, RemoveBlogType } from './RemoveBlog';
 
-function setProps({ removeBlog = jest.fn(), index }) {
+function setProps(index: string): RemoveBlogType {
   return {
     index,
-    removeBlog
+    removeBlog: jest.fn()
   };
 }
 
-function setup({ removeBlog, index }) {
-  const props = setProps({
-    index,
-    removeBlog
-  });
+function setup({ removeBlog, index }: RemoveBlogType) {
+  const props = setProps(index);
 
   const enzymeWrapper = shallow(<RemoveBlog {...props} />);
 
@@ -26,7 +23,7 @@ function setup({ removeBlog, index }) {
 
 describe('News Block', () => {
   it('should render shallow render only', () => {
-    const { enzymeWrapper } = setup({ index: '1' });
+    const { enzymeWrapper } = setup(setProps('1'));
 
     expect(enzymeWrapper.render()).toMatchSnapshot();
 
@@ -34,14 +31,14 @@ describe('News Block', () => {
   });
 
   it('should render proper renderer', () => {
-    const props = setProps({ index: '1' });
+    const props = setProps('1');
     const wrapper = renderer.create(<RemoveBlog {...props} />).toJSON();
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should proper invoke call functions on onClickAction', () => {
     // Arrange
-    const props = setProps({ index: '1' });
+    const props = setProps('1');
     const component = mount(<RemoveBlog {...props} />);
 
     // Act

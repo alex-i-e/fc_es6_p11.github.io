@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -7,7 +6,13 @@ const Author = styled.div`
   flex-flow: row;
 `;
 
-const AuthorItem = ({ value, matchingValue, className }) => {
+type AuthorItemType = {
+  value: string,
+  matchingValue: string,
+  className?: string
+};
+
+const AuthorItem = ({ value, matchingValue, className }: AuthorItemType) => {
   let innerHtml = value;
   if (value && matchingValue) {
     const regexp = new RegExp(matchingValue, 'g');
@@ -16,15 +21,8 @@ const AuthorItem = ({ value, matchingValue, className }) => {
       `<b style="background-color: yellow">${matchingValue}</b>`
     )}</span>`;
   }
-  // TODO: use sanitise DOM, ex. DOMPurify
   
   return <Author className={className} dangerouslySetInnerHTML={{ __html: innerHtml }} />;
-};
-
-AuthorItem.propTypes = {
-  value: PropTypes.string.isRequired,
-  matchingValue: PropTypes.string.isRequired,
-  className: PropTypes.string.isRequired
 };
 
 export default AuthorItem;

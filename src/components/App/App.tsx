@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useEffect } from 'react';
+import React, { SyntheticEvent, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -15,6 +15,7 @@ import NewsHeader from './NewsHeader/NewsHeader';
 import ErrorBoundary from '../shared/ErrorBoudary/ErrorBoundary';
 import ThemeContainer from './ThemeContainer/ThemeContainer';
 import withKeyboardTooltip from '../HOC/withKeyboardTooltip';
+import { GeneralStore } from '../../reducers/index';
 
 const AppBlock = styled.div`
   text-align: center;
@@ -75,10 +76,10 @@ const StyledMenu = styled(Menu)`
   width: 100%;
 `;
 
-const NavLinkWithTooltip = withKeyboardTooltip(NavLink);
+const NavLinkWithTooltip: any = withKeyboardTooltip(NavLink);
 
 const CustomMenu = () => {
-  const [menuItem, setMenuItem] = useState(null);
+  const [menuItem, setMenuItem] = useState('');
 
   const handleClick = e => {
     setMenuItem(e.key);
@@ -114,25 +115,33 @@ const CustomMenu = () => {
   );
 };
 
+
+type AppProps = {
+  changeThemeAction: Function,
+  initTheme: {
+    foreground: string,
+    background: string
+  }
+};
 // {logo} // TODO : provide logo through SSR
-export const App = ({ initTheme, changeThemeAction }: any) => {
+export const App = ({ initTheme, changeThemeAction }: AppProps) => {
   const [keyEvent, setKeyEvent] = useState(null);
   const [visible, setVisible] = useState(false);
 
-  function toggleTheme(color: string) {
+  function toggleTheme(color: string): void {
     changeThemeAction(themes[color] || themes.light);
   }
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    setVisible(e.ctrlKey ? true : e.code !== 'Escape');
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>/* SyntheticEvent<Document, > */) => {
+    setVisible(e.ctrlKey ? true : (e as any).code !== 'Escape');
 
-    if (e.target && e.target.localName !== 'BODY' && (e.ctrlKey || e.code === 'Escape')) {
-      setKeyEvent(e);
+    if (e.target && (e.target as any).localName !== 'BODY' && (e.ctrlKey || (e as any).code === 'Escape')) {
+      setKeyEvent(e as any);
     }
   };
 
   useEffect(() => {
-    const debounceKeyDown = _.debounce(onKeyDown, 200, { leading: true });
+    const debounceKeyDown: any = _.debounce(onKeyDown, 200, { leading: true });
 
     document.addEventListener('keydown', debounceKeyDown, false);
 
@@ -175,16 +184,8 @@ export const App = ({ initTheme, changeThemeAction }: any) => {
   );
 };
 
-App.propTypes = {
-  changeThemeAction: PropTypes.func.isRequired,
-  initTheme: PropTypes.shape({
-    foreground: PropTypes.string,
-    background: PropTypes.string
-  }).isRequired
-};
-
 export default connect(
-  (state: any) => ({
+  (state: GeneralStore) => ({
     initTheme: state.theme.value
   }),
   {

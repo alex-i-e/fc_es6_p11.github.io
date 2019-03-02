@@ -1,8 +1,9 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import BlogListItem from './BlogListItem/BlogListItem';
+import { GeneralStore } from '../../../../../reducers/index';
+import { BlogType } from '../../../../types/blogTypes';
 
 const BlogListBlock = styled.div`
   background-color: white;
@@ -15,7 +16,11 @@ const BlogListBlock = styled.div`
 
 const FILTER_TYPE = 'author';
 
-export const BlogSector = ({ blogList = [], value = '' }) => {
+export type BlogSectorType = {
+  blogList: BlogType[];
+  value: string;
+};
+export const BlogSector = ({ blogList = [], value = '' }: BlogSectorType) => {
   return (
     <BlogListBlock>
       <BlogListItem blogList={blogList} filterType={FILTER_TYPE} filterValue={value} />
@@ -23,30 +28,13 @@ export const BlogSector = ({ blogList = [], value = '' }) => {
   );
 };
 
-BlogSector.defaultProps = {
-  blogList: [],
-  value: ''
-};
-
-BlogSector.propTypes = {
-  blogList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      image: PropTypes.string,
-      title: PropTypes.string,
-      body: PropTypes.string,
-      date: PropTypes.date,
-      author: PropTypes.string
-    })
-  ),
-  value: PropTypes.string
-};
-
-export const getVisibleBlogList = (blogList, { type, value }) =>
-  blogList.filter(item => item[type].indexOf(value) !== -1);
+export const getVisibleBlogList = (
+  blogList: BlogType[],
+  { type, value }: { type: typeof FILTER_TYPE; value: string }
+) => blogList.filter(item => item[type].indexOf(value) !== -1);
 
 export default connect(
-  state => ({
+  (state: GeneralStore) => ({
     blogList: getVisibleBlogList(state.home.blogList, {
       type: FILTER_TYPE,
       value: state.filter.value

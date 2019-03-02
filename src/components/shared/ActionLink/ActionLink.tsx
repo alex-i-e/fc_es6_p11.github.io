@@ -8,18 +8,25 @@ import React, {
 import { Link, LinkProps } from 'react-router-dom';
 import { Button } from 'antd';
 import withKeyboardTooltip from '../../HOC/withKeyboardTooltip';
+import { AnchorButtonProps } from 'antd/lib/button/button';
+import { ButtonProps } from 'antd/lib/button';
 
 export type ActionLinkProps = {
   urlState: string;
-  children: React.ReactElement;
+  titleText?: string;
+  children?: React.ReactElement | string;
 };
 
 const NavLinkWithTooltip: any = withKeyboardTooltip(Link);
 
-const ActionLink: ForwardRefExoticComponent<
-  PropsWithoutRef<LinkProps> & RefAttributes<Link>
-> = forwardRef(
-  ({ onClick, urlState, children, titleText, ...props }: any, ref: Ref<Link>): any => {
+/* : ForwardRefExoticComponent<
+  PropsWithoutRef<LinkProps> & RefAttributes<Link & ActionLinkProps>
+> */
+const ActionLink = forwardRef(
+  (
+    { onClick, urlState, children, titleText, ...props }: any /* ActionLinkProps & ButtonProps */,
+    ref: Ref<Link>
+  ) => {
     // : RefForwardingComponent<Link, LinkProps>
     return (
       <Button onClick={onClick} {...props}>

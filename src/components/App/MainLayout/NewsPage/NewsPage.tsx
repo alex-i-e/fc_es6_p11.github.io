@@ -1,23 +1,29 @@
-import React, { Fragment, useEffect, useState, memo } from 'react';
-import PropTypes from 'prop-types';
+import React, {ClassAttributes, Fragment, memo, ReactType, useEffect, useState} from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { Button } from 'antd';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import {ButtonProps} from 'antd/lib/button';
+import {ActionButtonState} from 'antd/lib/modal/ActionButton';
 
-const CustomButtom = ({ counter, counterFunc, ...rest }) => {
+type CustomButtomProps = {
+  counter: number;
+  counterFunc: Function;
+};
+const CustomButtom = <BaseProps extends CustomButtomProps>({
+  counter,
+  counterFunc,
+  ...rest
+} : BaseProps) /* : React.FunctionComponent<any> */ => {
   return (
     <Button onClick={() => counterFunc(counter)} {...rest}>
       + {counter}
     </Button>
   );
 };
-CustomButtom.propTypes = {
-  counter: PropTypes.number.isRequired,
-  counterFunc: PropTypes.func.isRequired
-};
 
 const DocumentClicker = () => {
+
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -33,13 +39,11 @@ const DocumentClicker = () => {
   );
 };
 
-
 type RowData = {
   make: string;
   model: string;
   price: number;
 };
-
 export type NewsPageType = {
   initialTableProps: {
     columnDefs: {
@@ -49,13 +53,15 @@ export type NewsPageType = {
     rowData: RowData[];
   };
 };
-
 export const NewsPage = memo(({ initialTableProps }: NewsPageType) => {
   const [rows, setRowsCount] = useState(initialTableProps.rowData);
 
   const addExtraRow = (fillNumber = 1) => {
     setRowsCount(
-      [].concat(rows as never, Array(fillNumber).fill({ make: 'Toyota', model: 'Celica', price: 35000 }, 0) as never)
+      [].concat(
+        rows as never,
+        Array(fillNumber).fill({ make: 'Toyota', model: 'Celica', price: 35000 }, 0) as never
+      )
     );
   };
 

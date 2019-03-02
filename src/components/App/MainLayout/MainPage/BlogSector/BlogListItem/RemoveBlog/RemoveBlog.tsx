@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { SyntheticEvent, Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { removeBlog } from '../../../../../../../actions/blogActions';
@@ -11,14 +10,18 @@ export const RemoveWrapper = styled(BtnWrapper)`
   }
 `;
 
-export class RemoveBlog extends Component {
-  constructor(props) {
+export type RemoveBlogType = {
+  removeBlog: Function,
+  index: string
+};
+export class RemoveBlog extends Component<RemoveBlogType> {
+  constructor(props: any) {
     super(props);
 
     this.onClickAction = this.onClickAction.bind(this);
   }
 
-  onClickAction(e) {
+  onClickAction(e: SyntheticEvent<HTMLButtonElement, MouseEvent>) {
     if (e) {
       e.preventDefault();
       e.stopPropagation();
@@ -31,11 +34,6 @@ export class RemoveBlog extends Component {
     return <RemoveWrapper title="Remove from Blog!" onClick={this.onClickAction} />;
   }
 }
-
-RemoveBlog.propTypes = {
-  removeBlog: PropTypes.func.isRequired,
-  index: PropTypes.string.isRequired
-};
 
 export default connect(
   null,

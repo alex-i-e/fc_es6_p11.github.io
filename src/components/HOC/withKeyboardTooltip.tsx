@@ -1,6 +1,5 @@
 /* tslint:disable  */
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Tooltip } from 'antd';
 import { connect } from 'react-redux';
 import { LinkProps } from 'react-router-dom';
@@ -12,7 +11,7 @@ import { TooltipPlacement } from 'antd/es/tooltip';
 
 type WithKeyboardTooltipType = {
   titleText: string;
-  placement: TooltipPlacement;
+  placement?: TooltipPlacement;
 };
 
 type WithKeyboardAndRouterType = RouteComponentProps<any> & WithKeyboardTooltipType & LinkProps;
@@ -20,7 +19,7 @@ type WithKeyboardAndRouterType = RouteComponentProps<any> & WithKeyboardTooltipT
 const withKeyboardTooltip = <BaseProps extends WithKeyboardAndRouterType>(
   WrappedComponent: React.ComponentType<any>
 ) => {
-  const useKeyboardTooltip = ({ titleText, placement, ...props }: BaseProps) => {
+  const useKeyboardTooltip = ({ titleText, placement = 'bottom', ...props }: BaseProps) => {
     const [visible, setVisible] = useState(false);
     const { keyDownEvent, tooltipVisibility } = useContext(KeyDownEventContext);
 
@@ -46,13 +45,6 @@ const withKeyboardTooltip = <BaseProps extends WithKeyboardAndRouterType>(
   };
 
   useKeyboardTooltip.displayName = `withKeyboardTooltip(${getDisplayName(WrappedComponent)})`;
-  useKeyboardTooltip.propTypes = {
-    titleText: PropTypes.string.isRequired,
-    placement: PropTypes.string
-  };
-  useKeyboardTooltip.defaultProps = {
-    placement: 'bottom'
-  };
 
   return useKeyboardTooltip;
 };

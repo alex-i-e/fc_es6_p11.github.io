@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Input } from '../../../../../shared/Input/InputField';
+import Input from '../../../../../shared/Input/InputField';
 import { FilterSector } from './FilterSector';
 
 function setProps() {

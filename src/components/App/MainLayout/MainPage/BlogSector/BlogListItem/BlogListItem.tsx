@@ -1,9 +1,9 @@
 import moment from 'moment';
-import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 import AuthorItem from './AuthorItem';
 import RemoveBlog from './RemoveBlog/RemoveBlog';
+import { BlogType } from '../../../../../types/blogTypes';
 
 const BlogListBlock = styled.div`
   --blog-item-margin: 8px;
@@ -65,7 +65,13 @@ const NoItems = styled.div`
   flex-flow: row;
 `;
 
-const BlogListItem = ({ blogList, filterValue }) => (
+type BlogListItemType = {
+  blogList: BlogType[],
+  filterValue: string,
+  filterType: string,
+};
+
+const BlogListItem = ({ blogList, filterValue }: BlogListItemType) => (
   <BlogListBlock>
     {blogList.length ? (
       blogList.map((row, number) => (
@@ -89,19 +95,5 @@ const BlogListItem = ({ blogList, filterValue }) => (
     )}
   </BlogListBlock>
 );
-
-BlogListItem.propTypes = {
-  blogList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      image: PropTypes.string,
-      title: PropTypes.string,
-      body: PropTypes.string,
-      date: PropTypes.date,
-      author: PropTypes.string
-    })
-  ).isRequired,
-  filterValue: PropTypes.string.isRequired
-};
 
 export default BlogListItem;
